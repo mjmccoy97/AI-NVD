@@ -13,11 +13,12 @@ topology:
   kinds:
     nokia_srlinux:
       image: ghcr.io/nokia/srlinux:25.10.1
+      startup-config: configs/srlinux/__clabNodeName__.cfg
       type: ixr-h4
     linux:
       image: aninchat/ubuntu-server:v1
       binds:
-        - base-configs:/base-configs
+        - configs:/linux
   nodes:
     spine1:
       mgmt-ipv4: 172.21.21.101
@@ -91,62 +92,118 @@ topology:
       mgmt-ipv4: 172.21.21.51
       kind: linux
       exec:
-        - bash base-configs/s1.sh
+        - bash linux/s1.sh
     s2:
       mgmt-ipv4: 172.21.21.52
       kind: linux
       exec:
-        - bash base-configs/s2.sh
+        - bash linux/s2.sh
     s3:
       mgmt-ipv4: 172.21.21.53
       kind: linux
       exec:
-        - bash base-configs/s3.sh
+        - bash linux/s3.sh
     s4:
       mgmt-ipv4: 172.21.21.54
       kind: linux
       exec:
-        - bash base-configs/s4.sh
+        - bash linux/s4.sh
     weka1:
       mgmt-ipv4: 172.21.21.60
       kind: linux
       exec:
-        - bash base-configs/weka1.sh
+        - bash linux/weka1.sh
     weka2:
       mgmt-ipv4: 172.21.21.61
       kind: linux
       exec:
-        - bash base-configs/weka2.sh
+        - bash linux/weka2.sh
     weka3:
       mgmt-ipv4: 172.21.21.63
       kind: linux
       exec:
-        - bash base-configs/weka3.sh
+        - bash linux/weka3.sh
     weka4:
       mgmt-ipv4: 172.21.21.64
       kind: linux
       exec:
-        - bash base-configs/weka4.sh
+        - bash linux/weka4.sh
     weka5:
       mgmt-ipv4: 172.21.21.65
       kind: linux
       exec:
-        - bash base-configs/weka5.sh
+        - bash linux/weka5.sh
     weka6:
       mgmt-ipv4: 172.21.21.66
       kind: linux
       exec:
-        - bash base-configs/weka6.sh
+        - bash linux/weka6.sh
     weka7:
       mgmt-ipv4: 172.21.21.67
       kind: linux
       exec:
-        - bash base-configs/weka7.sh
+        - bash linux/weka7.sh
     weka8:
       mgmt-ipv4: 172.21.21.68
       kind: linux
       exec:
-        - bash base-configs/weka8.sh
+        - bash linux/weka8.sh
+  #TELEMETRY STACK
+  #UNCOMMENT THE FOLLOWING BLOCK BEFORE DEPLOYING THE LAB TO INCLUDE THE TELEMETRY STACK
+    gnmic:
+      kind: linux
+      image: ghcr.io/openconfig/gnmic:0.39.1
+      binds:
+        - configs/gnmic/gnmic-config.yml:/gnmic-config.yml:ro
+      cmd: --config /gnmic-config.yml --log subscribe
+      group: '10'
+    prometheus:
+      kind: linux
+      image: quay.io/prometheus/prometheus:v2.54.1
+      binds:
+        - configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      cmd: --config.file=/etc/prometheus/prometheus.yml
+      ports:
+        - 9090:9090
+      group: '10'
+    grafana:
+      kind: linux
+      #Build custom image to include additional plugins
+      image: grafana-custom:12.3.2
+      binds:
+        - configs/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
+        - configs/grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yaml:ro
+        - configs/grafana/dashboards:/var/lib/grafana/dashboards
+        - configs/grafana/dashboards/Nokia_Logo.svg:/usr/share/grafana/public/build/img/icons/marker/Nokia_Logo.svg:ro
+      ports:
+        - 3000:3000
+      env:
+        GF_ORG_ROLE: Admin
+        GF_ORG_NAME: Main Org
+        GF_AUTH_ANONYMOUS_ENABLED: "true"
+        GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+        GF_AUTH_ANONYMOUS: "true"
+        GF_AUTH_OAUTH_AUTO_LOGIN: "true"
+      group: '10'
+    #LOGGING STACK
+    promtail:
+      kind: linux
+      image: grafana/promtail:3.2.0
+      binds:
+        - configs/promtail:/etc/promtail
+      cmd: --config.file=/etc/promtail/promtail-config.yml
+      ports:
+        - 9080:9080
+    loki:
+      kind: linux
+      image: grafana/loki:3.2.0
+      binds:
+        - configs/loki:/etc/loki
+      cmd: --config.file=/etc/loki/loki-config.yml
+      ports:
+        - 3100:3100
+
+
   links:
     # stripe leafs to spines connectivity
     - endpoints: [ "stripe1-leaf1:e1-1", "spine1:e1-1" ]
