@@ -1,0 +1,298 @@
+set / routing-policy prefix-set prefixset-backend-dc1-backend-stripeconnector-backend prefix 192.0.2.0/24 mask-length-range 32..32
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:1:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:1:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:2:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:2:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:3:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:3:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:4:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:4:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:5:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:5:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:6:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:6:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:7:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:7:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:8:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:8:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:9:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:9:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:10:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:10:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:11:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:11:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:12:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:12:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:13:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:13:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:14:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:14:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:15:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:15:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:16:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:16:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:100:1:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:100:2:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:100:3:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:100:4:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:100:5:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:100:6:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:100:7:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:100:8:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:200:9:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:200:10:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:200:11:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:200:12:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:200:13:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:200:14:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:200:15:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:200:16:1::/93 mask-length-range 93..93
+set / routing-policy policy default-export-routeleak-dc1-backend default-action policy-result accept
+set / routing-policy policy default-import-routeleak-dc1-backend default-action policy-result accept
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend default-action policy-result reject
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 10 match protocol local
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 10 match prefix prefix-set prefixset-backend-dc1-backend-stripeconnector-backend
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 10 action policy-result accept
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 10 action bgp local-preference set 100
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 15 match protocol bgp
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 15 action policy-result accept
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 15 action bgp local-preference set 100
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 20 match protocol aggregate
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 20 action policy-result accept
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 20 action bgp local-preference set 100
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 25 match bgp evpn route-type [ 1 ]
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 25 action policy-result accept
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 25 action bgp local-preference set 100
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 30 match bgp evpn route-type [ 2 ]
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 30 action policy-result accept
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 30 action bgp local-preference set 100
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 35 match bgp evpn route-type [ 3 ]
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 35 action policy-result accept
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 35 action bgp local-preference set 100
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 40 match bgp evpn route-type [ 4 ]
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 40 action policy-result accept
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 40 action bgp local-preference set 100
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 45 match bgp evpn route-type [ 5 ]
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 45 action policy-result accept
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 45 action bgp local-preference set 100
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 60 match prefix prefix-set prefixset-routeleak-import-all-rails-dc1-backend
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 60 action policy-result accept
+set / routing-policy policy ebgp-isl-import-policy-backend default-action policy-result reject
+set / routing-policy policy ebgp-isl-import-policy-backend statement 10 match protocol bgp
+set / routing-policy policy ebgp-isl-import-policy-backend statement 10 action policy-result accept
+set / routing-policy policy ebgp-isl-import-policy-backend statement 10 action bgp local-preference set 100
+set / routing-policy policy export-routeleak-all-rails-dc1-backend default-action policy-result reject
+set / routing-policy policy export-routeleak-all-rails-dc1-backend statement 10 match protocol local
+set / routing-policy policy export-routeleak-all-rails-dc1-backend statement 10 match prefix prefix-set prefixset-routeleak-export-all-rails-dc1-backend
+set / routing-policy policy export-routeleak-all-rails-dc1-backend statement 10 action policy-result accept
+set / routing-policy policy import-routeleak-all-rails-dc1-backend default-action policy-result reject
+set / routing-policy policy import-routeleak-all-rails-dc1-backend statement 10 match protocol bgp
+set / routing-policy policy import-routeleak-all-rails-dc1-backend statement 10 match prefix prefix-set prefixset-routeleak-import-all-rails-dc1-backend
+set / routing-policy policy import-routeleak-all-rails-dc1-backend statement 10 action policy-result accept
+set / system configuration role sudo
+set / system load-balancing dynamic flowset-size 256
+set / system load-balancing dynamic inactivity-timer 50
+set / system load-balancing dynamic mode flow-dynamic
+set / system load-balancing dynamic link-quality-sampling-interval 5
+set / system load-balancing dynamic weighting-factor port-utilization 70
+set / system load-balancing dynamic weighting-factor queue-utilization 20
+set / system load-balancing dynamic weighting-factor itm-utilization 10
+set / system aaa authentication authentication-method [ local ]
+set / system aaa authentication admin-user password $y$j9T$38e8b28c18c05a3b$VstENctIoy7Gsr3dhTcn89woaP/E4YSmixDOKYvAxf1
+set / system aaa authorization role sudo superuser true
+set / system aaa authorization role sudo services [ cli gnmi gnoi gnsi netconf ]
+set / system aaa server-group local type local
+set / system ssh-server mgmt admin-state enable
+set / system ssh-server mgmt network-instance mgmt
+set / system grpc-server mgmt admin-state enable
+set / system grpc-server mgmt rate-limit 65535
+set / system grpc-server mgmt session-limit 1024
+set / system grpc-server mgmt metadata-authentication true
+set / system grpc-server mgmt tls-profile EDA
+set / system grpc-server mgmt network-instance mgmt
+set / system grpc-server mgmt port 57410
+set / system grpc-server mgmt services [ gnmi gnoi gnsi ]
+set / system grpc-server mgmt gnmi commit-save true
+set / system boot autoboot admin-state enable
+set / system name host-name stripe2-leaf6
+set / system lldp interface ethernet-1/1 admin-state enable
+set / system lldp interface ethernet-1/2 admin-state enable
+set / system lldp interface ethernet-1/3 admin-state enable
+set / system lldp interface ethernet-1/4 admin-state enable
+set / qos explicit-congestion-notification
+set / qos queues queue unicast-0 queue-index 0
+set / qos queues queue unicast-3 queue-index 3
+set / qos queues queue unicast-6 queue-index 6
+set / qos queues pfc-queue pfc-3 queue-index 3
+set / qos forwarding-classes forwarding-class fc0 output unicast-queue unicast-0
+set / qos forwarding-classes forwarding-class fc3 output unicast-queue unicast-3
+set / qos forwarding-classes forwarding-class fc6 output unicast-queue unicast-6
+set / qos pfc-mapping-profile fabric-backend pfc-priority 3 pfc-enable true
+set / qos pfc-mapping-profile fabric-backend received-traffic unicast-mapping pfc-queue pfc-3 forwarding-class fc3
+set / qos pfc-mapping-profile fabric-backend received-traffic unicast-mapping pfc-queue pfc-3 pfc-pause-frame-priority 3
+set / qos pfc-mapping-profile fabric-backend received-pfc-pause-frames deadlock enable true
+set / qos pfc-mapping-profile fabric-backend received-pfc-pause-frames deadlock detection-timer 750
+set / qos pfc-mapping-profile fabric-backend received-pfc-pause-frames deadlock recovery-timer 750
+set / qos pfc-mapping-profile fabric-backend received-pfc-pause-frames queue unicast-3 pfc-pause-frame-priority 3
+set / qos classifiers dscp-policy ingress-backend-dc1-backend dscp 0 forwarding-class fc0
+set / qos classifiers dscp-policy ingress-backend-dc1-backend dscp 0 drop-probability low
+set / qos classifiers dscp-policy ingress-backend-dc1-backend dscp 26 forwarding-class fc3
+set / qos classifiers dscp-policy ingress-backend-dc1-backend dscp 26 drop-probability low
+set / qos classifiers dscp-policy ingress-backend-dc1-backend dscp 48 forwarding-class fc6
+set / qos classifiers dscp-policy ingress-backend-dc1-backend dscp 48 drop-probability low
+set / qos scheduler-policies scheduler-policy egress-backend-dc1-backend scheduler 0 priority strict
+set / qos scheduler-policies scheduler-policy egress-backend-dc1-backend scheduler 0 input unicast-6 queue-name unicast-6
+set / qos scheduler-policies scheduler-policy egress-backend-dc1-backend scheduler 0 input unicast-6 peak-rate-percent 80
+set / qos scheduler-policies scheduler-policy egress-backend-dc1-backend scheduler 1 input unicast-0 queue-name unicast-0
+set / qos scheduler-policies scheduler-policy egress-backend-dc1-backend scheduler 1 input unicast-0 peak-rate-percent 10
+set / qos scheduler-policies scheduler-policy egress-backend-dc1-backend scheduler 1 input unicast-0 weight 10
+set / qos scheduler-policies scheduler-policy egress-backend-dc1-backend scheduler 1 input unicast-3 queue-name unicast-3
+set / qos scheduler-policies scheduler-policy egress-backend-dc1-backend scheduler 1 input unicast-3 peak-rate-percent 100
+set / qos scheduler-policies scheduler-policy egress-backend-dc1-backend scheduler 1 input unicast-3 weight 50
+set / qos interfaces interface ethernet-1/1 interface-ref interface ethernet-1/1
+set / qos interfaces interface ethernet-1/1 pfc pfc-mapping-profile fabric-backend
+set / qos interfaces interface ethernet-1/1 pfc pfc-enable true
+set / qos interfaces interface ethernet-1/1 input pfc-buffer-allocation-profile ingress-backend-dc1-backend
+set / qos interfaces interface ethernet-1/1 output buffer-allocation-profile egress-backend-dc1-backend
+set / qos interfaces interface ethernet-1/1 output queues queue unicast-3 queue-management-profile egress-backend-dc1-backend-2
+set / qos interfaces interface ethernet-1/1 output scheduler scheduler-policy egress-backend-dc1-backend
+set / qos interfaces interface ethernet-1/1.0 interface-ref interface ethernet-1/1
+set / qos interfaces interface ethernet-1/1.0 interface-ref subinterface 0
+set / qos interfaces interface ethernet-1/1.0 input classifiers dscp-policy ingress-backend-dc1-backend
+set / qos interfaces interface ethernet-1/2 interface-ref interface ethernet-1/2
+set / qos interfaces interface ethernet-1/2 pfc pfc-mapping-profile fabric-backend
+set / qos interfaces interface ethernet-1/2 pfc pfc-enable true
+set / qos interfaces interface ethernet-1/2 input pfc-buffer-allocation-profile ingress-backend-dc1-backend
+set / qos interfaces interface ethernet-1/2 output buffer-allocation-profile egress-backend-dc1-backend
+set / qos interfaces interface ethernet-1/2 output queues queue unicast-3 queue-management-profile egress-backend-dc1-backend-2
+set / qos interfaces interface ethernet-1/2 output scheduler scheduler-policy egress-backend-dc1-backend
+set / qos interfaces interface ethernet-1/2.0 interface-ref interface ethernet-1/2
+set / qos interfaces interface ethernet-1/2.0 interface-ref subinterface 0
+set / qos interfaces interface ethernet-1/2.0 input classifiers dscp-policy ingress-backend-dc1-backend
+set / qos buffer-management queue-management-profile egress-backend-dc1-backend-2 weight-factor 0
+set / qos buffer-management queue-management-profile egress-backend-dc1-backend-2 wred wred-slope all drop-probability all enable-ecn true min-threshold-percent 30
+set / qos buffer-management queue-management-profile egress-backend-dc1-backend-2 wred wred-slope all drop-probability all enable-ecn true max-threshold-percent 85
+set / qos buffer-management queue-management-profile egress-backend-dc1-backend-2 wred wred-slope all drop-probability all enable-ecn true slope-enabled true
+set / qos buffer-management queue-management-profile egress-backend-dc1-backend-2 wred wred-slope all drop-probability all enable-ecn true max-drop-probability-percent 100
+set / qos buffer-management buffer-allocation-profile egress-backend-dc1-backend queues queue unicast-0 maximum-burst-size 5211064
+set / qos buffer-management buffer-allocation-profile egress-backend-dc1-backend queues queue unicast-3 maximum-burst-size 52110640
+set / qos buffer-management buffer-allocation-profile egress-backend-dc1-backend queues queue unicast-6 maximum-burst-size 52110640
+set / qos buffer-management buffer-allocation-profile ingress-backend-dc1-backend queues pfc-queue pfc-3 maximum-burst-size 52110640
+set / qos linecard 1 forwarding-complex 0 input pfc-buffer-reservation 10
+set / interface ethernet-1/1 admin-state enable
+set / interface ethernet-1/1 ethernet flow-control receive false
+set / interface ethernet-1/1 subinterface 0 admin-state enable
+set / interface ethernet-1/1 subinterface 0 ipv6 admin-state enable
+set / interface ethernet-1/1 subinterface 0 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/1 subinterface 0 ipv6 router-advertisement router-role max-advertisement-interval 10
+set / interface ethernet-1/1 subinterface 0 ipv6 router-advertisement router-role min-advertisement-interval 4
+set / interface ethernet-1/2 admin-state enable
+set / interface ethernet-1/2 ethernet flow-control receive false
+set / interface ethernet-1/2 subinterface 0 admin-state enable
+set / interface ethernet-1/2 subinterface 0 ipv6 admin-state enable
+set / interface ethernet-1/2 subinterface 0 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/2 subinterface 0 ipv6 router-advertisement router-role max-advertisement-interval 10
+set / interface ethernet-1/2 subinterface 0 ipv6 router-advertisement router-role min-advertisement-interval 4
+set / interface ethernet-1/3 admin-state enable
+set / interface ethernet-1/3 vlan-tagging true
+set / interface ethernet-1/3 subinterface 100 type routed
+set / interface ethernet-1/3 subinterface 100 description "Backend: dc1-backend Stripe: stripe2"
+set / interface ethernet-1/3 subinterface 100 admin-state enable
+set / interface ethernet-1/3 subinterface 100 ip-mtu 1500
+set / interface ethernet-1/3 subinterface 100 ipv6 admin-state enable
+set / interface ethernet-1/3 subinterface 100 ipv6 address fd00:200:14:1:0:3:0:1/96 primary
+set / interface ethernet-1/3 subinterface 100 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/3 subinterface 100 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/3 subinterface 100 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/3 subinterface 100 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/3 subinterface 100 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/3 subinterface 100 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/3 subinterface 100 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/3 subinterface 100 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/3 subinterface 100 ipv6 router-advertisement router-role router-lifetime 1800
+set / interface ethernet-1/3 subinterface 100 vlan encap single-tagged vlan-id 100
+set / interface ethernet-1/4 admin-state enable
+set / interface ethernet-1/4 vlan-tagging true
+set / interface ethernet-1/4 subinterface 100 type routed
+set / interface ethernet-1/4 subinterface 100 description "Backend: dc1-backend Stripe: stripe2"
+set / interface ethernet-1/4 subinterface 100 admin-state enable
+set / interface ethernet-1/4 subinterface 100 ip-mtu 1500
+set / interface ethernet-1/4 subinterface 100 ipv6 admin-state enable
+set / interface ethernet-1/4 subinterface 100 ipv6 address fd00:200:14:1:0:4:0:1/96 primary
+set / interface ethernet-1/4 subinterface 100 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/4 subinterface 100 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/4 subinterface 100 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/4 subinterface 100 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/4 subinterface 100 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/4 subinterface 100 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/4 subinterface 100 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/4 subinterface 100 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/4 subinterface 100 ipv6 router-advertisement router-role router-lifetime 1800
+set / interface ethernet-1/4 subinterface 100 vlan encap single-tagged vlan-id 100
+set / interface mgmt0 admin-state enable
+set / interface mgmt0 subinterface 0 admin-state enable
+set / interface mgmt0 subinterface 0 ipv4 admin-state enable
+set / interface mgmt0 subinterface 0 ipv4 dhcp-client trace-options trace [ messages ]
+set / interface mgmt0 subinterface 0 ipv6 admin-state enable
+set / interface mgmt0 subinterface 0 ipv6 dhcp-client trace-options trace [ messages ]
+set / interface system0 subinterface 0 admin-state enable
+set / interface system0 subinterface 0 ipv4 admin-state enable
+set / interface system0 subinterface 0 ipv4 address 192.0.2.12/32
+set / network-instance all-rails type ip-vrf
+set / network-instance all-rails admin-state enable
+set / network-instance all-rails description "Backend: dc1-backend"
+set / network-instance all-rails interface ethernet-1/3.100
+set / network-instance all-rails interface ethernet-1/4.100
+set / network-instance all-rails inter-instance-policies apply-policy import-policy import-routeleak-all-rails-dc1-backend
+set / network-instance all-rails inter-instance-policies apply-policy export-policy export-routeleak-all-rails-dc1-backend
+set / network-instance default type default
+set / network-instance default admin-state enable
+set / network-instance default description "fabric: stripe2 role: leaf"
+set / network-instance default router-id 192.0.2.12
+set / network-instance default ip-forwarding receive-ipv4-check false
+set / network-instance default ip-load-balancing dynamic-load-balancing prefix ::/0
+set / network-instance default interface ethernet-1/1.0
+set / network-instance default interface ethernet-1/2.0
+set / network-instance default interface system0.0
+set / network-instance default protocols bgp admin-state enable
+set / network-instance default protocols bgp autonomous-system 104
+set / network-instance default protocols bgp router-id 192.0.2.12
+set / network-instance default protocols bgp dynamic-neighbors interface ethernet-1/1.0 peer-group bgpgroup-ebgp-backend
+set / network-instance default protocols bgp dynamic-neighbors interface ethernet-1/1.0 allowed-peer-as [ 116 ]
+set / network-instance default protocols bgp dynamic-neighbors interface ethernet-1/2.0 peer-group bgpgroup-ebgp-backend
+set / network-instance default protocols bgp dynamic-neighbors interface ethernet-1/2.0 allowed-peer-as [ 116 ]
+set / network-instance default protocols bgp ebgp-default-policy import-reject-all true
+set / network-instance default protocols bgp ebgp-default-policy export-reject-all true
+set / network-instance default protocols bgp afi-safi evpn admin-state disable
+set / network-instance default protocols bgp afi-safi ipv4-unicast admin-state enable
+set / network-instance default protocols bgp afi-safi ipv4-unicast multipath allow-multiple-as true
+set / network-instance default protocols bgp afi-safi ipv4-unicast multipath ebgp maximum-paths 1
+set / network-instance default protocols bgp afi-safi ipv4-unicast multipath ibgp maximum-paths 1
+set / network-instance default protocols bgp afi-safi ipv4-unicast ipv4-unicast advertise-ipv6-next-hops true
+set / network-instance default protocols bgp afi-safi ipv4-unicast ipv4-unicast receive-ipv6-next-hops true
+set / network-instance default protocols bgp afi-safi ipv6-unicast admin-state disable
+set / network-instance default protocols bgp afi-safi ipv6-unicast multipath allow-multiple-as true
+set / network-instance default protocols bgp afi-safi ipv6-unicast multipath ebgp maximum-paths 2
+set / network-instance default protocols bgp preference ebgp 170
+set / network-instance default protocols bgp preference ibgp 170
+set / network-instance default protocols bgp route-advertisement rapid-withdrawal true
+set / network-instance default protocols bgp route-advertisement wait-for-fib-install false
+set / network-instance default protocols bgp group bgpgroup-ebgp-backend admin-state enable
+set / network-instance default protocols bgp group bgpgroup-ebgp-backend export-policy [ ebgp-isl-export-stripeconnector-backend-dc1-backend ]
+set / network-instance default protocols bgp group bgpgroup-ebgp-backend import-policy [ ebgp-isl-import-policy-backend ]
+set / network-instance default protocols bgp group bgpgroup-ebgp-backend afi-safi evpn admin-state disable
+set / network-instance default protocols bgp group bgpgroup-ebgp-backend afi-safi ipv4-unicast admin-state enable
+set / network-instance default protocols bgp group bgpgroup-ebgp-backend afi-safi ipv4-unicast ipv4-unicast advertise-ipv6-next-hops true
+set / network-instance default protocols bgp group bgpgroup-ebgp-backend afi-safi ipv4-unicast ipv4-unicast receive-ipv6-next-hops true
+set / network-instance default protocols bgp group bgpgroup-ebgp-backend afi-safi ipv6-unicast admin-state enable
+set / network-instance default inter-instance-policies apply-policy import-policy default-import-routeleak-dc1-backend
+set / network-instance default inter-instance-policies apply-policy export-policy default-export-routeleak-dc1-backend
+set / network-instance default aggregate-routes route fd00:200:14:1::/93 admin-state enable
+set / network-instance default aggregate-routes route fd00:200:14:1::/93 summary-only true
+set / network-instance default aggregate-routes route fd00:200:14:1::/93 aggregator address 192.0.2.12
+set / network-instance mgmt type ip-vrf
+set / network-instance mgmt admin-state enable
+set / network-instance mgmt description "Management network instance"
+set / network-instance mgmt interface mgmt0.0
+set / network-instance mgmt protocols linux import-routes true
+set / network-instance mgmt protocols linux export-routes true
