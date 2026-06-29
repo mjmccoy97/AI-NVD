@@ -1,0 +1,475 @@
+---
+anchors:
+  thresholds-operstate: &thresholds-operstate
+    - { color: "red", level: 0 }
+    - { color: "green", level: 1 }
+  thresholds-traffic: &thresholds-traffic
+    - { color: "gray", level: 0 }
+    - { color: "green", level: 199 }
+    - { color: "yellow", level: 500 }
+    - { color: "orange", level: 1000 }
+    - { color: "red", level: 5000 }
+  thresholds-rate-label: &thresholds-rate-label
+    - { color: "white", level: 0 }
+  label-config: &label-config
+    separator: "replace"
+    units: "bps"
+    decimalPoints: 1
+    valueMappings:
+      - { valueMax: 199999, text: "\u200B" }
+cellIdPreamble: "cell-"
+tagConfig:
+  legend: ["hide-rates"]
+  lowlightAlphaFactor: 0
+  highlightRgbFactor: 1
+cells:
+  "fespine:e1-1":
+    dataRef: "oper-state:fespine:e1-1"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "feleaf1:e1-3":
+    dataRef: "oper-state:feleaf1:e1-3"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "link_id:fespine:e1-1:feleaf1:e1-3":
+    dataRef: "fespine:e1-1:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:fespine:e1-1:feleaf1:e1-3:label":
+    dataRef: "fespine:e1-1:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "link_id:feleaf1:e1-3:fespine:e1-1":
+    dataRef: "feleaf1:e1-3:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:feleaf1:e1-3:fespine:e1-1:label":
+    dataRef: "feleaf1:e1-3:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "fespine:e1-2":
+    dataRef: "oper-state:fespine:e1-2"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "feleaf2:e1-3":
+    dataRef: "oper-state:feleaf2:e1-3"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "link_id:fespine:e1-2:feleaf2:e1-3":
+    dataRef: "fespine:e1-2:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:fespine:e1-2:feleaf2:e1-3:label":
+    dataRef: "fespine:e1-2:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "link_id:feleaf2:e1-3:fespine:e1-2":
+    dataRef: "feleaf2:e1-3:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:feleaf2:e1-3:fespine:e1-2:label":
+    dataRef: "feleaf2:e1-3:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "fespine:e1-3":
+    dataRef: "oper-state:fespine:e1-3"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "feleaf3:e1-3":
+    dataRef: "oper-state:feleaf3:e1-3"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "link_id:fespine:e1-3:feleaf3:e1-3":
+    dataRef: "fespine:e1-3:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:fespine:e1-3:feleaf3:e1-3:label":
+    dataRef: "fespine:e1-3:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "link_id:feleaf3:e1-3:fespine:e1-3":
+    dataRef: "feleaf3:e1-3:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:feleaf3:e1-3:fespine:e1-3:label":
+    dataRef: "feleaf3:e1-3:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "feleaf1:e1-1":
+    dataRef: "oper-state:feleaf1:e1-1"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "cs1:eth2":
+    dataRef: "oper-state:cs1:eth2"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "link_id:feleaf1:e1-1:cs1:eth2":
+    dataRef: "feleaf1:e1-1:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:feleaf1:e1-1:cs1:eth2:label":
+    dataRef: "feleaf1:e1-1:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "link_id:cs1:eth2:feleaf1:e1-1":
+    dataRef: "cs1:eth2:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:cs1:eth2:feleaf1:e1-1:label":
+    dataRef: "cs1:eth2:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "feleaf1:e1-2":
+    dataRef: "oper-state:feleaf1:e1-2"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "cs2:eth2":
+    dataRef: "oper-state:cs2:eth2"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "link_id:feleaf1:e1-2:cs2:eth2":
+    dataRef: "feleaf1:e1-2:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:feleaf1:e1-2:cs2:eth2:label":
+    dataRef: "feleaf1:e1-2:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "link_id:cs2:eth2:feleaf1:e1-2":
+    dataRef: "cs2:eth2:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:cs2:eth2:feleaf1:e1-2:label":
+    dataRef: "cs2:eth2:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "feleaf2:e1-1":
+    dataRef: "oper-state:feleaf2:e1-1"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "cs3:eth2":
+    dataRef: "oper-state:cs3:eth2"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "link_id:feleaf2:e1-1:cs3:eth2":
+    dataRef: "feleaf2:e1-1:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:feleaf2:e1-1:cs3:eth2:label":
+    dataRef: "feleaf2:e1-1:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "link_id:cs3:eth2:feleaf2:e1-1":
+    dataRef: "cs3:eth2:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:cs3:eth2:feleaf2:e1-1:label":
+    dataRef: "cs3:eth2:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "feleaf2:e1-2":
+    dataRef: "oper-state:feleaf2:e1-2"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "cs4:eth2":
+    dataRef: "oper-state:cs4:eth2"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "link_id:feleaf2:e1-2:cs4:eth2":
+    dataRef: "feleaf2:e1-2:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:feleaf2:e1-2:cs4:eth2:label":
+    dataRef: "feleaf2:e1-2:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "link_id:cs4:eth2:feleaf2:e1-2":
+    dataRef: "cs4:eth2:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:cs4:eth2:feleaf2:e1-2:label":
+    dataRef: "cs4:eth2:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "feleaf3:e1-1":
+    dataRef: "oper-state:feleaf3:e1-1"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "store1:eth1":
+    dataRef: "oper-state:store1:eth1"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "link_id:feleaf3:e1-1:store1:eth1":
+    dataRef: "feleaf3:e1-1:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:feleaf3:e1-1:store1:eth1:label":
+    dataRef: "feleaf3:e1-1:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "link_id:store1:eth1:feleaf3:e1-1":
+    dataRef: "store1:eth1:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:store1:eth1:feleaf3:e1-1:label":
+    dataRef: "store1:eth1:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "feleaf3:e1-2":
+    dataRef: "oper-state:feleaf3:e1-2"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "store2:eth1":
+    dataRef: "oper-state:store2:eth1"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "link_id:feleaf3:e1-2:store2:eth1":
+    dataRef: "feleaf3:e1-2:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:feleaf3:e1-2:store2:eth1:label":
+    dataRef: "feleaf3:e1-2:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "link_id:store2:eth1:feleaf3:e1-2":
+    dataRef: "store2:eth1:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:store2:eth1:feleaf3:e1-2:label":
+    dataRef: "store2:eth1:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "bespine:e1-1":
+    dataRef: "oper-state:bespine:e1-1"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "beleaf1:e1-3":
+    dataRef: "oper-state:beleaf1:e1-3"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "link_id:bespine:e1-1:beleaf1:e1-3":
+    dataRef: "bespine:e1-1:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:bespine:e1-1:beleaf1:e1-3:label":
+    dataRef: "bespine:e1-1:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "link_id:beleaf1:e1-3:bespine:e1-1":
+    dataRef: "beleaf1:e1-3:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:beleaf1:e1-3:bespine:e1-1:label":
+    dataRef: "beleaf1:e1-3:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "bespine:e1-2":
+    dataRef: "oper-state:bespine:e1-2"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "beleaf2:e1-3":
+    dataRef: "oper-state:beleaf2:e1-3"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "link_id:bespine:e1-2:beleaf2:e1-3":
+    dataRef: "bespine:e1-2:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:bespine:e1-2:beleaf2:e1-3:label":
+    dataRef: "bespine:e1-2:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "link_id:beleaf2:e1-3:bespine:e1-2":
+    dataRef: "beleaf2:e1-3:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:beleaf2:e1-3:bespine:e1-2:label":
+    dataRef: "beleaf2:e1-3:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "beleaf1:e1-1":
+    dataRef: "oper-state:beleaf1:e1-1"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "cs1:eth1":
+    dataRef: "oper-state:cs1:eth1"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "link_id:beleaf1:e1-1:cs1:eth1":
+    dataRef: "beleaf1:e1-1:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:beleaf1:e1-1:cs1:eth1:label":
+    dataRef: "beleaf1:e1-1:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "link_id:cs1:eth1:beleaf1:e1-1":
+    dataRef: "cs1:eth1:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:cs1:eth1:beleaf1:e1-1:label":
+    dataRef: "cs1:eth1:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "beleaf1:e1-2":
+    dataRef: "oper-state:beleaf1:e1-2"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "cs2:eth1":
+    dataRef: "oper-state:cs2:eth1"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "link_id:beleaf1:e1-2:cs2:eth1":
+    dataRef: "beleaf1:e1-2:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:beleaf1:e1-2:cs2:eth1:label":
+    dataRef: "beleaf1:e1-2:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "link_id:cs2:eth1:beleaf1:e1-2":
+    dataRef: "cs2:eth1:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:cs2:eth1:beleaf1:e1-2:label":
+    dataRef: "cs2:eth1:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "beleaf2:e1-1":
+    dataRef: "oper-state:beleaf2:e1-1"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "cs3:eth1":
+    dataRef: "oper-state:cs3:eth1"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "link_id:beleaf2:e1-1:cs3:eth1":
+    dataRef: "beleaf2:e1-1:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:beleaf2:e1-1:cs3:eth1:label":
+    dataRef: "beleaf2:e1-1:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "link_id:cs3:eth1:beleaf2:e1-1":
+    dataRef: "cs3:eth1:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:cs3:eth1:beleaf2:e1-1:label":
+    dataRef: "cs3:eth1:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "beleaf2:e1-2":
+    dataRef: "oper-state:beleaf2:e1-2"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "cs4:eth1":
+    dataRef: "oper-state:cs4:eth1"
+    fillColor:
+      thresholds: *thresholds-operstate
+    tags: ["hide-rates"]
+  "link_id:beleaf2:e1-2:cs4:eth1":
+    dataRef: "beleaf2:e1-2:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:beleaf2:e1-2:cs4:eth1:label":
+    dataRef: "beleaf2:e1-2:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label
+  "link_id:cs4:eth1:beleaf2:e1-2":
+    dataRef: "cs4:eth1:out"
+    strokeColor:
+      thresholds: *thresholds-traffic
+    tags: ["hide-rates"]
+  "link_id:cs4:eth1:beleaf2:e1-2:label":
+    dataRef: "cs4:eth1:out"
+    label: *label-config
+    labelColor:
+      thresholds: *thresholds-rate-label

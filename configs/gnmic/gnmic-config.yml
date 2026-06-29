@@ -1,0 +1,178 @@
+# Copyright 2020 Nokia
+# Licensed under the BSD 3-Clause License.
+# SPDX-License-Identifier: BSD-3-Clause
+
+username: admin
+timeout: 10s
+
+common_srl_subscriptions: &common_srl_subs
+  skip-verify: true
+  insecure: false
+  password: NokiaSrl1!
+  subscriptions:
+    - srl-if-stats
+    #- srl-if-stats-OC
+    - srl-bgp
+    #- srl-bgp-OC
+    - srl-system-performance
+    - srl-routes
+    - srl-bridge
+    - srl-apps
+    - srl-net-instance
+
+targets:
+  frontend-leaf1: *common_srl_subs
+  frontend-leaf2: *common_srl_subs
+  frontend-spine1: *common_srl_subs
+  frontend-spine2: *common_srl_subs
+  spine1: *common_srl_subs
+  spine2: *common_srl_subs
+  stripe1-leaf1: *common_srl_subs
+  stripe1-leaf2: *common_srl_subs 
+  stripe1-leaf3: *common_srl_subs
+  stripe1-leaf4: *common_srl_subs
+  stripe1-leaf5: *common_srl_subs
+  stripe1-leaf6: *common_srl_subs
+  stripe1-leaf7: *common_srl_subs
+  stripe1-leaf8: *common_srl_subs
+  stripe2-leaf1: *common_srl_subs
+  stripe2-leaf2: *common_srl_subs
+  stripe2-leaf3: *common_srl_subs
+  stripe2-leaf4: *common_srl_subs
+  stripe2-leaf5: *common_srl_subs
+  stripe2-leaf6: *common_srl_subs
+  stripe2-leaf7: *common_srl_subs
+  stripe2-leaf8: *common_srl_subs 
+
+subscriptions:
+  srl-system-performance:
+    mode: stream
+    stream-mode: sample
+    sample-interval: 5s
+    paths:
+      - /platform/control[slot=*]/cpu[index=all]/total
+      - /platform/control[slot=*]/memory
+  srl-if-stats:
+    mode: stream
+    stream-mode: sample
+    sample-interval: 5s
+    paths:
+      - /interface[name=ethernet-1/*]/oper-state
+      - /interface[name=ethernet-1/*]/statistics
+      - /interface[name=ethernet-1/*]/traffic-rate
+  srl-if-stats-OC:
+    mode: stream
+    stream-mode: on-change
+    paths:
+      - /interface[name=ethernet-1/*]/mtu
+      - /interface[name=ethernet-1/*]/loopback-mode
+      - /interface[name=ethernet-1/*]/description
+      - /interface[name=ethernet-1/*]/admin-state
+      - /interface[name=ethernet-1/*]/ifindex
+      - /interface[name=ethernet-1/*]/oper-status
+      - /interface[name=ethernet-1/*]/last-change
+      - /interface[name=ethernet-1/*]/ethernet/hw-mac-address
+      - /interface[name=ethernet-1/*]/ethernet/auto-negotiate
+      - /interface[name=ethernet-1/*]/ethernet/duplex-mode
+      - /interface[name=ethernet-1/*]/ethernet/port-speed
+      - /interface[name=ethernet-1/*]/ethernet/flow-control/receive
+      - /interface[name=ethernet-1/*]/subinterface[index=*]/oper-state
+      - /interface[name=ethernet-1/*]/subinterface[index=*]/admin-status
+      - /interface[name=ethernet-1/*]/subinterface[index=*]/description
+  srl-routes:
+    mode: stream
+    stream-mode: sample
+    sample-interval: 5s
+    paths:
+      - /network-instance[name=*]/route-table/ipv4-unicast/statistics/
+      - /network-instance[name=*]/route-table/ipv6-unicast/statistics/
+  srl-bgp:
+    mode: stream
+    stream-mode: sample
+    sample-interval: 10s
+    paths:
+      - /network-instance[name=*]/protocols/bgp/statistics
+      - /network-instance[name=*]/protocols/bgp/neighbor[peer-address=*]/sent-messages/total-updates
+      - /network-instance[name=*]/protocols/bgp/neighbor[peer-address=*]/sent-messages/total-notifications
+      - /network-instance[name=*]/protocols/bgp/neighbor[peer-address=*]/received-messages/total-updates
+      - /network-instance[name=*]/protocols/bgp/neighbor[peer-address=*]/received-messages/total-notifications  
+      - /network-instance[name=*]/protocols/bgp/neighbor[peer-address=*]/established-transitions
+      - /network-instance[name=*]/protocols/bgp/neighbor[peer-address=*]/afi-safi[afi-safi-name=ipv4-unicast]/oper-state
+      - /network-instance[name=*]/protocols/bgp/neighbor[peer-address=*]/afi-safi[afi-safi-name=ipv4-unicast]/active-routes
+      - /network-instance[name=*]/protocols/bgp/neighbor[peer-address=*]/afi-safi[afi-safi-name=evpn]/oper-state
+      - /network-instance[name=*]/protocols/bgp/neighbor[peer-address=*]/afi-safi[afi-safi-name=evpn]/active-routes
+  srl-bgp-OC:
+    mode: stream
+    stream-mode: on-change
+    paths:
+      - /network-instances[name=*]/protocols/bgp/neighbor[peer-address=*]/description
+      - /network-instances[name=*]/protocols/bgp/neighbor[peer-address=*]/admin-state
+      - /network-instances[name=*]/protocols/bgp/neighbor[peer-address=*]/session-state
+      - /network-instances[name=*]/protocols/bgp/neighbor[peer-address=*]/sent-messages/queue-depth
+      - /network-instances[name=*]/protocols/bgp/neighbor[peer-address=*]/received-messages/queue-depth
+      - /bfd/network-instance[name=*]/peer[local-discriminator=*]/oper-state
+  srl-bridge:
+    mode: stream
+    stream-mode: sample
+    sample-interval: 5s
+    paths:
+      - /network-instance[name=*]/bridge-table/statistics/
+  srl-apps:
+    paths:
+      - /system/app-management/application[name=*]
+    mode: stream
+    stream-mode: sample
+    sample-interval: 5s
+  srl-net-instance:
+    paths:
+      - /network-instance[name=*]/oper-state
+    mode: stream
+    stream-mode: sample
+    sample-interval: 5s
+  srl-vxlan-vteps:
+    paths: 
+      - /tunnel/vxlan-tunnel/vtep[address=*]
+    mode: stream
+    stream-mode: sample
+    sample-interval: 5s
+outputs:
+  prom-output:
+    type: prometheus
+    listen: :9273
+    event-processors:
+      - trim-prefixes
+      - rename-srl-interface
+      - oper-state-to-int
+
+processors:
+  trim-prefixes:
+    event-strings:
+      value-names:
+        - "^/state/.*"
+      transforms:
+        - trim-prefix:
+            apply-on: "name"
+            prefix: "/state/"
+
+  oper-state-to-int:
+    event-strings:
+      value-names:
+        - ".*"
+      transforms:
+        - replace:
+            apply-on: "value"
+            old: "up"
+            new: "1"
+        - replace:
+            apply-on: "value"
+            old: "down"
+            new: "0"
+  rename-srl-interface:
+    event-strings:
+      tag-names:
+        - "^interface_name"
+      transforms:
+        - replace:
+            apply-on: "value"
+            old: "ethernet-(\\d+)/(\\d+)"
+            new: "e$1-$2"

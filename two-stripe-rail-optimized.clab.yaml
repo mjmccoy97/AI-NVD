@@ -5,7 +5,7 @@
 name: two-stripe-rail-optimized
 prefix: ""
 mgmt:
-  network: eda_mgmt
+  network: mgmt
   ipv4-subnet: 172.21.21.0/24
 topology:
   defaults:
