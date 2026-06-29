@@ -17,7 +17,8 @@ NC='\033[0m' # No Color
 # Configuration
 VERBOSE=false
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TOPOLOGY_FILE="${SCRIPT_DIR}/../cs.clab.yml"
+TOPOLOGY_FILE=""
+CONTAINER_PREFIX=""
 
 # SR Linux devices (dynamically discovered)
 DEVICES=()
@@ -26,24 +27,51 @@ DEVICES=()
 declare -A TOPOLOGY_INTERFACES
 
 # Function to show usage
+# Derive container prefix from the topology YAML using containerlab naming rules:
+#   no prefix field  →  clab-<name>-
+#   prefix: ""       →  (empty)
+#   prefix: "foo"    →  foo-
+derive_container_prefix() {
+    local yaml_file="$1"
+    local topo_name
+    topo_name=$(grep -E '^name:' "$yaml_file" | awk '{print $2}' | tr -d '"'"'")
+
+    if grep -qE '^prefix:' "$yaml_file"; then
+        local prefix_val
+        prefix_val=$(grep -E '^prefix:' "$yaml_file" | awk '{print $2}' | tr -d '"'"'")
+        if [[ -z "$prefix_val" ]]; then
+            echo ""
+        elif [[ "$prefix_val" == "__lab-name" ]]; then
+            echo "${topo_name}-"
+        else
+            echo "${prefix_val}-"
+        fi
+    else
+        echo "clab-${topo_name}-"
+    fi
+}
+
 show_usage() {
-    echo "Usage: $0 [OPTIONS]"
+    echo "Usage: $0 [OPTIONS] <topology-file>"
     echo "Verify all SR Linux interfaces from the topology links section are up/up"
+    echo
+    echo "Arguments:"
+    echo "  <topology-file>         Path to the containerlab topology YAML file (required)"
     echo
     echo "Options:"
     echo "  -v, --verbose           Verbose output with per-interface details"
-    echo "  -f, --file FILE         Topology file (default: ../poc.clab.yml)"
+    echo "  -f, --file FILE         Topology file (alternative to positional argument)"
     echo "  -h, --help              Show this help message"
     echo
     echo "Examples:"
-    echo "  $0                      # Run with default settings"
-    echo "  $0 -v                   # Run with verbose output"
+    echo "  $0 ../two-stripe-rail-optimized.clab.yaml"
+    echo "  $0 -v ../two-stripe-rail-optimized.clab.yaml"
 }
 
 # Function to discover SR Linux devices dynamically
 discover_srlinux_devices() {
     local devices_json
-    devices_json=$(containerlab inspect --format json 2>/dev/null | jq -r 'to_entries[].value[] | select(.kind == "nokia_srlinux") | .name' | sed 's/^clab-cs-//')
+    devices_json=$(containerlab inspect --format json 2>/dev/null | jq -r 'to_entries[].value[] | select(.kind == "nokia_srlinux") | .name' | sed "s/^${CONTAINER_PREFIX}//")
 
     if [[ -z "$devices_json" ]]; then
         echo -e "${RED}Error: No SR Linux devices found in the topology${NC}"
@@ -99,7 +127,7 @@ load_topology_interfaces() {
                 TOPOLOGY_INTERFACES[$device]+=" $eth_iface"
             fi
         fi
-    done < <(grep -E "endpoints:" "$TOPOLOGY_FILE" | grep -oE "'[^']+'" | tr -d "'")
+    done < <(grep -E "endpoints:" "$TOPOLOGY_FILE" | grep -oE '"[^"]+"' | tr -d '"')
 
     if [[ "$VERBOSE" == "true" ]]; then
         echo -e "${BLUE}Loaded topology interface lists for ${#TOPOLOGY_INTERFACES[@]} devices${NC}"
@@ -109,7 +137,7 @@ load_topology_interfaces() {
 # Function to get all interfaces for an SR Linux device using JSON-RPC
 get_srlinux_interfaces() {
     local device="$1"
-    local url="http://clab-cs-${device}/jsonrpc"
+    local url="http://${CONTAINER_PREFIX}${device}/jsonrpc"
 
     local response
     response=$(curl -s -u admin:NokiaSrl1! "$url" \
@@ -256,12 +284,20 @@ while [[ $# -gt 0 ]]; do
             exit 0
             ;;
         *)
-            echo -e "${RED}Unknown option: $1${NC}"
-            show_usage
-            exit 1
+            TOPOLOGY_FILE="$1"
+            shift
             ;;
     esac
 done
+
+if [[ -z "$TOPOLOGY_FILE" ]]; then
+    echo -e "${RED}Error: topology file is required${NC}"
+    echo
+    show_usage
+    exit 1
+fi
+
+CONTAINER_PREFIX=$(derive_container_prefix "$TOPOLOGY_FILE")
 
 # Check if required tools are available
 for tool in curl jq; do

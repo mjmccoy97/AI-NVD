@@ -1,73 +1,140 @@
 #!/bin/bash
 
-# BGP Session Test Script using JSON-RPC for EVPN Lab
-# Tests and waits for all BGP neighbors to become established
+# BGP Session Test Script for SR Linux Containerlab Topologies
+# Supports two modes, auto-selected based on whether EXPECTED_PEERS is populated:
+#
+#   baseline  (EXPECTED_PEERS non-empty) — validates each node against a known
+#             expected dynamic peer count; detects missing/unlearned peers.
+#
+#   discovery (EXPECTED_PEERS empty) — discovers all SR Linux nodes, checks that
+#             every configured/static peer is established; shows per-peer detail
+#             on failures.
+#
 # M. McCoy 5.12.26 Nokia
 
-# Color codes for output
+# Color codes
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
-# Configuration
 DEFAULT_TIMEOUT=120
 POLL_INTERVAL=5
+TOPOLOGY_FILE=""
+CONTAINER_PREFIX=""
+MODE=""
 
-# SR Linux devices (dynamically discovered)
+# Baseline expected established peer count per node.
+# Leave this map empty to use discovery mode instead.
+# Update these values if the topology changes.
+declare -A EXPECTED_PEERS=(
+    [spine1]=16          [spine2]=16
+    [stripe1-leaf1]=2    [stripe1-leaf2]=2
+    [stripe1-leaf3]=2    [stripe1-leaf4]=2
+    [stripe1-leaf5]=2    [stripe1-leaf6]=2
+    [stripe1-leaf7]=2    [stripe1-leaf8]=2
+    [stripe2-leaf1]=2    [stripe2-leaf2]=2
+    [stripe2-leaf3]=2    [stripe2-leaf4]=2
+    [stripe2-leaf5]=2    [stripe2-leaf6]=2
+    [stripe2-leaf7]=2    [stripe2-leaf8]=2
+    [frontend-spine1]=2  [frontend-spine2]=2
+    [frontend-leaf1]=2   [frontend-leaf2]=2
+)
+
+# Populated in discovery mode via containerlab inspect
 DEVICES=()
 
-# Function to show usage
 show_usage() {
-    echo "Usage: $0 [OPTIONS]"
-    echo "Test and wait for BGP neighbors to become established using JSON-RPC"
+    echo "Usage: $0 [OPTIONS] <topology-file>"
+    echo "Validates BGP sessions for SR Linux nodes in a containerlab topology."
+    echo
+    echo "  Baseline mode  (EXPECTED_PEERS populated): validates each node against its"
+    echo "                 expected dynamic peer count."
+    echo "  Discovery mode (EXPECTED_PEERS empty):     checks all configured/static peers"
+    echo "                 are established — no expected count required."
+    echo
+    echo "Arguments:"
+    echo "  <topology-file>          Path to the containerlab topology YAML file (required)"
     echo
     echo "Options:"
     echo "  -t, --timeout SECONDS    Timeout in seconds (default: ${DEFAULT_TIMEOUT})"
     echo "  -i, --interval SECONDS   Poll interval in seconds (default: ${POLL_INTERVAL})"
-    echo "  -v, --verbose           Verbose output with session details"
+    echo "  -v, --verbose           Show per-device detail each poll cycle"
     echo "  -h, --help              Show this help message"
     echo
     echo "Examples:"
-    echo "  $0                      # Run with default settings"
-    echo "  $0 -t 300 -v          # Wait up to 5 minutes with verbose output"
+    echo "  $0 aifab.clab.yaml"
+    echo "  $0 -t 300 -v aifab.clab.yaml"
 }
 
-# Function to discover SR Linux devices dynamically
-discover_srlinux_devices() {
-    local devices_json
-    devices_json=$(containerlab inspect --format json 2>/dev/null | jq -r 'to_entries[].value[] | select(.kind == "nokia_srlinux") | .name' | sed 's/^clab-cs-//')
-    
-    if [[ -z "$devices_json" ]]; then
-        echo -e "${RED}Error: No SR Linux devices found in the topology${NC}"
-        exit 1
+# Derive container prefix from the topology YAML using containerlab naming rules:
+#   no prefix field    →  clab-<name>-
+#   prefix: ""         →  (empty)
+#   prefix: __lab-name →  <name>-
+#   prefix: "foo"      →  foo-
+derive_container_prefix() {
+    local yaml_file="$1"
+    local topo_name
+    topo_name=$(grep -E '^name:' "$yaml_file" | awk '{print $2}' | tr -d '"'"'")
+
+    if grep -qE '^prefix:' "$yaml_file"; then
+        local prefix_val
+        prefix_val=$(grep -E '^prefix:' "$yaml_file" | awk '{print $2}' | tr -d '"'"'")
+        if [[ -z "$prefix_val" ]]; then
+            echo ""
+        elif [[ "$prefix_val" == "__lab-name" ]]; then
+            echo "${topo_name}-"
+        else
+            echo "${prefix_val}-"
+        fi
+    else
+        echo "clab-${topo_name}-"
     fi
-    
-    # Convert to array
-    readarray -t DEVICES <<< "$devices_json"
-    
-    echo -e "${CYAN}Discovered ${#DEVICES[@]} SR Linux devices: ${DEVICES[*]}${NC}"
 }
 
-# Function to check if lab is deployed and discover devices
 check_lab_deployed() {
     if ! containerlab inspect > /dev/null 2>&1; then
-        echo -e "${RED}Error: Lab topology is not deployed. Run 'make deploy' first.${NC}"
+        echo -e "${RED}Error: No lab topology is deployed${NC}"
         exit 1
     fi
-    
-    discover_srlinux_devices
+
+    local running
+    running=$(containerlab inspect --format json 2>/dev/null \
+        | jq -r 'to_entries[].value[] | select(.kind == "nokia_srlinux") | .name' \
+        | sed "s/^${CONTAINER_PREFIX}//")
+
+    if [[ "$MODE" == "baseline" ]]; then
+        local missing=()
+        for device in "${!EXPECTED_PEERS[@]}"; do
+            if ! grep -qx "$device" <<< "$running"; then
+                missing+=("$device")
+            fi
+        done
+        [[ ${#missing[@]} -gt 0 ]] && \
+            echo -e "${YELLOW}Warning: expected devices not found: ${missing[*]}${NC}"
+        local total_expected=0
+        for v in "${EXPECTED_PEERS[@]}"; do total_expected=$(( total_expected + v )); done
+        echo -e "${CYAN}Mode: baseline | ${#EXPECTED_PEERS[@]} devices | ${total_expected} total expected peers${NC}"
+    else
+        readarray -t DEVICES <<< "$running"
+        if [[ ${#DEVICES[@]} -eq 0 ]]; then
+            echo -e "${RED}Error: No SR Linux devices found in the topology${NC}"
+            exit 1
+        fi
+        echo -e "${CYAN}Mode: discovery | ${#DEVICES[@]} SR Linux devices discovered${NC}"
+    fi
 }
 
-# Function to get BGP neighbors for a device using JSON-RPC
-get_bgp_neighbors() {
+# Query a single device via JSON-RPC.
+# Returns "established:learned" counts, or "ERROR".
+# jq handles IPv6 peer addresses natively — no string-splitting required.
+get_bgp_sessions() {
     local device="$1"
-    local url="http://clab-cs-${device}/jsonrpc"
-    
-    # JSON-RPC request to get BGP neighbor session states and descriptions
+    local url="http://${CONTAINER_PREFIX}${device}/jsonrpc"
+
     local response
     response=$(curl -s -u admin:NokiaSrl1! "$url" \
         -H "Content-Type: application/json" \
@@ -84,312 +151,298 @@ get_bgp_neighbors() {
                 ]
             }
         }' 2>/dev/null)
-    
-    if [[ -z "$response" ]]; then
-        echo "ERROR_CONNECTION"
-        return 1
-    fi
-    
-    # Parse JSON response and extract neighbor info with descriptions
+
+    [[ -z "$response" ]] && { echo "ERROR"; return 1; }
+
+    local learned established
+    learned=$(echo "$response" | jq -r '
+        if .result and .result[0] and .result[0].neighbor then
+            .result[0].neighbor | length
+        else 0 end' 2>/dev/null)
+
+    established=$(echo "$response" | jq -r '
+        if .result and .result[0] and .result[0].neighbor then
+            [.result[0].neighbor[] | select(."session-state" == "established")] | length
+        else 0 end' 2>/dev/null)
+
+    echo "${established:-0}:${learned:-0}"
+}
+
+# Get per-peer detail for a device (discovery mode final summary).
+# Returns lines of: state|peer-address|description
+# Uses | as separator to avoid splitting on IPv6 colons.
+get_bgp_peer_details() {
+    local device="$1"
+    local url="http://${CONTAINER_PREFIX}${device}/jsonrpc"
+
+    local response
+    response=$(curl -s -u admin:NokiaSrl1! "$url" \
+        -H "Content-Type: application/json" \
+        -d '{
+            "jsonrpc": "2.0",
+            "id": 0,
+            "method": "get",
+            "params": {
+                "commands": [
+                    {
+                        "path": "/network-instance[name=default]/protocols/bgp/neighbor[peer-address=*]",
+                        "datastore": "state"
+                    }
+                ]
+            }
+        }' 2>/dev/null)
+
+    [[ -z "$response" ]] && return 1
+
     echo "$response" | jq -r '
         if .result and .result[0] and .result[0].neighbor then
-            .result[0].neighbor[] | "\(.["peer-address"]):\(.["session-state"]):\(.["description"] // "")"
-        else
-            empty
-        end
-    ' 2>/dev/null || echo "ERROR_PARSE"
+            .result[0].neighbor[] |
+            (."session-state") + "|" + (."peer-address") + "|" + (.description // "")
+        else empty end' 2>/dev/null
 }
 
-# Function to check all BGP sessions
-check_all_bgp_sessions() {
+# Baseline mode check.
+# Returns "established:expected:device_results~..."
+# Each device result: "device:est:learned:expected"
+check_sessions_baseline() {
     local verbose="$1"
-    
-    local total_sessions=0
-    local established_sessions=0
+    local total_established=0 total_expected=0
     local device_results=()
-    
-    if [[ "$verbose" == "true" ]]; then
-        echo -e "${CYAN}Checking BGP sessions on all devices...${NC}" >&2
-        echo >&2
-    fi
-    
-    for device in "${DEVICES[@]}"; do
-        local neighbors_info
-        neighbors_info=$(get_bgp_neighbors "$device")
-        
-        if [[ "$neighbors_info" == "ERROR_CONNECTION" ]]; then
-            if [[ "$verbose" == "true" ]]; then
-                echo -e "${RED}$device: Connection failed${NC}" >&2
-            fi
-            device_results+=("$device:ERROR:0:0")
-            continue
-        elif [[ "$neighbors_info" == "ERROR_PARSE" ]]; then
-            if [[ "$verbose" == "true" ]]; then
-                echo -e "${RED}$device: Parse error${NC}" >&2
-            fi
-            device_results+=("$device:ERROR:0:0")
-            continue
-        fi
-        
-        local device_total=0
-        local device_established=0
-        local session_details=()
-        
-        if [[ -n "$neighbors_info" ]]; then
-            while IFS= read -r neighbor_line; do
-                if [[ -n "$neighbor_line" ]]; then
-                    IFS=':' read -r peer_ip session_state description <<< "$neighbor_line"
-                    ((device_total++))
-                    ((total_sessions++))
-                    
-                    if [[ "$session_state" == "established" ]]; then
-                        ((device_established++))
-                        ((established_sessions++))
-                        session_details+=("$peer_ip:✓:$description")
-                    else
-                        session_details+=("$peer_ip:✗($session_state):$description")
-                    fi
-                fi
-            done <<< "$neighbors_info"
-        fi
-        
-        device_results+=("$device:OK:$device_established:$device_total:$(IFS='|'; echo "${session_details[*]}")")
-        
+
+    for device in "${!EXPECTED_PEERS[@]}"; do
+        local expected="${EXPECTED_PEERS[$device]}"
+        total_expected=$(( total_expected + expected ))
+
+        local result dev_est=0 dev_learned=0
+        result=$(get_bgp_sessions "$device")
+        [[ "$result" != "ERROR" ]] && IFS=':' read -r dev_est dev_learned <<< "$result"
+
+        total_established=$(( total_established + dev_est ))
+        device_results+=("$device:$dev_est:$dev_learned:$expected")
+
         if [[ "$verbose" == "true" ]]; then
-            if [[ $device_established -eq $device_total ]] && [[ $device_total -gt 0 ]]; then
-                echo -e "${GREEN}$device: ${device_established}/${device_total} sessions established${NC}" >&2
+            if [[ "$result" == "ERROR" ]]; then
+                echo -e "${RED}  $device: connection failed (expected ${expected})${NC}" >&2
+            elif [[ $dev_est -eq $expected ]]; then
+                echo -e "${GREEN}  $device: ${dev_est}/${expected} established${NC}" >&2
+            elif [[ $dev_learned -lt $expected ]]; then
+                echo -e "${RED}  $device: ${dev_est}/${expected} established (only ${dev_learned}/${expected} peers learned)${NC}" >&2
             else
-                echo -e "${YELLOW}$device: ${device_established}/${device_total} sessions established${NC}" >&2
+                echo -e "${YELLOW}  $device: ${dev_est}/${expected} established (${dev_learned} learned, some sessions down)${NC}" >&2
             fi
-            
-            for session in "${session_details[@]}"; do
-                IFS=':' read -r peer status description <<< "$session"
-                local peer_display
-                if [[ -n "$description" ]]; then
-                    peer_display="$peer ($description)"
-                else
-                    peer_display="$peer"
-                fi
-                
-                if [[ "$status" == "✓" ]]; then
-                    echo -e "  ${peer_display}: ${GREEN}established${NC}" >&2
-                else
-                    echo -e "  ${peer_display}: ${RED}${status#✗}${NC}" >&2
-                fi
-            done
-            echo >&2
         fi
     done
-    
-    echo "$established_sessions:$total_sessions:$(IFS='~'; echo "${device_results[*]}")"
+
+    echo "${total_established}:${total_expected}:$(IFS='~'; echo "${device_results[*]}")"
 }
 
-# Function to show detailed session status
-show_session_summary() {
-    local session_data="$1"
-    
-    IFS=':' read -r established total details <<< "$session_data"
-    
-    echo -e "${PURPLE}=== BGP Session Summary ===${NC}"
-    echo -e "Sessions: ${GREEN}$established established${NC} / ${BLUE}$total total${NC}"
-    
-    if [[ $established -eq $total ]] && [[ $total -gt 0 ]]; then
-        echo -e "Status: ${GREEN}All BGP sessions are established!${NC}"
-    elif [[ $total -eq 0 ]]; then
-        echo -e "Status: ${RED}No BGP sessions found${NC}"
+# Discovery mode check.
+# Returns "established:total_learned:device_results~..."
+# Each device result: "device:est:learned"
+check_sessions_discovery() {
+    local verbose="$1"
+    local total_established=0 total_learned=0
+    local device_results=()
+
+    for device in "${DEVICES[@]}"; do
+        local result dev_est=0 dev_learned=0
+        result=$(get_bgp_sessions "$device")
+        [[ "$result" != "ERROR" ]] && IFS=':' read -r dev_est dev_learned <<< "$result"
+
+        total_established=$(( total_established + dev_est ))
+        total_learned=$(( total_learned + dev_learned ))
+        device_results+=("$device:$dev_est:$dev_learned")
+
+        if [[ "$verbose" == "true" ]]; then
+            if [[ "$result" == "ERROR" ]]; then
+                echo -e "${RED}  $device: connection failed${NC}" >&2
+            elif [[ $dev_learned -eq 0 ]]; then
+                echo -e "${CYAN}  $device: no BGP peers configured${NC}" >&2
+            elif [[ $dev_est -eq $dev_learned ]]; then
+                echo -e "${GREEN}  $device: ${dev_est}/${dev_learned} established${NC}" >&2
+            else
+                echo -e "${YELLOW}  $device: ${dev_est}/${dev_learned} established${NC}" >&2
+            fi
+        fi
+    done
+
+    echo "${total_established}:${total_learned}:$(IFS='~'; echo "${device_results[*]}")"
+}
+
+check_all_bgp_sessions() {
+    if [[ "$MODE" == "baseline" ]]; then
+        check_sessions_baseline "$1"
     else
-        echo -e "Status: ${YELLOW}$((total - established)) sessions not established${NC}"
+        check_sessions_discovery "$1"
+    fi
+}
+
+show_final_summary() {
+    local session_data="$1"
+    local established total details
+    IFS=':' read -r established total details <<< "$session_data"
+
+    echo -e "${PURPLE}=== BGP Session Summary ===${NC}"
+
+    if [[ "$MODE" == "baseline" ]]; then
+        echo -e "Expected: ${BLUE}${total}${NC}  |  Established: ${GREEN}${established}${NC}  |  Missing: ${YELLOW}$(( total - established ))${NC}"
+        echo
+
+        local failures=() successes=() device_results=()
+        IFS='~' read -r -a device_results <<< "$details"
+
+        for entry in "${device_results[@]}"; do
+            [[ -z "$entry" ]] && continue
+            local device dev_est dev_learned dev_expected
+            IFS=':' read -r device dev_est dev_learned dev_expected <<< "$entry"
+            [[ $dev_est -eq $dev_expected ]] && successes+=("$entry") || failures+=("$entry")
+        done
+
+        for entry in "${failures[@]}" "${successes[@]}"; do
+            [[ -z "$entry" ]] && continue
+            local device dev_est dev_learned dev_expected
+            IFS=':' read -r device dev_est dev_learned dev_expected <<< "$entry"
+            if [[ $dev_est -eq $dev_expected ]]; then
+                echo -e "  ${GREEN}${device}: ${dev_est}/${dev_expected} established${NC}"
+            elif [[ $dev_learned -lt $dev_expected ]]; then
+                echo -e "  ${RED}${device}: ${dev_est}/${dev_expected} established  [only ${dev_learned}/${dev_expected} peers learned — link/peer missing?]${NC}"
+            else
+                echo -e "  ${YELLOW}${device}: ${dev_est}/${dev_expected} established  [${dev_learned} peers learned, $(( dev_learned - dev_est )) session(s) down]${NC}"
+            fi
+        done
+
+    else
+        echo -e "Total peers: ${BLUE}${total}${NC}  |  Established: ${GREEN}${established}${NC}  |  Not established: ${YELLOW}$(( total - established ))${NC}"
+        echo
+
+        local failures=() successes=() device_results=()
+        IFS='~' read -r -a device_results <<< "$details"
+
+        for entry in "${device_results[@]}"; do
+            [[ -z "$entry" ]] && continue
+            local device dev_est dev_learned
+            IFS=':' read -r device dev_est dev_learned <<< "$entry"
+            [[ $dev_learned -eq 0 ]] && continue
+            [[ $dev_est -eq $dev_learned ]] && successes+=("$entry") || failures+=("$entry")
+        done
+
+        for entry in "${failures[@]}" "${successes[@]}"; do
+            [[ -z "$entry" ]] && continue
+            local device dev_est dev_learned
+            IFS=':' read -r device dev_est dev_learned <<< "$entry"
+            if [[ $dev_est -eq $dev_learned ]]; then
+                echo -e "  ${GREEN}${device}: ${dev_est}/${dev_learned} established${NC}"
+            else
+                echo -e "  ${YELLOW}${device}: ${dev_est}/${dev_learned} established${NC}"
+                # Show individual peer states for failing devices
+                while IFS='|' read -r state peer desc; do
+                    local label="${peer}${desc:+ (${desc})}"
+                    if [[ "$state" == "established" ]]; then
+                        echo -e "    ${GREEN}✓ ${label}${NC}"
+                    else
+                        echo -e "    ${RED}✗ ${label}: ${state}${NC}"
+                    fi
+                done <<< "$(get_bgp_peer_details "$device")"
+            fi
+        done
     fi
     echo
 }
 
-# Function to show detailed peer status for each device
-show_detailed_peer_status() {
-    local session_data="$1"
-    
-    IFS=':' read -r established total details <<< "$session_data"
-    
-    echo -e "${PURPLE}=== Detailed BGP Peer Status ===${NC}"
-    echo -e "Total sessions: ${BLUE}$total${NC}, Established: ${GREEN}$established${NC}, Not established: ${YELLOW}$((total - established))${NC}"
-    echo
-    
-    # Parse device results
-    IFS='~' read -r -a device_results <<< "$details"
-    
-    for device_result in "${device_results[@]}"; do
-        if [[ -z "$device_result" ]]; then
-            continue
-        fi
-        
-        IFS=':' read -r device status device_est device_total session_list <<< "$device_result"
-        
-        if [[ "$status" == "ERROR" ]]; then
-            echo -e "${RED}$device: ERROR (connection or parse error)${NC}"
-            continue
-        fi
-        
-        # Skip devices with no BGP peers configured
-        if [[ $device_total -eq 0 ]]; then
-            continue
-        fi
-        
-        # Show device summary
-        if [[ $device_est -eq $device_total ]]; then
-            echo -e "${GREEN}$device: All $device_total sessions established${NC}"
-        else
-            echo -e "${YELLOW}$device: $device_est/$device_total sessions established${NC}"
-        fi
-        
-        # Show individual peer states
-        if [[ -n "$session_list" ]]; then
-            IFS='|' read -r -a sessions <<< "$session_list"
-            for session in "${sessions[@]}"; do
-                if [[ -n "$session" ]]; then
-                    IFS=':' read -r peer_ip status_symbol description <<< "$session"
-                    
-                    # Format peer display with device name if available
-                    local peer_display
-                    if [[ -n "$description" ]]; then
-                        peer_display="$peer_ip ($description)"
-                    else
-                        peer_display="$peer_ip"
-                    fi
-                    
-                    if [[ "$status_symbol" == "✓" ]]; then
-                        echo -e "  ${peer_display}: ${GREEN}established${NC}"
-                    else
-                        # Remove the ✗ symbol and parentheses to show just the state
-                        clean_status="${status_symbol#✗}"
-                        clean_status="${clean_status#(}"
-                        clean_status="${clean_status%)}"
-                        echo -e "  ${peer_display}: ${RED}${clean_status}${NC}"
-                    fi
-                fi
-            done
-        fi
-        echo
-    done
-}
-
-# Function to wait for BGP sessions to be established
 wait_for_bgp_sessions() {
     local timeout="$1"
     local poll_interval="$2"
     local verbose="$3"
-    
-    local start_time=$(date +%s)
-    local end_time=$((start_time + timeout))
-    
-    echo -e "${BLUE}Waiting for BGP sessions to be established...${NC}"
-    echo -e "${YELLOW}Timeout: ${timeout}s, Poll interval: ${poll_interval}s${NC}"
+
+    local start_time end_time
+    start_time=$(date +%s)
+    end_time=$(( start_time + timeout ))
+
+    echo -e "${BLUE}Waiting for all BGP sessions to become established...${NC}"
+    echo -e "${YELLOW}Timeout: ${timeout}s  |  Poll interval: ${poll_interval}s${NC}"
     echo
-    
+
     while true; do
-        local current_time=$(date +%s)
-        local elapsed=$((current_time - start_time))
-        
+        local current_time elapsed remaining
+        current_time=$(date +%s)
+        elapsed=$(( current_time - start_time ))
+        remaining=$(( end_time - current_time ))
+
         if [[ $current_time -gt $end_time ]]; then
             echo -e "${RED}Timeout reached after ${elapsed}s${NC}"
             echo
-            # Show detailed peer status on timeout
-            local final_session_data
-            final_session_data=$(check_all_bgp_sessions false)
-            show_detailed_peer_status "$final_session_data"
+            show_final_summary "$(check_all_bgp_sessions false)"
             return 1
         fi
-        
-        local session_data
-        session_data=$(check_all_bgp_sessions false)
-        
+
+        [[ "$verbose" == "true" ]] && echo -e "${CYAN}[${elapsed}s] Per-device status:${NC}" >&2
+
+        local session_data established total
+        session_data=$(check_all_bgp_sessions "$verbose")
         IFS=':' read -r established total _ <<< "$session_data"
-        
-        local remaining=$((end_time - current_time))
-        echo -e "${BLUE}[${elapsed}s/${timeout}s]${NC} BGP Sessions: ${GREEN}$established${NC}/${BLUE}$total${NC} established (${remaining}s remaining)"
-        
-        if [[ $established -eq $total ]] && [[ $total -gt 0 ]]; then
+
+        echo -e "${BLUE}[${elapsed}s/${timeout}s]${NC} BGP sessions: ${GREEN}${established}${NC}/${BLUE}${total}${NC} established  (${remaining}s remaining)"
+
+        if [[ $total -gt 0 ]] && [[ $established -eq $total ]]; then
             echo -e "${GREEN}All BGP sessions are established!${NC}"
             echo
-            show_detailed_peer_status "$session_data"
+            show_final_summary "$session_data"
             return 0
         fi
-        
-        if [[ "$verbose" == "true" ]]; then
-            echo >&2
-            show_session_summary "$session_data" >&2
-        fi
-        
+
         sleep "$poll_interval"
     done
 }
 
-# Parse command line arguments
+# --- Argument parsing ---
 TIMEOUT="$DEFAULT_TIMEOUT"
 INTERVAL="$POLL_INTERVAL"
 VERBOSE=false
 
 while [[ $# -gt 0 ]]; do
     case $1 in
-        -t|--timeout)
-            TIMEOUT="$2"
-            shift 2
-            ;;
-        -i|--interval)
-            INTERVAL="$2"
-            shift 2
-            ;;
-        -v|--verbose)
-            VERBOSE=true
-            shift
-            ;;
-        -h|--help)
-            show_usage
-            exit 0
-            ;;
-        *)
-            echo -e "${RED}Unknown option: $1${NC}"
-            show_usage
-            exit 1
-            ;;
+        -t|--timeout)  TIMEOUT="$2";  shift 2 ;;
+        -i|--interval) INTERVAL="$2"; shift 2 ;;
+        -v|--verbose)  VERBOSE=true;  shift   ;;
+        -h|--help)     show_usage; exit 0      ;;
+        *)             TOPOLOGY_FILE="$1"; shift ;;
     esac
 done
 
-# Validate arguments
-if [[ ! "$TIMEOUT" =~ ^[0-9]+$ ]] || [[ $TIMEOUT -lt 1 ]]; then
-    echo -e "${RED}Error: Timeout must be a positive integer${NC}"
+if [[ -z "$TOPOLOGY_FILE" ]]; then
+    echo -e "${RED}Error: topology file is required${NC}"
+    echo
+    show_usage
     exit 1
 fi
 
+if [[ ! "$TIMEOUT"  =~ ^[0-9]+$ ]] || [[ $TIMEOUT  -lt 1 ]]; then
+    echo -e "${RED}Error: Timeout must be a positive integer${NC}"; exit 1
+fi
 if [[ ! "$INTERVAL" =~ ^[0-9]+$ ]] || [[ $INTERVAL -lt 1 ]]; then
-    echo -e "${RED}Error: Interval must be a positive integer${NC}"
-    exit 1
+    echo -e "${RED}Error: Interval must be a positive integer${NC}"; exit 1
 fi
 
-# Check if required tools are available
 for tool in curl jq; do
     if ! command -v "$tool" &> /dev/null; then
-        echo -e "${RED}Error: Required tool '$tool' is not installed${NC}"
-        exit 1
+        echo -e "${RED}Error: Required tool '$tool' is not installed${NC}"; exit 1
     fi
 done
 
-# Check if lab is deployed
+[[ ${#EXPECTED_PEERS[@]} -gt 0 ]] && MODE="baseline" || MODE="discovery"
+
+CONTAINER_PREFIX=$(derive_container_prefix "$TOPOLOGY_FILE")
+
 check_lab_deployed
 
-# Show configuration
-echo -e "${PURPLE}=== BGP Session Test Settings ===${NC}"
-echo -e "Timeout: ${TIMEOUT}s"
-echo -e "Poll interval: ${INTERVAL}s"
+echo
+echo -e "${PURPLE}=== BGP Session Test ===${NC}"
+echo -e "Timeout: ${TIMEOUT}s  |  Poll interval: ${INTERVAL}s"
 echo
 
-# Start monitoring
 if wait_for_bgp_sessions "$TIMEOUT" "$INTERVAL" "$VERBOSE"; then
-    echo -e "${GREEN}Success: All BGP sessions are established!${NC}"
     exit 0
 else
-    echo -e "${RED}Failed: Not all BGP sessions became established within timeout${NC}"
-    echo
-    # Show detailed peer status
-    session_data=$(check_all_bgp_sessions false)
-    show_detailed_peer_status "$session_data"
+    echo -e "${RED}Failed: BGP sessions did not reach expected state within timeout${NC}"
     exit 1
 fi

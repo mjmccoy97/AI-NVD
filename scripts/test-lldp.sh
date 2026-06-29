@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # LLDP Neighbor Verification Script for EVPN Lab
-# Verifies that LLDP neighbors match the expected topology defined in cs.clab.yml
+# Verifies that LLDP neighbors match the expected topology from the provided YAML file
 # M. McCoy 5.12.26 Nokia 
 
 # Color codes for output
@@ -14,31 +14,59 @@ CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
 # Configuration
-TOPOLOGY_FILE="cs.clab.yml"
+TOPOLOGY_FILE=""
 VERBOSE=false
+CONTAINER_PREFIX=""
 
 # SR Linux devices (dynamically discovered)
 DEVICES=()
 
 # Function to show usage
+# Derive container prefix from the topology YAML using containerlab naming rules:
+#   no prefix field  →  clab-<name>-
+#   prefix: ""       →  (empty)
+#   prefix: "foo"    →  foo-
+derive_container_prefix() {
+    local yaml_file="$1"
+    local topo_name
+    topo_name=$(grep -E '^name:' "$yaml_file" | awk '{print $2}' | tr -d '"'"'")
+
+    if grep -qE '^prefix:' "$yaml_file"; then
+        local prefix_val
+        prefix_val=$(grep -E '^prefix:' "$yaml_file" | awk '{print $2}' | tr -d '"'"'")
+        if [[ -z "$prefix_val" ]]; then
+            echo ""
+        elif [[ "$prefix_val" == "__lab-name" ]]; then
+            echo "${topo_name}-"
+        else
+            echo "${prefix_val}-"
+        fi
+    else
+        echo "clab-${topo_name}-"
+    fi
+}
+
 show_usage() {
-    echo "Usage: $0 [OPTIONS]"
-    echo "Verify LLDP neighbors against expected topology from cs.clab.yml"
+    echo "Usage: $0 [OPTIONS] <topology-file>"
+    echo "Verify LLDP neighbors against expected topology from the containerlab YAML"
+    echo
+    echo "Arguments:"
+    echo "  <topology-file>            Path to the containerlab topology YAML file (required)"
     echo
     echo "Options:"
     echo "  -v, --verbose              Verbose output with detailed neighbor info"
-    echo "  -f, --topology-file FILE   Topology YAML file (default: cs.clab.yml)"
+    echo "  -f, --topology-file FILE   Topology YAML file (alternative to positional argument)"
     echo "  -h, --help                 Show this help message"
     echo
     echo "Examples:"
-    echo "  $0                      # Run with default settings"
-    echo "  $0 -v                   # Run with verbose output"
+    echo "  $0 ../two-stripe-rail-optimized.clab.yaml"
+    echo "  $0 -v ../two-stripe-rail-optimized.clab.yaml"
 }
 
 # Function to discover SR Linux devices dynamically
 discover_srlinux_devices() {
     local devices_json
-    devices_json=$(containerlab inspect --format json 2>/dev/null | jq -r 'to_entries[].value[] | select(.kind == "nokia_srlinux") | .name' | sed 's/^clab-cs-//')
+    devices_json=$(containerlab inspect --format json 2>/dev/null | jq -r 'to_entries[].value[] | select(.kind == "nokia_srlinux") | .name' | sed "s/^${CONTAINER_PREFIX}//")
 
     if [[ -z "$devices_json" ]]; then
         echo -e "${RED}Error: No SR Linux devices found in the topology${NC}"
@@ -62,9 +90,9 @@ check_lab_deployed() {
 }
 
 # Function to load expected neighbors from topology YAML
-# Parses the links section of cs.clab.yml, converting containerlab interface
+# Parses the links section of two-stripe-rail-optimized.clab.yaml, converting containerlab interface
 # notation (e1-1) to SR Linux format (ethernet-1/1), and prefixing linux node
-# hostnames with clab-cs- to match what they advertise via LLDP.
+# hostnames with CONTAINER_PREFIX to match what they advertise via LLDP.
 load_topology() {
     local topology_file="$1"
 
@@ -76,7 +104,7 @@ load_topology() {
     declare -g -A EXPECTED_NEIGHBORS
 
     local srlinux_set=" ${DEVICES[*]} "
-    local pattern="endpoints.*'([^:]+):([^']+)'.*'([^:]+):([^']+)'"
+    local pattern='endpoints.*"([^:]+):([^"]+)".*"([^:]+):([^"]+)"'
 
     while IFS= read -r line; do
         if [[ "$line" =~ $pattern ]]; then
@@ -94,10 +122,10 @@ load_topology() {
             [[ "$srlinux_set" == *" $node1 "* ]] && node1_is_srlinux=true
             [[ "$srlinux_set" == *" $node2 "* ]] && node2_is_srlinux=true
 
-            # Linux nodes advertise clab-cs-<name> as their LLDP system-name
+            # Linux nodes advertise ${CONTAINER_PREFIX}<name> as their LLDP system-name
             local sys1 sys2
-            if [[ "$node1_is_srlinux" == true ]]; then sys1="$node1"; else sys1="clab-cs-$node1"; fi
-            if [[ "$node2_is_srlinux" == true ]]; then sys2="$node2"; else sys2="clab-cs-$node2"; fi
+            if [[ "$node1_is_srlinux" == true ]]; then sys1="$node1"; else sys1="${CONTAINER_PREFIX}$node1"; fi
+            if [[ "$node2_is_srlinux" == true ]]; then sys2="$node2"; else sys2="${CONTAINER_PREFIX}$node2"; fi
 
             # Add an expected neighbor entry for each SR Linux endpoint
             if [[ "$node1_is_srlinux" == true ]]; then
@@ -117,7 +145,7 @@ load_topology() {
 # Function to get LLDP neighbors for a device using JSON-RPC
 get_lldp_neighbors() {
     local device="$1"
-    local url="http://clab-cs-${device}/jsonrpc"
+    local url="http://${CONTAINER_PREFIX}${device}/jsonrpc"
 
     local response
     response=$(curl -s -u admin:NokiaSrl1! "$url" \
@@ -264,12 +292,20 @@ while [[ $# -gt 0 ]]; do
             exit 0
             ;;
         *)
-            echo -e "${RED}Unknown option: $1${NC}"
-            show_usage
-            exit 1
+            TOPOLOGY_FILE="$1"
+            shift
             ;;
     esac
 done
+
+if [[ -z "$TOPOLOGY_FILE" ]]; then
+    echo -e "${RED}Error: topology file is required${NC}"
+    echo
+    show_usage
+    exit 1
+fi
+
+CONTAINER_PREFIX=$(derive_container_prefix "$TOPOLOGY_FILE")
 
 # Check if required tools are available
 for tool in curl jq; do

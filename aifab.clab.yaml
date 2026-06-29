@@ -2,8 +2,8 @@
 # Licensed under the BSD 3-Clause License  
 # SPDX-License-Identifier: BSD-3-Clause  
 
-name: two-stripe-rail-optimized
-prefix: ""
+name: aifab
+prefix: __lab-name
 mgmt:
   network: mgmt
   ipv4-subnet: 172.21.21.0/24
@@ -169,7 +169,7 @@ topology:
     grafana:
       kind: linux
       #Build custom image to include additional plugins
-      image: grafana-custom:12.3.2
+      image: grafana/grafana:12.3.2
       binds:
         - configs/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
         - configs/grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yaml:ro
