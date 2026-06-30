@@ -1,0 +1,307 @@
+{
+  "freeTextAnnotations": [],
+  "freeShapeAnnotations": [],
+  "trafficRateAnnotations": [],
+  "groupStyleAnnotations": [],
+  "networkNodeAnnotations": [],
+  "nodeAnnotations": [
+    {
+      "id": "spine1",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 560,
+        "y": 140
+      }
+    },
+    {
+      "id": "spine2",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 520,
+        "y": 60
+      }
+    },
+    {
+      "id": "stripe1-leaf1",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": -100,
+        "y": 180
+      }
+    },
+    {
+      "id": "stripe1-leaf2",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 400,
+        "y": -300
+      }
+    },
+    {
+      "id": "stripe1-leaf3",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 300,
+        "y": -120
+      }
+    },
+    {
+      "id": "stripe1-leaf4",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 20,
+        "y": -20
+      }
+    },
+    {
+      "id": "stripe1-leaf5",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 520,
+        "y": -140
+      }
+    },
+    {
+      "id": "stripe1-leaf6",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 700,
+        "y": -120
+      }
+    },
+    {
+      "id": "stripe1-leaf7",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 920,
+        "y": -120
+      }
+    },
+    {
+      "id": "stripe1-leaf8",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 660,
+        "y": 140
+      }
+    },
+    {
+      "id": "stripe2-leaf1",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 320,
+        "y": 220
+      }
+    },
+    {
+      "id": "stripe2-leaf2",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 360,
+        "y": 320
+      }
+    },
+    {
+      "id": "stripe2-leaf3",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 480,
+        "y": 320
+      }
+    },
+    {
+      "id": "stripe2-leaf4",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 420,
+        "y": 240
+      }
+    },
+    {
+      "id": "stripe2-leaf5",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 520,
+        "y": 240
+      }
+    },
+    {
+      "id": "stripe2-leaf6",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 620,
+        "y": 240
+      }
+    },
+    {
+      "id": "stripe2-leaf7",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 660,
+        "y": 340
+      }
+    },
+    {
+      "id": "stripe2-leaf8",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 560,
+        "y": 320
+      }
+    },
+    {
+      "id": "frontend-spine1",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 340,
+        "y": 540
+      }
+    },
+    {
+      "id": "frontend-spine2",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 240,
+        "y": 580
+      }
+    },
+    {
+      "id": "frontend-leaf1",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 160,
+        "y": -60
+      }
+    },
+    {
+      "id": "frontend-leaf2",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 320,
+        "y": 400
+      }
+    },
+    {
+      "id": "s1",
+      "position": {
+        "x": -40,
+        "y": -300
+      }
+    },
+    {
+      "id": "s2",
+      "position": {
+        "x": 460,
+        "y": 140
+      }
+    },
+    {
+      "id": "s3",
+      "position": {
+        "x": 520,
+        "y": 420
+      }
+    },
+    {
+      "id": "s4",
+      "position": {
+        "x": 420,
+        "y": 400
+      }
+    },
+    {
+      "id": "weka1",
+      "position": {
+        "x": 420,
+        "y": 500
+      }
+    },
+    {
+      "id": "weka2",
+      "position": {
+        "x": 260,
+        "y": 480
+      }
+    },
+    {
+      "id": "weka3",
+      "position": {
+        "x": 160,
+        "y": 420
+      }
+    },
+    {
+      "id": "weka4",
+      "position": {
+        "x": 160,
+        "y": 520
+      }
+    },
+    {
+      "id": "weka5",
+      "position": {
+        "x": 120,
+        "y": 240
+      }
+    },
+    {
+      "id": "weka6",
+      "position": {
+        "x": 160,
+        "y": 320
+      }
+    },
+    {
+      "id": "weka7",
+      "position": {
+        "x": 80,
+        "y": 360
+      }
+    },
+    {
+      "id": "weka8",
+      "position": {
+        "x": 80,
+        "y": 460
+      }
+    },
+    {
+      "id": "gnmic",
+      "position": {
+        "x": 580,
+        "y": 1140
+      }
+    },
+    {
+      "id": "prometheus",
+      "position": {
+        "x": 740,
+        "y": 920
+      }
+    },
+    {
+      "id": "grafana",
+      "position": {
+        "x": 960,
+        "y": 1120
+      }
+    },
+    {
+      "id": "promtail",
+      "position": {
+        "x": 1060,
+        "y": 840
+      }
+    },
+    {
+      "id": "loki",
+      "position": {
+        "x": 1120,
+        "y": 600
+      }
+    }
+  ],
+  "edgeAnnotations": [],
+  "aliasEndpointAnnotations": [],
+  "viewerSettings": {}
+}

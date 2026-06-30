@@ -1,0 +1,319 @@
+{
+  "freeTextAnnotations": [],
+  "freeShapeAnnotations": [],
+  "trafficRateAnnotations": [],
+  "groupStyleAnnotations": [],
+  "networkNodeAnnotations": [],
+  "nodeAnnotations": [
+    {
+      "id": "spine1",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 280,
+        "y": 60
+      }
+    },
+    {
+      "id": "spine2",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 1180,
+        "y": 60
+      }
+    },
+    {
+      "id": "stripe1-leaf1",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": -80,
+        "y": 460
+      }
+    },
+    {
+      "id": "stripe1-leaf2",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 20,
+        "y": 460
+      }
+    },
+    {
+      "id": "stripe1-leaf3",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 120,
+        "y": 460
+      }
+    },
+    {
+      "id": "stripe1-leaf4",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 220,
+        "y": 460
+      }
+    },
+    {
+      "id": "stripe1-leaf5",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 320,
+        "y": 460
+      }
+    },
+    {
+      "id": "stripe1-leaf6",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 600,
+        "y": 460
+      }
+    },
+    {
+      "id": "stripe1-leaf7",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 520,
+        "y": 460
+      }
+    },
+    {
+      "id": "stripe1-leaf8",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 420,
+        "y": 460
+      }
+    },
+    {
+      "id": "stripe2-leaf1",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 840,
+        "y": 460
+      }
+    },
+    {
+      "id": "stripe2-leaf2",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 940,
+        "y": 460
+      }
+    },
+    {
+      "id": "stripe2-leaf3",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 1020,
+        "y": 460
+      }
+    },
+    {
+      "id": "stripe2-leaf4",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 1120,
+        "y": 460
+      }
+    },
+    {
+      "id": "stripe2-leaf5",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 1220,
+        "y": 460
+      }
+    },
+    {
+      "id": "stripe2-leaf6",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 1320,
+        "y": 460
+      }
+    },
+    {
+      "id": "stripe2-leaf7",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 1420,
+        "y": 460
+      }
+    },
+    {
+      "id": "stripe2-leaf8",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 1520,
+        "y": 460
+      }
+    },
+    {
+      "id": "frontend-spine1",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 300,
+        "y": 900
+      }
+    },
+    {
+      "id": "frontend-spine2",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 1120,
+        "y": 900
+      }
+    },
+    {
+      "id": "frontend-leaf1",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 1000,
+        "y": 1060
+      }
+    },
+    {
+      "id": "frontend-leaf2",
+      "interfacePattern": "e1-{n}",
+      "position": {
+        "x": 460,
+        "y": 1060
+      }
+    },
+    {
+      "icon": "host",
+      "id": "s1",
+      "position": {
+        "x": 600,
+        "y": 780
+      }
+    },
+    {
+      "icon": "host",
+      "id": "s2",
+      "position": {
+        "x": 680,
+        "y": 780
+      }
+    },
+    {
+      "icon": "host",
+      "id": "s3",
+      "position": {
+        "x": 760,
+        "y": 780
+      }
+    },
+    {
+      "icon": "host",
+      "id": "s4",
+      "position": {
+        "x": 840,
+        "y": 780
+      }
+    },
+    {
+      "icon": "host",
+      "id": "weka1",
+      "position": {
+        "x": 380,
+        "y": 1300
+      }
+    },
+    {
+      "icon": "host",
+      "id": "weka2",
+      "position": {
+        "x": 480,
+        "y": 1300
+      }
+    },
+    {
+      "icon": "host",
+      "id": "weka3",
+      "position": {
+        "x": 580,
+        "y": 1300
+      }
+    },
+    {
+      "icon": "host",
+      "id": "weka4",
+      "position": {
+        "x": 680,
+        "y": 1300
+      }
+    },
+    {
+      "icon": "host",
+      "id": "weka5",
+      "position": {
+        "x": 760,
+        "y": 1300
+      }
+    },
+    {
+      "icon": "host",
+      "id": "weka6",
+      "position": {
+        "x": 860,
+        "y": 1300
+      }
+    },
+    {
+      "icon": "host",
+      "id": "weka7",
+      "position": {
+        "x": 960,
+        "y": 1300
+      }
+    },
+    {
+      "icon": "host",
+      "id": "weka8",
+      "position": {
+        "x": 1060,
+        "y": 1300
+      }
+    },
+    {
+      "id": "gnmic",
+      "position": {
+        "x": -260,
+        "y": 320
+      }
+    },
+    {
+      "id": "prometheus",
+      "position": {
+        "x": -260,
+        "y": 20
+      }
+    },
+    {
+      "id": "grafana",
+      "position": {
+        "x": -260,
+        "y": 420
+      }
+    },
+    {
+      "id": "promtail",
+      "position": {
+        "x": -260,
+        "y": 220
+      }
+    },
+    {
+      "id": "loki",
+      "position": {
+        "x": -260,
+        "y": 120
+      }
+    }
+  ],
+  "edgeAnnotations": [],
+  "aliasEndpointAnnotations": [],
+  "viewerSettings": {}
+}
