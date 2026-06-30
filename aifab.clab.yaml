@@ -246,6 +246,7 @@ topology:
       labels:
         graph-level: 3
         graph-icon: host
+    #TELEMETRY STACK
     gnmic:
       kind: linux
       image: ghcr.io/openconfig/gnmic:0.39.1
@@ -264,7 +265,7 @@ topology:
       group: '10'
     grafana:
       kind: linux
-      image: grafana/grafana:12.3.2
+      image: grafana-custom:12.3.2
       binds:
       - configs/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
       - configs/grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yaml:ro

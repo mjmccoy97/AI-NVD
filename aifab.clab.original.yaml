@@ -169,7 +169,7 @@ topology:
     grafana:
       kind: linux
       #Build custom image to include additional plugins
-      image: grafana/grafana:12.3.2
+      image: grafana-custom:12.3.2
       binds:
         - configs/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
         - configs/grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yaml:ro

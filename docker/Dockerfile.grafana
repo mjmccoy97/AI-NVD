@@ -1,0 +1,22 @@
+FROM grafana/grafana:12.3.2
+USER root
+
+# Install plugins during build (when network is available)
+RUN grafana-cli plugins install andrewbmchugh-flow-panel && \
+    grafana-cli plugins install grafana-lokiexplore-app && \
+    grafana-cli plugins install grafana-pyroscope-app && \
+    grafana-cli plugins install grafana-exploretraces-app && \
+    grafana-cli plugins install grafana-metricsdrilldown-app
+
+# Create custom grafana.ini to disable all external calls
+RUN echo '[plugins]' > /etc/grafana/grafana.ini && \
+    echo 'enable_alpha = false' >> /etc/grafana/grafana.ini && \
+    echo 'plugin_admin_enabled = false' >> /etc/grafana/grafana.ini && \
+    echo 'plugin_admin_external_manage_enabled = false' >> /etc/grafana/grafana.ini && \
+    echo '' >> /etc/grafana/grafana.ini && \
+    echo '[analytics]' >> /etc/grafana/grafana.ini && \
+    echo 'check_for_updates = false' >> /etc/grafana/grafana.ini && \
+    echo 'check_for_plugin_updates = false' >> /etc/grafana/grafana.ini && \
+    echo 'reporting_enabled = false' >> /etc/grafana/grafana.ini
+
+USER grafana
