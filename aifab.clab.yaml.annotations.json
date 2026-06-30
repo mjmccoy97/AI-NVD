@@ -9,296 +9,317 @@
       "id": "spine1",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 560,
-        "y": 140
-      }
+        "x": -260,
+        "y": -180
+      },
+      "icon": "super-spine"
     },
     {
       "id": "spine2",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 520,
-        "y": 60
-      }
+        "x": 640,
+        "y": -180
+      },
+      "icon": "super-spine"
     },
     {
       "id": "stripe1-leaf1",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": -100,
-        "y": 180
+        "x": -560,
+        "y": 100
       }
     },
     {
       "id": "stripe1-leaf2",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 400,
-        "y": -300
+        "x": -460,
+        "y": 100
       }
     },
     {
       "id": "stripe1-leaf3",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 300,
-        "y": -120
+        "x": -360,
+        "y": 100
       }
     },
     {
       "id": "stripe1-leaf4",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 20,
-        "y": -20
+        "x": -160,
+        "y": 100
       }
     },
     {
       "id": "stripe1-leaf5",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 520,
-        "y": -140
+        "x": -260,
+        "y": 100
       }
     },
     {
       "id": "stripe1-leaf6",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 700,
-        "y": -120
+        "x": -60,
+        "y": 100
       }
     },
     {
       "id": "stripe1-leaf7",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 920,
-        "y": -120
+        "x": 120,
+        "y": 100
       }
     },
     {
       "id": "stripe1-leaf8",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 660,
-        "y": 140
+        "x": 200,
+        "y": 100
       }
     },
     {
       "id": "stripe2-leaf1",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 320,
-        "y": 220
+        "x": 280,
+        "y": 100
       }
     },
     {
       "id": "stripe2-leaf2",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 360,
-        "y": 320
+        "x": 340,
+        "y": 100
       }
     },
     {
       "id": "stripe2-leaf3",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 480,
-        "y": 320
+        "x": 440,
+        "y": 100
       }
     },
     {
       "id": "stripe2-leaf4",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 420,
-        "y": 240
+        "x": 540,
+        "y": 100
       }
     },
     {
       "id": "stripe2-leaf5",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 520,
-        "y": 240
+        "x": 640,
+        "y": 100
       }
     },
     {
       "id": "stripe2-leaf6",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 620,
-        "y": 240
+        "x": 740,
+        "y": 100
       }
     },
     {
       "id": "stripe2-leaf7",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 660,
-        "y": 340
+        "x": 840,
+        "y": 100
       }
     },
     {
       "id": "stripe2-leaf8",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 560,
-        "y": 320
+        "x": 960,
+        "y": 100
       }
     },
     {
       "id": "frontend-spine1",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 340,
-        "y": 540
+        "x": -380,
+        "y": 620
       }
     },
     {
       "id": "frontend-spine2",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 240,
-        "y": 580
+        "x": 900,
+        "y": 640
       }
     },
     {
       "id": "frontend-leaf1",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 160,
-        "y": -60
+        "x": -60,
+        "y": 520
       }
     },
     {
       "id": "frontend-leaf2",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 320,
-        "y": 400
+        "x": 540,
+        "y": 520
       }
     },
     {
       "id": "s1",
       "position": {
-        "x": -40,
-        "y": -300
-      }
+        "x": -500,
+        "y": 340
+      },
+      "icon": "client"
     },
     {
       "id": "s2",
       "position": {
-        "x": 460,
-        "y": 140
-      }
+        "x": -60,
+        "y": 340
+      },
+      "icon": "client"
     },
     {
       "id": "s3",
       "position": {
-        "x": 520,
-        "y": 420
-      }
+        "x": 540,
+        "y": 340
+      },
+      "icon": "client"
     },
     {
       "id": "s4",
       "position": {
-        "x": 420,
-        "y": 400
-      }
+        "x": 900,
+        "y": 340
+      },
+      "icon": "client"
     },
     {
       "id": "weka1",
       "position": {
-        "x": 420,
-        "y": 500
-      }
+        "x": -100,
+        "y": 780
+      },
+      "icon": "client"
     },
     {
       "id": "weka2",
       "position": {
-        "x": 260,
-        "y": 480
-      }
+        "x": 20,
+        "y": 780
+      },
+      "icon": "client"
     },
     {
       "id": "weka3",
       "position": {
-        "x": 160,
-        "y": 420
-      }
+        "x": 140,
+        "y": 780
+      },
+      "icon": "client",
+      "iconCornerRadius": 0
     },
     {
       "id": "weka4",
       "position": {
-        "x": 160,
-        "y": 520
-      }
+        "x": 260,
+        "y": 780
+      },
+      "icon": "client"
     },
     {
       "id": "weka5",
       "position": {
-        "x": 120,
-        "y": 240
-      }
+        "x": 360,
+        "y": 780
+      },
+      "icon": "client"
     },
     {
       "id": "weka6",
       "position": {
-        "x": 160,
-        "y": 320
-      }
+        "x": 480,
+        "y": 780
+      },
+      "icon": "client"
     },
     {
       "id": "weka7",
       "position": {
-        "x": 80,
-        "y": 360
-      }
+        "x": 600,
+        "y": 780
+      },
+      "icon": "client"
     },
     {
       "id": "weka8",
       "position": {
-        "x": 80,
-        "y": 460
-      }
+        "x": 720,
+        "y": 780
+      },
+      "icon": "client",
+      "iconCornerRadius": 0
     },
     {
       "id": "gnmic",
       "position": {
-        "x": 580,
-        "y": 1140
-      }
+        "x": 1120,
+        "y": 320
+      },
+      "icon": "server"
     },
     {
       "id": "prometheus",
       "position": {
-        "x": 740,
-        "y": 920
-      }
+        "x": 1120,
+        "y": 80
+      },
+      "icon": "server"
     },
     {
       "id": "grafana",
       "position": {
-        "x": 960,
-        "y": 1120
-      }
+        "x": 1120,
+        "y": 200
+      },
+      "icon": "server"
     },
     {
       "id": "promtail",
       "position": {
-        "x": 1060,
-        "y": 840
-      }
+        "x": 1120,
+        "y": -40
+      },
+      "icon": "server"
     },
     {
       "id": "loki",
       "position": {
         "x": 1120,
-        "y": 600
-      }
+        "y": -140
+      },
+      "icon": "server"
     }
   ],
   "edgeAnnotations": [],

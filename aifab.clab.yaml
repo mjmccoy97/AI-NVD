@@ -14,18 +14,12 @@ topology:
     linux:
       image: aninchat/ubuntu-server:v1
       binds:
-      - configs:/linux
+        - configs:/linux
   nodes:
     spine1:
       mgmt-ipv4: 172.21.21.101
-      labels:
-        graph-level: 1
-        graph-icon: network
     spine2:
       mgmt-ipv4: 172.21.21.102
-      labels:
-        graph-level: 1
-        graph-icon: network
     stripe1-leaf1:
       mgmt-ipv4: 172.21.21.11
       labels:
@@ -154,242 +148,207 @@ topology:
       mgmt-ipv4: 172.21.21.51
       kind: linux
       exec:
-      - bash linux/s1.sh
-      labels:
-        graph-level: 3
-        graph-icon: host
+        - bash linux/s1.sh
     s2:
       mgmt-ipv4: 172.21.21.52
       kind: linux
       exec:
-      - bash linux/s2.sh
-      labels:
-        graph-level: 3
-        graph-icon: host
+        - bash linux/s2.sh
     s3:
       mgmt-ipv4: 172.21.21.53
       kind: linux
       exec:
-      - bash linux/s3.sh
-      labels:
-        graph-level: 3
-        graph-icon: host
+        - bash linux/s3.sh
     s4:
       mgmt-ipv4: 172.21.21.54
       kind: linux
       exec:
-      - bash linux/s4.sh
-      labels:
-        graph-level: 3
-        graph-icon: host
+        - bash linux/s4.sh
     weka1:
       mgmt-ipv4: 172.21.21.60
       kind: linux
       exec:
-      - bash linux/weka1.sh
-      labels:
-        graph-level: 3
-        graph-icon: host
+        - bash linux/weka1.sh
     weka2:
       mgmt-ipv4: 172.21.21.61
       kind: linux
       exec:
-      - bash linux/weka2.sh
-      labels:
-        graph-level: 3
-        graph-icon: host
+        - bash linux/weka2.sh
     weka3:
       mgmt-ipv4: 172.21.21.63
       kind: linux
       exec:
-      - bash linux/weka3.sh
-      labels:
-        graph-level: 3
-        graph-icon: host
+        - bash linux/weka3.sh
     weka4:
       mgmt-ipv4: 172.21.21.64
       kind: linux
       exec:
-      - bash linux/weka4.sh
-      labels:
-        graph-level: 3
-        graph-icon: host
+        - bash linux/weka4.sh
     weka5:
       mgmt-ipv4: 172.21.21.65
       kind: linux
       exec:
-      - bash linux/weka5.sh
-      labels:
-        graph-level: 3
-        graph-icon: host
+        - bash linux/weka5.sh
     weka6:
       mgmt-ipv4: 172.21.21.66
       kind: linux
       exec:
-      - bash linux/weka6.sh
-      labels:
-        graph-level: 3
-        graph-icon: host
+        - bash linux/weka6.sh
     weka7:
       mgmt-ipv4: 172.21.21.67
       kind: linux
       exec:
-      - bash linux/weka7.sh
-      labels:
-        graph-level: 3
-        graph-icon: host
+        - bash linux/weka7.sh
     weka8:
       mgmt-ipv4: 172.21.21.68
       kind: linux
       exec:
-      - bash linux/weka8.sh
-      labels:
-        graph-level: 3
-        graph-icon: host
+        - bash linux/weka8.sh
     #TELEMETRY STACK
     gnmic:
       kind: linux
       image: ghcr.io/openconfig/gnmic:0.39.1
       binds:
-      - configs/gnmic/gnmic-config.yml:/gnmic-config.yml:ro
+        - configs/gnmic/gnmic-config.yml:/gnmic-config.yml:ro
       cmd: --config /gnmic-config.yml --log subscribe
       group: '10'
     prometheus:
       kind: linux
       image: quay.io/prometheus/prometheus:v2.54.1
       binds:
-      - configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+        - configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       cmd: --config.file=/etc/prometheus/prometheus.yml
       ports:
-      - 9090:9090
+        - 9090:9090
       group: '10'
     grafana:
       kind: linux
       image: grafana-custom:12.3.2
       binds:
-      - configs/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
-      - configs/grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yaml:ro
-      - configs/grafana/dashboards:/var/lib/grafana/dashboards
-      - configs/grafana/dashboards/Nokia_Logo.svg:/usr/share/grafana/public/build/img/icons/marker/Nokia_Logo.svg:ro
+        - configs/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
+        - configs/grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yaml:ro
+        - configs/grafana/dashboards:/var/lib/grafana/dashboards
+        - configs/grafana/dashboards/Nokia_Logo.svg:/usr/share/grafana/public/build/img/icons/marker/Nokia_Logo.svg:ro
       ports:
-      - 3000:3000
+        - 3000:3000
       env:
         GF_ORG_ROLE: Admin
         GF_ORG_NAME: Main Org
-        GF_AUTH_ANONYMOUS_ENABLED: 'true'
+        GF_AUTH_ANONYMOUS_ENABLED: "true"
         GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
-        GF_AUTH_ANONYMOUS: 'true'
-        GF_AUTH_OAUTH_AUTO_LOGIN: 'true'
+        GF_AUTH_ANONYMOUS: "true"
+        GF_AUTH_OAUTH_AUTO_LOGIN: "true"
       group: '10'
     promtail:
       kind: linux
       image: grafana/promtail:3.2.0
       binds:
-      - configs/promtail:/etc/promtail
+        - configs/promtail:/etc/promtail
       cmd: --config.file=/etc/promtail/promtail-config.yml
       ports:
-      - 9080:9080
+        - 9080:9080
     loki:
       kind: linux
       image: grafana/loki:3.2.0
       binds:
-      - configs/loki:/etc/loki
+        - configs/loki:/etc/loki
       cmd: --config.file=/etc/loki/loki-config.yml
       ports:
-      - 3100:3100
+        - 3100:3100
   links:
-  - endpoints: ['stripe1-leaf1:e1-1', 'spine1:e1-1']
-  - endpoints: ['stripe1-leaf1:e1-2', 'spine2:e1-1']
-  - endpoints: ['stripe1-leaf2:e1-1', 'spine1:e1-2']
-  - endpoints: ['stripe1-leaf2:e1-2', 'spine2:e1-2']
-  - endpoints: ['stripe1-leaf3:e1-1', 'spine1:e1-3']
-  - endpoints: ['stripe1-leaf3:e1-2', 'spine2:e1-3']
-  - endpoints: ['stripe1-leaf4:e1-1', 'spine1:e1-4']
-  - endpoints: ['stripe1-leaf4:e1-2', 'spine2:e1-4']
-  - endpoints: ['stripe1-leaf5:e1-1', 'spine1:e1-5']
-  - endpoints: ['stripe1-leaf5:e1-2', 'spine2:e1-5']
-  - endpoints: ['stripe1-leaf6:e1-1', 'spine1:e1-6']
-  - endpoints: ['stripe1-leaf6:e1-2', 'spine2:e1-6']
-  - endpoints: ['stripe1-leaf7:e1-1', 'spine1:e1-7']
-  - endpoints: ['stripe1-leaf7:e1-2', 'spine2:e1-7']
-  - endpoints: ['stripe1-leaf8:e1-1', 'spine1:e1-8']
-  - endpoints: ['stripe1-leaf8:e1-2', 'spine2:e1-8']
-  - endpoints: ['stripe2-leaf1:e1-1', 'spine1:e1-9']
-  - endpoints: ['stripe2-leaf1:e1-2', 'spine2:e1-9']
-  - endpoints: ['stripe2-leaf2:e1-1', 'spine1:e1-10']
-  - endpoints: ['stripe2-leaf2:e1-2', 'spine2:e1-10']
-  - endpoints: ['stripe2-leaf3:e1-1', 'spine1:e1-11']
-  - endpoints: ['stripe2-leaf3:e1-2', 'spine2:e1-11']
-  - endpoints: ['stripe2-leaf4:e1-1', 'spine1:e1-12']
-  - endpoints: ['stripe2-leaf4:e1-2', 'spine2:e1-12']
-  - endpoints: ['stripe2-leaf5:e1-1', 'spine1:e1-13']
-  - endpoints: ['stripe2-leaf5:e1-2', 'spine2:e1-13']
-  - endpoints: ['stripe2-leaf6:e1-1', 'spine1:e1-14']
-  - endpoints: ['stripe2-leaf6:e1-2', 'spine2:e1-14']
-  - endpoints: ['stripe2-leaf7:e1-1', 'spine1:e1-15']
-  - endpoints: ['stripe2-leaf7:e1-2', 'spine2:e1-15']
-  - endpoints: ['stripe2-leaf8:e1-1', 'spine1:e1-16']
-  - endpoints: ['stripe2-leaf8:e1-2', 'spine2:e1-16']
-  - endpoints: ['s1:eth1', 'stripe1-leaf1:e1-3']
-  - endpoints: ['s1:eth2', 'stripe1-leaf2:e1-3']
-  - endpoints: ['s1:eth3', 'stripe1-leaf3:e1-3']
-  - endpoints: ['s1:eth4', 'stripe1-leaf4:e1-3']
-  - endpoints: ['s1:eth5', 'stripe1-leaf5:e1-3']
-  - endpoints: ['s1:eth6', 'stripe1-leaf6:e1-3']
-  - endpoints: ['s1:eth7', 'stripe1-leaf7:e1-3']
-  - endpoints: ['s1:eth8', 'stripe1-leaf8:e1-3']
-  - endpoints: ['s2:eth1', 'stripe1-leaf1:e1-4']
-  - endpoints: ['s2:eth2', 'stripe1-leaf2:e1-4']
-  - endpoints: ['s2:eth3', 'stripe1-leaf3:e1-4']
-  - endpoints: ['s2:eth4', 'stripe1-leaf4:e1-4']
-  - endpoints: ['s2:eth5', 'stripe1-leaf5:e1-4']
-  - endpoints: ['s2:eth6', 'stripe1-leaf6:e1-4']
-  - endpoints: ['s2:eth7', 'stripe1-leaf7:e1-4']
-  - endpoints: ['s2:eth8', 'stripe1-leaf8:e1-4']
-  - endpoints: ['s3:eth1', 'stripe2-leaf1:e1-3']
-  - endpoints: ['s3:eth2', 'stripe2-leaf2:e1-3']
-  - endpoints: ['s3:eth3', 'stripe2-leaf3:e1-3']
-  - endpoints: ['s3:eth4', 'stripe2-leaf4:e1-3']
-  - endpoints: ['s3:eth5', 'stripe2-leaf5:e1-3']
-  - endpoints: ['s3:eth6', 'stripe2-leaf6:e1-3']
-  - endpoints: ['s3:eth7', 'stripe2-leaf7:e1-3']
-  - endpoints: ['s3:eth8', 'stripe2-leaf8:e1-3']
-  - endpoints: ['s4:eth1', 'stripe2-leaf1:e1-4']
-  - endpoints: ['s4:eth2', 'stripe2-leaf2:e1-4']
-  - endpoints: ['s4:eth3', 'stripe2-leaf3:e1-4']
-  - endpoints: ['s4:eth4', 'stripe2-leaf4:e1-4']
-  - endpoints: ['s4:eth5', 'stripe2-leaf5:e1-4']
-  - endpoints: ['s4:eth6', 'stripe2-leaf6:e1-4']
-  - endpoints: ['s4:eth7', 'stripe2-leaf7:e1-4']
-  - endpoints: ['s4:eth8', 'stripe2-leaf8:e1-4']
-  - endpoints: ['frontend-leaf1:e1-1', 'frontend-spine1:e1-1']
-  - endpoints: ['frontend-leaf1:e1-2', 'frontend-spine2:e1-1']
-  - endpoints: ['frontend-leaf2:e1-1', 'frontend-spine1:e1-2']
-  - endpoints: ['frontend-leaf2:e1-2', 'frontend-spine2:e1-2']
-  - endpoints: ['s1:eth9', 'frontend-leaf1:e1-3']
-  - endpoints: ['s1:eth10', 'frontend-leaf2:e1-3']
-  - endpoints: ['s2:eth9', 'frontend-leaf1:e1-4']
-  - endpoints: ['s2:eth10', 'frontend-leaf2:e1-4']
-  - endpoints: ['s3:eth9', 'frontend-leaf1:e1-5']
-  - endpoints: ['s3:eth10', 'frontend-leaf2:e1-5']
-  - endpoints: ['s4:eth9', 'frontend-leaf1:e1-6']
-  - endpoints: ['s4:eth10', 'frontend-leaf2:e1-6']
-  - endpoints: ['weka1:eth1', 'frontend-leaf1:e1-7']
-  - endpoints: ['weka1:eth2', 'frontend-leaf2:e1-7']
-  - endpoints: ['weka2:eth1', 'frontend-leaf1:e1-8']
-  - endpoints: ['weka2:eth2', 'frontend-leaf2:e1-8']
-  - endpoints: ['weka3:eth1', 'frontend-leaf1:e1-9']
-  - endpoints: ['weka3:eth2', 'frontend-leaf2:e1-9']
-  - endpoints: ['weka4:eth1', 'frontend-leaf1:e1-10']
-  - endpoints: ['weka4:eth2', 'frontend-leaf2:e1-10']
-  - endpoints: ['weka5:eth1', 'frontend-leaf1:e1-11']
-  - endpoints: ['weka5:eth2', 'frontend-leaf2:e1-11']
-  - endpoints: ['weka6:eth1', 'frontend-leaf1:e1-12']
-  - endpoints: ['weka6:eth2', 'frontend-leaf2:e1-12']
-  - endpoints: ['weka7:eth1', 'frontend-leaf1:e1-13']
-  - endpoints: ['weka7:eth2', 'frontend-leaf2:e1-13']
-  - endpoints: ['weka8:eth1', 'frontend-leaf1:e1-14']
-  - endpoints: ['weka8:eth2', 'frontend-leaf2:e1-14']
+    - endpoints: [ 'stripe1-leaf1:e1-1', 'spine1:e1-1' ]
+    - endpoints: [ 'stripe1-leaf1:e1-2', 'spine2:e1-1' ]
+    - endpoints: [ 'stripe1-leaf2:e1-1', 'spine1:e1-2' ]
+    - endpoints: [ 'stripe1-leaf2:e1-2', 'spine2:e1-2' ]
+    - endpoints: [ 'stripe1-leaf3:e1-1', 'spine1:e1-3' ]
+    - endpoints: [ 'stripe1-leaf3:e1-2', 'spine2:e1-3' ]
+    - endpoints: [ 'stripe1-leaf4:e1-1', 'spine1:e1-4' ]
+    - endpoints: [ 'stripe1-leaf4:e1-2', 'spine2:e1-4' ]
+    - endpoints: [ 'stripe1-leaf5:e1-1', 'spine1:e1-5' ]
+    - endpoints: [ 'stripe1-leaf5:e1-2', 'spine2:e1-5' ]
+    - endpoints: [ 'stripe1-leaf6:e1-1', 'spine1:e1-6' ]
+    - endpoints: [ 'stripe1-leaf6:e1-2', 'spine2:e1-6' ]
+    - endpoints: [ 'stripe1-leaf7:e1-1', 'spine1:e1-7' ]
+    - endpoints: [ 'stripe1-leaf7:e1-2', 'spine2:e1-7' ]
+    - endpoints: [ 'stripe1-leaf8:e1-1', 'spine1:e1-8' ]
+    - endpoints: [ 'stripe1-leaf8:e1-2', 'spine2:e1-8' ]
+    - endpoints: [ 'stripe2-leaf1:e1-1', 'spine1:e1-9' ]
+    - endpoints: [ 'stripe2-leaf1:e1-2', 'spine2:e1-9' ]
+    - endpoints: [ 'stripe2-leaf2:e1-1', 'spine1:e1-10' ]
+    - endpoints: [ 'stripe2-leaf2:e1-2', 'spine2:e1-10' ]
+    - endpoints: [ 'stripe2-leaf3:e1-1', 'spine1:e1-11' ]
+    - endpoints: [ 'stripe2-leaf3:e1-2', 'spine2:e1-11' ]
+    - endpoints: [ 'stripe2-leaf4:e1-1', 'spine1:e1-12' ]
+    - endpoints: [ 'stripe2-leaf4:e1-2', 'spine2:e1-12' ]
+    - endpoints: [ 'stripe2-leaf5:e1-1', 'spine1:e1-13' ]
+    - endpoints: [ 'stripe2-leaf5:e1-2', 'spine2:e1-13' ]
+    - endpoints: [ 'stripe2-leaf6:e1-1', 'spine1:e1-14' ]
+    - endpoints: [ 'stripe2-leaf6:e1-2', 'spine2:e1-14' ]
+    - endpoints: [ 'stripe2-leaf7:e1-1', 'spine1:e1-15' ]
+    - endpoints: [ 'stripe2-leaf7:e1-2', 'spine2:e1-15' ]
+    - endpoints: [ 'stripe2-leaf8:e1-1', 'spine1:e1-16' ]
+    - endpoints: [ 'stripe2-leaf8:e1-2', 'spine2:e1-16' ]
+    - endpoints: [ 's1:eth1', 'stripe1-leaf1:e1-3' ]
+    - endpoints: [ 's1:eth2', 'stripe1-leaf2:e1-3' ]
+    - endpoints: [ 's1:eth3', 'stripe1-leaf3:e1-3' ]
+    - endpoints: [ 's1:eth4', 'stripe1-leaf4:e1-3' ]
+    - endpoints: [ 's1:eth5', 'stripe1-leaf5:e1-3' ]
+    - endpoints: [ 's1:eth6', 'stripe1-leaf6:e1-3' ]
+    - endpoints: [ 's1:eth7', 'stripe1-leaf7:e1-3' ]
+    - endpoints: [ 's1:eth8', 'stripe1-leaf8:e1-3' ]
+    - endpoints: [ 's2:eth1', 'stripe1-leaf1:e1-4' ]
+    - endpoints: [ 's2:eth2', 'stripe1-leaf2:e1-4' ]
+    - endpoints: [ 's2:eth3', 'stripe1-leaf3:e1-4' ]
+    - endpoints: [ 's2:eth4', 'stripe1-leaf4:e1-4' ]
+    - endpoints: [ 's2:eth5', 'stripe1-leaf5:e1-4' ]
+    - endpoints: [ 's2:eth6', 'stripe1-leaf6:e1-4' ]
+    - endpoints: [ 's2:eth7', 'stripe1-leaf7:e1-4' ]
+    - endpoints: [ 's2:eth8', 'stripe1-leaf8:e1-4' ]
+    - endpoints: [ 's3:eth1', 'stripe2-leaf1:e1-3' ]
+    - endpoints: [ 's3:eth2', 'stripe2-leaf2:e1-3' ]
+    - endpoints: [ 's3:eth3', 'stripe2-leaf3:e1-3' ]
+    - endpoints: [ 's3:eth4', 'stripe2-leaf4:e1-3' ]
+    - endpoints: [ 's3:eth5', 'stripe2-leaf5:e1-3' ]
+    - endpoints: [ 's3:eth6', 'stripe2-leaf6:e1-3' ]
+    - endpoints: [ 's3:eth7', 'stripe2-leaf7:e1-3' ]
+    - endpoints: [ 's3:eth8', 'stripe2-leaf8:e1-3' ]
+    - endpoints: [ 's4:eth1', 'stripe2-leaf1:e1-4' ]
+    - endpoints: [ 's4:eth2', 'stripe2-leaf2:e1-4' ]
+    - endpoints: [ 's4:eth3', 'stripe2-leaf3:e1-4' ]
+    - endpoints: [ 's4:eth4', 'stripe2-leaf4:e1-4' ]
+    - endpoints: [ 's4:eth5', 'stripe2-leaf5:e1-4' ]
+    - endpoints: [ 's4:eth6', 'stripe2-leaf6:e1-4' ]
+    - endpoints: [ 's4:eth7', 'stripe2-leaf7:e1-4' ]
+    - endpoints: [ 's4:eth8', 'stripe2-leaf8:e1-4' ]
+    - endpoints: [ 'frontend-leaf1:e1-1', 'frontend-spine1:e1-1' ]
+    - endpoints: [ 'frontend-leaf1:e1-2', 'frontend-spine2:e1-1' ]
+    - endpoints: [ 'frontend-leaf2:e1-1', 'frontend-spine1:e1-2' ]
+    - endpoints: [ 'frontend-leaf2:e1-2', 'frontend-spine2:e1-2' ]
+    - endpoints: [ 's1:eth9', 'frontend-leaf1:e1-3' ]
+    - endpoints: [ 's1:eth10', 'frontend-leaf2:e1-3' ]
+    - endpoints: [ 's2:eth9', 'frontend-leaf1:e1-4' ]
+    - endpoints: [ 's2:eth10', 'frontend-leaf2:e1-4' ]
+    - endpoints: [ 's3:eth9', 'frontend-leaf1:e1-5' ]
+    - endpoints: [ 's3:eth10', 'frontend-leaf2:e1-5' ]
+    - endpoints: [ 's4:eth9', 'frontend-leaf1:e1-6' ]
+    - endpoints: [ 's4:eth10', 'frontend-leaf2:e1-6' ]
+    - endpoints: [ 'weka1:eth1', 'frontend-leaf1:e1-7' ]
+    - endpoints: [ 'weka1:eth2', 'frontend-leaf2:e1-7' ]
+    - endpoints: [ 'weka2:eth1', 'frontend-leaf1:e1-8' ]
+    - endpoints: [ 'weka2:eth2', 'frontend-leaf2:e1-8' ]
+    - endpoints: [ 'weka3:eth1', 'frontend-leaf1:e1-9' ]
+    - endpoints: [ 'weka3:eth2', 'frontend-leaf2:e1-9' ]
+    - endpoints: [ 'weka4:eth1', 'frontend-leaf1:e1-10' ]
+    - endpoints: [ 'weka4:eth2', 'frontend-leaf2:e1-10' ]
+    - endpoints: [ 'weka5:eth1', 'frontend-leaf1:e1-11' ]
+    - endpoints: [ 'weka5:eth2', 'frontend-leaf2:e1-11' ]
+    - endpoints: [ 'weka6:eth1', 'frontend-leaf1:e1-12' ]
+    - endpoints: [ 'weka6:eth2', 'frontend-leaf2:e1-12' ]
+    - endpoints: [ 'weka7:eth1', 'frontend-leaf1:e1-13' ]
+    - endpoints: [ 'weka7:eth2', 'frontend-leaf2:e1-13' ]
+    - endpoints: [ 'weka8:eth1', 'frontend-leaf1:e1-14' ]
+    - endpoints: [ 'weka8:eth2', 'frontend-leaf2:e1-14' ]
+
 # annotations:
 #   freeTextAnnotations: []
 #   freeShapeAnnotations: []

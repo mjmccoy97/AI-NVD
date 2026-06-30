@@ -5,10 +5,10 @@ anchors:
     - { color: "green", level: 1 }
   thresholds-traffic: &thresholds-traffic
     - { color: "gray", level: 0 }
-    - { color: "green", level: 199999 }
-    - { color: "yellow", level: 500000 }
-    - { color: "orange", level: 1000000 }
-    - { color: "red", level: 5000000 }
+    - { color: "green", level: 1000 }
+    - { color: "yellow", level: 10000 }
+    - { color: "orange", level: 100000 }
+    - { color: "red", level: 1000000 }
   thresholds-rate-label: &thresholds-rate-label
     - { color: "white", level: 0 }
   label-config: &label-config
@@ -16,7 +16,7 @@ anchors:
     units: "bps"
     decimalPoints: 1
     valueMappings:
-      - { valueMax: 199999, text: "\u200B" }
+      - { valueMax: 1000, text: "\u200B" }
 cellIdPreamble: "cell-"
 tagConfig:
   legend: ["hide-rates"]
