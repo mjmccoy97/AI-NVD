@@ -21,28 +21,28 @@ common_srl_subscriptions: &common_srl_subs
     - srl-net-instance
 
 targets:
-  frontend-leaf1: *common_srl_subs
-  frontend-leaf2: *common_srl_subs
-  frontend-spine1: *common_srl_subs
-  frontend-spine2: *common_srl_subs
-  spine1: *common_srl_subs
-  spine2: *common_srl_subs
-  stripe1-leaf1: *common_srl_subs
-  stripe1-leaf2: *common_srl_subs 
-  stripe1-leaf3: *common_srl_subs
-  stripe1-leaf4: *common_srl_subs
-  stripe1-leaf5: *common_srl_subs
-  stripe1-leaf6: *common_srl_subs
-  stripe1-leaf7: *common_srl_subs
-  stripe1-leaf8: *common_srl_subs
-  stripe2-leaf1: *common_srl_subs
-  stripe2-leaf2: *common_srl_subs
-  stripe2-leaf3: *common_srl_subs
-  stripe2-leaf4: *common_srl_subs
-  stripe2-leaf5: *common_srl_subs
-  stripe2-leaf6: *common_srl_subs
-  stripe2-leaf7: *common_srl_subs
-  stripe2-leaf8: *common_srl_subs 
+  aifab-frontend-leaf1: *common_srl_subs
+  aifab-frontend-leaf2: *common_srl_subs
+  aifab-frontend-spine1: *common_srl_subs
+  aifab-frontend-spine2: *common_srl_subs
+  aifab-spine1: *common_srl_subs
+  aifab-spine2: *common_srl_subs
+  aifab-stripe1-leaf1: *common_srl_subs
+  aifab-stripe1-leaf2: *common_srl_subs 
+  aifab-stripe1-leaf3: *common_srl_subs
+  aifab-stripe1-leaf4: *common_srl_subs
+  aifab-stripe1-leaf5: *common_srl_subs
+  aifab-stripe1-leaf6: *common_srl_subs
+  aifab-stripe1-leaf7: *common_srl_subs
+  aifab-stripe1-leaf8: *common_srl_subs
+  aifab-stripe2-leaf1: *common_srl_subs
+  aifab-stripe2-leaf2: *common_srl_subs
+  aifab-stripe2-leaf3: *common_srl_subs
+  aifab-stripe2-leaf4: *common_srl_subs
+  aifab-stripe2-leaf5: *common_srl_subs
+  aifab-stripe2-leaf6: *common_srl_subs
+  aifab-stripe2-leaf7: *common_srl_subs
+  aifab-stripe2-leaf8: *common_srl_subs 
 
 subscriptions:
   srl-system-performance:
