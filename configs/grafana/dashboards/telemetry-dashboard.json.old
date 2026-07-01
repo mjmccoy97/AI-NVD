@@ -1,0 +1,1583 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "prometheus"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 39,
+      "options": {
+        "inlineEditing": true,
+        "panZoom": false,
+        "root": {
+          "background": {
+            "color": {
+              "fixed": "dark-blue"
+            },
+            "image": {
+              "field": "",
+              "fixed": "",
+              "mode": "fixed"
+            }
+          },
+          "border": {
+            "color": {
+              "fixed": "dark-green"
+            }
+          },
+          "constraint": {
+            "horizontal": "left",
+            "vertical": "top"
+          },
+          "elements": [
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "fill": {
+                  "fixed": "#D9D9D9"
+                },
+                "path": {
+                  "fixed": "img/icons/marker/Nokia_Logo.svg",
+                  "mode": "fixed"
+                }
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "links": [],
+              "name": "Element 2",
+              "placement": {
+                "height": 193,
+                "left": 104,
+                "rotation": 0,
+                "top": 0,
+                "width": 1744
+              },
+              "type": "icon"
+            }
+          ],
+          "name": "Element 1773881870553",
+          "placement": {
+            "height": 100,
+            "left": 0,
+            "rotation": 0,
+            "top": 0,
+            "width": 100
+          },
+          "type": "frame"
+        },
+        "showAdvancedTypes": true,
+        "tooltip": {
+          "disableForOneClick": false,
+          "mode": "single"
+        },
+        "zoomToContent": false
+      },
+      "pluginVersion": "12.3.2",
+      "targets": [
+        {
+          "refId": "A"
+        }
+      ],
+      "title": "",
+      "transparent": true,
+      "type": "canvas"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "id": 2,
+      "panels": [],
+      "title": "DC Fabric",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 5000,
+            "axisSoftMin": 10000,
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 1,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 10,
+        "x": 0,
+        "y": 6
+      },
+      "id": 22,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "interface_traffic_rate_in_bps",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "interface_traffic_rate_out_bps",
+          "hide": false,
+          "legendFormat": "{{source}}:{{interface_name}}:OUT",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Fabric Throughput",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 23,
+        "w": 14,
+        "x": 10,
+        "y": 6
+      },
+      "id": 1,
+      "options": {
+        "animationControlEnabled": true,
+        "animationsEnabled": true,
+        "debuggingCtr": {
+          "colorsCtr": 1,
+          "dataCtr": 0,
+          "displaySvgCtr": 0,
+          "mappingsCtr": 0,
+          "timingsCtr": 0
+        },
+        "highlighterEnabled": true,
+        "highlighterSelection": "",
+        "panZoomEnabled": true,
+        "panelConfig": "---\nanchors:\n  thresholds-operstate: &thresholds-operstate\n    - { color: \"red\", level: 0 }\n    - { color: \"green\", level: 1 }\n  thresholds-traffic: &thresholds-traffic\n    - { color: \"gray\", level: 0 }\n    - { color: \"green\", level: 199 }\n    - { color: \"yellow\", level: 500 }\n    - { color: \"orange\", level: 1000 }\n    - { color: \"red\", level: 5000 }\n  thresholds-rate-label: &thresholds-rate-label\n    - { color: \"white\", level: 0 }\n  label-config: &label-config\n    separator: \"replace\"\n    units: \"bps\"\n    decimalPoints: 1\n    valueMappings:\n      - { valueMax: 199999, text: \"\\u200B\" }\ncellIdPreamble: \"cell-\"\ntagConfig:\n  legend: [\"hide-rates\"]\n  lowlightAlphaFactor: 0\n  highlightRgbFactor: 1\ncells:\n  \"fespine:e1-1\":\n    dataRef: \"oper-state:fespine:e1-1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"feleaf1:e1-3\":\n    dataRef: \"oper-state:feleaf1:e1-3\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:fespine:e1-1:feleaf1:e1-3\":\n    dataRef: \"fespine:e1-1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:fespine:e1-1:feleaf1:e1-3:label\":\n    dataRef: \"fespine:e1-1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:feleaf1:e1-3:fespine:e1-1\":\n    dataRef: \"feleaf1:e1-3:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf1:e1-3:fespine:e1-1:label\":\n    dataRef: \"feleaf1:e1-3:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"fespine:e1-2\":\n    dataRef: \"oper-state:fespine:e1-2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"feleaf2:e1-3\":\n    dataRef: \"oper-state:feleaf2:e1-3\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:fespine:e1-2:feleaf2:e1-3\":\n    dataRef: \"fespine:e1-2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:fespine:e1-2:feleaf2:e1-3:label\":\n    dataRef: \"fespine:e1-2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:feleaf2:e1-3:fespine:e1-2\":\n    dataRef: \"feleaf2:e1-3:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf2:e1-3:fespine:e1-2:label\":\n    dataRef: \"feleaf2:e1-3:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"fespine:e1-3\":\n    dataRef: \"oper-state:fespine:e1-3\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"feleaf3:e1-3\":\n    dataRef: \"oper-state:feleaf3:e1-3\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:fespine:e1-3:feleaf3:e1-3\":\n    dataRef: \"fespine:e1-3:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:fespine:e1-3:feleaf3:e1-3:label\":\n    dataRef: \"fespine:e1-3:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:feleaf3:e1-3:fespine:e1-3\":\n    dataRef: \"feleaf3:e1-3:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf3:e1-3:fespine:e1-3:label\":\n    dataRef: \"feleaf3:e1-3:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"feleaf1:e1-1\":\n    dataRef: \"oper-state:feleaf1:e1-1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"cs1:eth2\":\n    dataRef: \"oper-state:cs1:eth2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf1:e1-1:cs1:eth2\":\n    dataRef: \"feleaf1:e1-1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf1:e1-1:cs1:eth2:label\":\n    dataRef: \"feleaf1:e1-1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:cs1:eth2:feleaf1:e1-1\":\n    dataRef: \"cs1:eth2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:cs1:eth2:feleaf1:e1-1:label\":\n    dataRef: \"cs1:eth2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"feleaf1:e1-2\":\n    dataRef: \"oper-state:feleaf1:e1-2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"cs2:eth2\":\n    dataRef: \"oper-state:cs2:eth2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf1:e1-2:cs2:eth2\":\n    dataRef: \"feleaf1:e1-2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf1:e1-2:cs2:eth2:label\":\n    dataRef: \"feleaf1:e1-2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:cs2:eth2:feleaf1:e1-2\":\n    dataRef: \"cs2:eth2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:cs2:eth2:feleaf1:e1-2:label\":\n    dataRef: \"cs2:eth2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"feleaf2:e1-1\":\n    dataRef: \"oper-state:feleaf2:e1-1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"cs3:eth2\":\n    dataRef: \"oper-state:cs3:eth2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf2:e1-1:cs3:eth2\":\n    dataRef: \"feleaf2:e1-1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf2:e1-1:cs3:eth2:label\":\n    dataRef: \"feleaf2:e1-1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:cs3:eth2:feleaf2:e1-1\":\n    dataRef: \"cs3:eth2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:cs3:eth2:feleaf2:e1-1:label\":\n    dataRef: \"cs3:eth2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"feleaf2:e1-2\":\n    dataRef: \"oper-state:feleaf2:e1-2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"cs4:eth2\":\n    dataRef: \"oper-state:cs4:eth2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf2:e1-2:cs4:eth2\":\n    dataRef: \"feleaf2:e1-2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf2:e1-2:cs4:eth2:label\":\n    dataRef: \"feleaf2:e1-2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:cs4:eth2:feleaf2:e1-2\":\n    dataRef: \"cs4:eth2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:cs4:eth2:feleaf2:e1-2:label\":\n    dataRef: \"cs4:eth2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"feleaf3:e1-1\":\n    dataRef: \"oper-state:feleaf3:e1-1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"store1:eth1\":\n    dataRef: \"oper-state:store1:eth1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf3:e1-1:store1:eth1\":\n    dataRef: \"feleaf3:e1-1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf3:e1-1:store1:eth1:label\":\n    dataRef: \"feleaf3:e1-1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:store1:eth1:feleaf3:e1-1\":\n    dataRef: \"store1:eth1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:store1:eth1:feleaf3:e1-1:label\":\n    dataRef: \"store1:eth1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"feleaf3:e1-2\":\n    dataRef: \"oper-state:feleaf3:e1-2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"store2:eth1\":\n    dataRef: \"oper-state:store2:eth1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf3:e1-2:store2:eth1\":\n    dataRef: \"feleaf3:e1-2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf3:e1-2:store2:eth1:label\":\n    dataRef: \"feleaf3:e1-2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:store2:eth1:feleaf3:e1-2\":\n    dataRef: \"store2:eth1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:store2:eth1:feleaf3:e1-2:label\":\n    dataRef: \"store2:eth1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"bespine:e1-1\":\n    dataRef: \"oper-state:bespine:e1-1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"beleaf1:e1-3\":\n    dataRef: \"oper-state:beleaf1:e1-3\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:bespine:e1-1:beleaf1:e1-3\":\n    dataRef: \"bespine:e1-1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:bespine:e1-1:beleaf1:e1-3:label\":\n    dataRef: \"bespine:e1-1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:beleaf1:e1-3:bespine:e1-1\":\n    dataRef: \"beleaf1:e1-3:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:beleaf1:e1-3:bespine:e1-1:label\":\n    dataRef: \"beleaf1:e1-3:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"bespine:e1-2\":\n    dataRef: \"oper-state:bespine:e1-2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"beleaf2:e1-3\":\n    dataRef: \"oper-state:beleaf2:e1-3\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:bespine:e1-2:beleaf2:e1-3\":\n    dataRef: \"bespine:e1-2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:bespine:e1-2:beleaf2:e1-3:label\":\n    dataRef: \"bespine:e1-2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:beleaf2:e1-3:bespine:e1-2\":\n    dataRef: \"beleaf2:e1-3:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:beleaf2:e1-3:bespine:e1-2:label\":\n    dataRef: \"beleaf2:e1-3:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"beleaf1:e1-1\":\n    dataRef: \"oper-state:beleaf1:e1-1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"cs1:eth1\":\n    dataRef: \"oper-state:cs1:eth1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:beleaf1:e1-1:cs1:eth1\":\n    dataRef: \"beleaf1:e1-1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:beleaf1:e1-1:cs1:eth1:label\":\n    dataRef: \"beleaf1:e1-1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:cs1:eth1:beleaf1:e1-1\":\n    dataRef: \"cs1:eth1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:cs1:eth1:beleaf1:e1-1:label\":\n    dataRef: \"cs1:eth1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"beleaf1:e1-2\":\n    dataRef: \"oper-state:beleaf1:e1-2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"cs2:eth1\":\n    dataRef: \"oper-state:cs2:eth1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:beleaf1:e1-2:cs2:eth1\":\n    dataRef: \"beleaf1:e1-2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:beleaf1:e1-2:cs2:eth1:label\":\n    dataRef: \"beleaf1:e1-2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:cs2:eth1:beleaf1:e1-2\":\n    dataRef: \"cs2:eth1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:cs2:eth1:beleaf1:e1-2:label\":\n    dataRef: \"cs2:eth1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"beleaf2:e1-1\":\n    dataRef: \"oper-state:beleaf2:e1-1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"cs3:eth1\":\n    dataRef: \"oper-state:cs3:eth1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:beleaf2:e1-1:cs3:eth1\":\n    dataRef: \"beleaf2:e1-1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:beleaf2:e1-1:cs3:eth1:label\":\n    dataRef: \"beleaf2:e1-1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:cs3:eth1:beleaf2:e1-1\":\n    dataRef: \"cs3:eth1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:cs3:eth1:beleaf2:e1-1:label\":\n    dataRef: \"cs3:eth1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"beleaf2:e1-2\":\n    dataRef: \"oper-state:beleaf2:e1-2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"cs4:eth1\":\n    dataRef: \"oper-state:cs4:eth1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:beleaf2:e1-2:cs4:eth1\":\n    dataRef: \"beleaf2:e1-2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:beleaf2:e1-2:cs4:eth1:label\":\n    dataRef: \"beleaf2:e1-2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:cs4:eth1:beleaf2:e1-2\":\n    dataRef: \"cs4:eth1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:cs4:eth1:beleaf2:e1-2:label\":\n    dataRef: \"cs4:eth1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label",
+        "siteConfig": "---\nanchors:\n  thresholds-operstate: &thresholds-operstate\n    - { color: \"red\", level: 0 }\n    - { color: \"green\", level: 1 }\n  thresholds-traffic: &thresholds-traffic\n    - { color: \"gray\", level: 0 }\n    - { color: \"green\", level: 199 }\n    - { color: \"yellow\", level: 500 }\n    - { color: \"orange\", level: 1000 }\n    - { color: \"red\", level: 5000 }\n  thresholds-rate-label: &thresholds-rate-label\n    - { color: \"white\", level: 0 }\n  label-config: &label-config\n    separator: \"replace\"\n    units: \"bps\"\n    decimalPoints: 1\n    valueMappings:\n      - { valueMax: 199999, text: \"\\u200B\" }\ncellIdPreamble: \"cell-\"\ntagConfig:\n  legend: [\"hide-rates\"]\n  lowlightAlphaFactor: 0\n  highlightRgbFactor: 1\ncells:\n  \"fespine:e1-1\":\n    dataRef: \"oper-state:fespine:e1-1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"feleaf1:e1-3\":\n    dataRef: \"oper-state:feleaf1:e1-3\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:fespine:e1-1:feleaf1:e1-3\":\n    dataRef: \"fespine:e1-1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:fespine:e1-1:feleaf1:e1-3:label\":\n    dataRef: \"fespine:e1-1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:feleaf1:e1-3:fespine:e1-1\":\n    dataRef: \"feleaf1:e1-3:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf1:e1-3:fespine:e1-1:label\":\n    dataRef: \"feleaf1:e1-3:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"fespine:e1-2\":\n    dataRef: \"oper-state:fespine:e1-2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"feleaf2:e1-3\":\n    dataRef: \"oper-state:feleaf2:e1-3\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:fespine:e1-2:feleaf2:e1-3\":\n    dataRef: \"fespine:e1-2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:fespine:e1-2:feleaf2:e1-3:label\":\n    dataRef: \"fespine:e1-2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:feleaf2:e1-3:fespine:e1-2\":\n    dataRef: \"feleaf2:e1-3:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf2:e1-3:fespine:e1-2:label\":\n    dataRef: \"feleaf2:e1-3:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"fespine:e1-3\":\n    dataRef: \"oper-state:fespine:e1-3\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"feleaf3:e1-3\":\n    dataRef: \"oper-state:feleaf3:e1-3\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:fespine:e1-3:feleaf3:e1-3\":\n    dataRef: \"fespine:e1-3:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:fespine:e1-3:feleaf3:e1-3:label\":\n    dataRef: \"fespine:e1-3:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:feleaf3:e1-3:fespine:e1-3\":\n    dataRef: \"feleaf3:e1-3:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf3:e1-3:fespine:e1-3:label\":\n    dataRef: \"feleaf3:e1-3:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"feleaf1:e1-1\":\n    dataRef: \"oper-state:feleaf1:e1-1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"cs1:eth2\":\n    dataRef: \"oper-state:cs1:eth2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf1:e1-1:cs1:eth2\":\n    dataRef: \"feleaf1:e1-1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf1:e1-1:cs1:eth2:label\":\n    dataRef: \"feleaf1:e1-1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:cs1:eth2:feleaf1:e1-1\":\n    dataRef: \"cs1:eth2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:cs1:eth2:feleaf1:e1-1:label\":\n    dataRef: \"cs1:eth2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"feleaf1:e1-2\":\n    dataRef: \"oper-state:feleaf1:e1-2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"cs2:eth2\":\n    dataRef: \"oper-state:cs2:eth2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf1:e1-2:cs2:eth2\":\n    dataRef: \"feleaf1:e1-2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf1:e1-2:cs2:eth2:label\":\n    dataRef: \"feleaf1:e1-2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:cs2:eth2:feleaf1:e1-2\":\n    dataRef: \"cs2:eth2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:cs2:eth2:feleaf1:e1-2:label\":\n    dataRef: \"cs2:eth2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"feleaf2:e1-1\":\n    dataRef: \"oper-state:feleaf2:e1-1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"cs3:eth2\":\n    dataRef: \"oper-state:cs3:eth2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf2:e1-1:cs3:eth2\":\n    dataRef: \"feleaf2:e1-1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf2:e1-1:cs3:eth2:label\":\n    dataRef: \"feleaf2:e1-1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:cs3:eth2:feleaf2:e1-1\":\n    dataRef: \"cs3:eth2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:cs3:eth2:feleaf2:e1-1:label\":\n    dataRef: \"cs3:eth2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"feleaf2:e1-2\":\n    dataRef: \"oper-state:feleaf2:e1-2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"cs4:eth2\":\n    dataRef: \"oper-state:cs4:eth2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf2:e1-2:cs4:eth2\":\n    dataRef: \"feleaf2:e1-2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf2:e1-2:cs4:eth2:label\":\n    dataRef: \"feleaf2:e1-2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:cs4:eth2:feleaf2:e1-2\":\n    dataRef: \"cs4:eth2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:cs4:eth2:feleaf2:e1-2:label\":\n    dataRef: \"cs4:eth2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"feleaf3:e1-1\":\n    dataRef: \"oper-state:feleaf3:e1-1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"store1:eth1\":\n    dataRef: \"oper-state:store1:eth1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf3:e1-1:store1:eth1\":\n    dataRef: \"feleaf3:e1-1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf3:e1-1:store1:eth1:label\":\n    dataRef: \"feleaf3:e1-1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:store1:eth1:feleaf3:e1-1\":\n    dataRef: \"store1:eth1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:store1:eth1:feleaf3:e1-1:label\":\n    dataRef: \"store1:eth1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"feleaf3:e1-2\":\n    dataRef: \"oper-state:feleaf3:e1-2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"store2:eth1\":\n    dataRef: \"oper-state:store2:eth1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf3:e1-2:store2:eth1\":\n    dataRef: \"feleaf3:e1-2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:feleaf3:e1-2:store2:eth1:label\":\n    dataRef: \"feleaf3:e1-2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:store2:eth1:feleaf3:e1-2\":\n    dataRef: \"store2:eth1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:store2:eth1:feleaf3:e1-2:label\":\n    dataRef: \"store2:eth1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"bespine:e1-1\":\n    dataRef: \"oper-state:bespine:e1-1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"beleaf1:e1-3\":\n    dataRef: \"oper-state:beleaf1:e1-3\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:bespine:e1-1:beleaf1:e1-3\":\n    dataRef: \"bespine:e1-1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:bespine:e1-1:beleaf1:e1-3:label\":\n    dataRef: \"bespine:e1-1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:beleaf1:e1-3:bespine:e1-1\":\n    dataRef: \"beleaf1:e1-3:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:beleaf1:e1-3:bespine:e1-1:label\":\n    dataRef: \"beleaf1:e1-3:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"bespine:e1-2\":\n    dataRef: \"oper-state:bespine:e1-2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"beleaf2:e1-3\":\n    dataRef: \"oper-state:beleaf2:e1-3\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:bespine:e1-2:beleaf2:e1-3\":\n    dataRef: \"bespine:e1-2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:bespine:e1-2:beleaf2:e1-3:label\":\n    dataRef: \"bespine:e1-2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:beleaf2:e1-3:bespine:e1-2\":\n    dataRef: \"beleaf2:e1-3:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:beleaf2:e1-3:bespine:e1-2:label\":\n    dataRef: \"beleaf2:e1-3:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"beleaf1:e1-1\":\n    dataRef: \"oper-state:beleaf1:e1-1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"cs1:eth1\":\n    dataRef: \"oper-state:cs1:eth1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:beleaf1:e1-1:cs1:eth1\":\n    dataRef: \"beleaf1:e1-1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:beleaf1:e1-1:cs1:eth1:label\":\n    dataRef: \"beleaf1:e1-1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:cs1:eth1:beleaf1:e1-1\":\n    dataRef: \"cs1:eth1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:cs1:eth1:beleaf1:e1-1:label\":\n    dataRef: \"cs1:eth1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"beleaf1:e1-2\":\n    dataRef: \"oper-state:beleaf1:e1-2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"cs2:eth1\":\n    dataRef: \"oper-state:cs2:eth1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:beleaf1:e1-2:cs2:eth1\":\n    dataRef: \"beleaf1:e1-2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:beleaf1:e1-2:cs2:eth1:label\":\n    dataRef: \"beleaf1:e1-2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:cs2:eth1:beleaf1:e1-2\":\n    dataRef: \"cs2:eth1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:cs2:eth1:beleaf1:e1-2:label\":\n    dataRef: \"cs2:eth1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"beleaf2:e1-1\":\n    dataRef: \"oper-state:beleaf2:e1-1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"cs3:eth1\":\n    dataRef: \"oper-state:cs3:eth1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:beleaf2:e1-1:cs3:eth1\":\n    dataRef: \"beleaf2:e1-1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:beleaf2:e1-1:cs3:eth1:label\":\n    dataRef: \"beleaf2:e1-1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:cs3:eth1:beleaf2:e1-1\":\n    dataRef: \"cs3:eth1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:cs3:eth1:beleaf2:e1-1:label\":\n    dataRef: \"cs3:eth1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"beleaf2:e1-2\":\n    dataRef: \"oper-state:beleaf2:e1-2\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"cs4:eth1\":\n    dataRef: \"oper-state:cs4:eth1\"\n    fillColor:\n      thresholds: *thresholds-operstate\n    tags: [\"hide-rates\"]\n  \"link_id:beleaf2:e1-2:cs4:eth1\":\n    dataRef: \"beleaf2:e1-2:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:beleaf2:e1-2:cs4:eth1:label\":\n    dataRef: \"beleaf2:e1-2:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label\n  \"link_id:cs4:eth1:beleaf2:e1-2\":\n    dataRef: \"cs4:eth1:out\"\n    strokeColor:\n      thresholds: *thresholds-traffic\n    tags: [\"hide-rates\"]\n  \"link_id:cs4:eth1:beleaf2:e1-2:label\":\n    dataRef: \"cs4:eth1:out\"\n    label: *label-config\n    labelColor:\n      thresholds: *thresholds-rate-label",
+        "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\" viewBox=\"0 0 797.4252707878738 761.224222717721\" preserveAspectRatio=\"xMidYMid meet\"><defs>\n\n</defs><g class=\"export-graph-layer\" transform=\"translate(102.001514, 71.299359) scale(1.145603)\"><g class=\"export-edge grafana-operstate-cell\" id=\"cell-fespine:e1-1\" data-cell-id=\"fespine:e1-1\"><rect x=\"267\" y=\"4\" width=\"6\" height=\"6\" rx=\"1\" ry=\"1\" fill=\"transparent\" stroke=\"none\"/></g><g class=\"export-edge\" data-id=\"Clab-Link0\"><g class=\"grafana-traffic-half\" id=\"cell-link_id:fespine:e1-1:feleaf1:e1-3\" data-cell-id=\"link_id:fespine:e1-1:feleaf1:e1-3\"><path d=\"M 270 7 L 375 50\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"309.9\" y=\"23.34\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:fespine:e1-1:feleaf1:e1-3:label\" data-cell-id=\"link_id:fespine:e1-1:feleaf1:e1-3:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g><g class=\"grafana-traffic-half\" id=\"cell-link_id:feleaf1:e1-3:fespine:e1-1\" data-cell-id=\"link_id:feleaf1:e1-3:fespine:e1-1\"><path d=\"M 375 50 L 480 93\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"440.1\" y=\"76.66\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:feleaf1:e1-3:fespine:e1-1:label\" data-cell-id=\"link_id:feleaf1:e1-3:fespine:e1-1:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g></g><g class=\"export-edge grafana-operstate-cell\" id=\"cell-fespine:e1-2\" data-cell-id=\"fespine:e1-2\"><rect x=\"257\" y=\"4\" width=\"6\" height=\"6\" rx=\"1\" ry=\"1\" fill=\"transparent\" stroke=\"none\"/></g><g class=\"export-edge\" data-id=\"Clab-Link1\"><g class=\"grafana-traffic-half\" id=\"cell-link_id:fespine:e1-2:feleaf2:e1-3\" data-cell-id=\"link_id:fespine:e1-2:feleaf2:e1-3\"><path d=\"M 260 7 L 260 50\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"257.381\" y=\"23.34\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:fespine:e1-2:feleaf2:e1-3:label\" data-cell-id=\"link_id:fespine:e1-2:feleaf2:e1-3:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g><g class=\"grafana-traffic-half\" id=\"cell-link_id:feleaf2:e1-3:fespine:e1-2\" data-cell-id=\"link_id:feleaf2:e1-3:fespine:e1-2\"><path d=\"M 260 50 L 260 93\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"260\" y=\"76.66\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:feleaf2:e1-3:fespine:e1-2:label\" data-cell-id=\"link_id:feleaf2:e1-3:fespine:e1-2:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g></g><g class=\"export-edge grafana-operstate-cell\" id=\"cell-fespine:e1-3\" data-cell-id=\"fespine:e1-3\"><rect x=\"247\" y=\"4\" width=\"6\" height=\"6\" rx=\"1\" ry=\"1\" fill=\"transparent\" stroke=\"none\"/></g><g class=\"export-edge\" data-id=\"Clab-Link2\"><g class=\"grafana-traffic-half\" id=\"cell-link_id:fespine:e1-3:feleaf3:e1-3\" data-cell-id=\"link_id:fespine:e1-3:feleaf3:e1-3\"><path d=\"M 250 7 L 135 50\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"205.003\" y=\"23.825\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:fespine:e1-3:feleaf3:e1-3:label\" data-cell-id=\"link_id:fespine:e1-3:feleaf3:e1-3:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g><g class=\"grafana-traffic-half\" id=\"cell-link_id:feleaf3:e1-3:fespine:e1-3\" data-cell-id=\"link_id:feleaf3:e1-3:fespine:e1-3\"><path d=\"M 135 50 L 20 93\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"63.7\" y=\"76.66\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:feleaf3:e1-3:fespine:e1-3:label\" data-cell-id=\"link_id:feleaf3:e1-3:fespine:e1-3:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g></g><g class=\"export-edge grafana-operstate-cell\" id=\"cell-feleaf1:e1-1\" data-cell-id=\"feleaf1:e1-1\"><rect x=\"483.667\" y=\"144\" width=\"6\" height=\"6\" rx=\"1\" ry=\"1\" fill=\"transparent\" stroke=\"none\"/></g><g class=\"export-edge\" data-id=\"Clab-Link3\"><g class=\"grafana-traffic-half\" id=\"cell-link_id:feleaf1:e1-1:cs1:eth2\" data-cell-id=\"link_id:feleaf1:e1-1:cs1:eth2\"><path d=\"M 486.667 147 L 523.333 190\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"500.6\" y=\"163.34\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:feleaf1:e1-1:cs1:eth2:label\" data-cell-id=\"link_id:feleaf1:e1-1:cs1:eth2:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g><g class=\"grafana-traffic-half\" id=\"cell-link_id:cs1:eth2:feleaf1:e1-1\" data-cell-id=\"link_id:cs1:eth2:feleaf1:e1-1\"><path d=\"M 523.333 190 L 560 233\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"546.067\" y=\"216.66\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:cs1:eth2:feleaf1:e1-1:label\" data-cell-id=\"link_id:cs1:eth2:feleaf1:e1-1:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g></g><g class=\"export-edge grafana-operstate-cell\" id=\"cell-feleaf1:e1-2\" data-cell-id=\"feleaf1:e1-2\"><rect x=\"470.333\" y=\"144\" width=\"6\" height=\"6\" rx=\"1\" ry=\"1\" fill=\"transparent\" stroke=\"none\"/></g><g class=\"export-edge\" data-id=\"Clab-Link4\"><g class=\"grafana-traffic-half\" id=\"cell-link_id:feleaf1:e1-2:cs2:eth2\" data-cell-id=\"link_id:feleaf1:e1-2:cs2:eth2\"><path d=\"M 473.333 147 L 436.667 190\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"459.636\" y=\"173.826\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:feleaf1:e1-2:cs2:eth2:label\" data-cell-id=\"link_id:feleaf1:e1-2:cs2:eth2:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g><g class=\"grafana-traffic-half\" id=\"cell-link_id:cs2:eth2:feleaf1:e1-2\" data-cell-id=\"link_id:cs2:eth2:feleaf1:e1-2\"><path d=\"M 436.667 190 L 400 233\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"413.933\" y=\"216.66\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:cs2:eth2:feleaf1:e1-2:label\" data-cell-id=\"link_id:cs2:eth2:feleaf1:e1-2:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g></g><g class=\"export-edge grafana-operstate-cell\" id=\"cell-feleaf2:e1-1\" data-cell-id=\"feleaf2:e1-1\"><rect x=\"263.667\" y=\"144\" width=\"6\" height=\"6\" rx=\"1\" ry=\"1\" fill=\"transparent\" stroke=\"none\"/></g><g class=\"export-edge\" data-id=\"Clab-Link5\"><g class=\"grafana-traffic-half\" id=\"cell-link_id:feleaf2:e1-1:cs3:eth2\" data-cell-id=\"link_id:feleaf2:e1-1:cs3:eth2\"><path d=\"M 266.667 147 L 303.333 190\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"280.6\" y=\"163.34\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:feleaf2:e1-1:cs3:eth2:label\" data-cell-id=\"link_id:feleaf2:e1-1:cs3:eth2:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g><g class=\"grafana-traffic-half\" id=\"cell-link_id:cs3:eth2:feleaf2:e1-1\" data-cell-id=\"link_id:cs3:eth2:feleaf2:e1-1\"><path d=\"M 303.333 190 L 340 233\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"326.067\" y=\"216.66\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:cs3:eth2:feleaf2:e1-1:label\" data-cell-id=\"link_id:cs3:eth2:feleaf2:e1-1:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g></g><g class=\"export-edge grafana-operstate-cell\" id=\"cell-feleaf2:e1-2\" data-cell-id=\"feleaf2:e1-2\"><rect x=\"250.333\" y=\"144\" width=\"6\" height=\"6\" rx=\"1\" ry=\"1\" fill=\"transparent\" stroke=\"none\"/></g><g class=\"export-edge\" data-id=\"Clab-Link6\"><g class=\"grafana-traffic-half\" id=\"cell-link_id:feleaf2:e1-2:cs4:eth2\" data-cell-id=\"link_id:feleaf2:e1-2:cs4:eth2\"><path d=\"M 253.333 147 L 216.667 190\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"239.636\" y=\"173.826\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:feleaf2:e1-2:cs4:eth2:label\" data-cell-id=\"link_id:feleaf2:e1-2:cs4:eth2:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g><g class=\"grafana-traffic-half\" id=\"cell-link_id:cs4:eth2:feleaf2:e1-2\" data-cell-id=\"link_id:cs4:eth2:feleaf2:e1-2\"><path d=\"M 216.667 190 L 180 233\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"193.933\" y=\"216.66\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:cs4:eth2:feleaf2:e1-2:label\" data-cell-id=\"link_id:cs4:eth2:feleaf2:e1-2:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g></g><g class=\"export-edge grafana-operstate-cell\" id=\"cell-feleaf3:e1-1\" data-cell-id=\"feleaf3:e1-1\"><rect x=\"10.333\" y=\"144\" width=\"6\" height=\"6\" rx=\"1\" ry=\"1\" fill=\"transparent\" stroke=\"none\"/></g><g class=\"export-edge\" data-id=\"Clab-Link7\"><g class=\"grafana-traffic-half\" id=\"cell-link_id:feleaf3:e1-1:store1:eth1\" data-cell-id=\"link_id:feleaf3:e1-1:store1:eth1\"><path d=\"M 13.333 147 L -23.333 190\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"-0.6\" y=\"163.34\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:feleaf3:e1-1:store1:eth1:label\" data-cell-id=\"link_id:feleaf3:e1-1:store1:eth1:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g><g class=\"grafana-traffic-half\" id=\"cell-link_id:store1:eth1:feleaf3:e1-1\" data-cell-id=\"link_id:store1:eth1:feleaf3:e1-1\"><path d=\"M -23.333 190 L -60 233\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"-46.067\" y=\"216.66\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:store1:eth1:feleaf3:e1-1:label\" data-cell-id=\"link_id:store1:eth1:feleaf3:e1-1:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g></g><g class=\"export-edge grafana-operstate-cell\" id=\"cell-feleaf3:e1-2\" data-cell-id=\"feleaf3:e1-2\"><rect x=\"23.667\" y=\"144\" width=\"6\" height=\"6\" rx=\"1\" ry=\"1\" fill=\"transparent\" stroke=\"none\"/></g><g class=\"export-edge\" data-id=\"Clab-Link8\"><g class=\"grafana-traffic-half\" id=\"cell-link_id:feleaf3:e1-2:store2:eth1\" data-cell-id=\"link_id:feleaf3:e1-2:store2:eth1\"><path d=\"M 26.667 147 L 53.333 190\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"36.107\" y=\"173.817\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:feleaf3:e1-2:store2:eth1:label\" data-cell-id=\"link_id:feleaf3:e1-2:store2:eth1:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g><g class=\"grafana-traffic-half\" id=\"cell-link_id:store2:eth1:feleaf3:e1-2\" data-cell-id=\"link_id:store2:eth1:feleaf3:e1-2\"><path d=\"M 53.333 190 L 80 233\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"69.867\" y=\"216.66\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:store2:eth1:feleaf3:e1-2:label\" data-cell-id=\"link_id:store2:eth1:feleaf3:e1-2:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g></g><g class=\"export-edge grafana-operstate-cell\" id=\"cell-bespine:e1-1\" data-cell-id=\"bespine:e1-1\"><rect x=\"383.667\" y=\"530\" width=\"6\" height=\"6\" rx=\"1\" ry=\"1\" fill=\"transparent\" stroke=\"none\"/></g><g class=\"export-edge\" data-id=\"Clab-Link9\"><g class=\"grafana-traffic-half\" id=\"cell-link_id:bespine:e1-1:beleaf1:e1-3\" data-cell-id=\"link_id:bespine:e1-1:beleaf1:e1-3\"><path d=\"M 386.667 533 L 433.333 490\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"404.4\" y=\"516.66\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:bespine:e1-1:beleaf1:e1-3:label\" data-cell-id=\"link_id:bespine:e1-1:beleaf1:e1-3:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g><g class=\"grafana-traffic-half\" id=\"cell-link_id:beleaf1:e1-3:bespine:e1-1\" data-cell-id=\"link_id:beleaf1:e1-3:bespine:e1-1\"><path d=\"M 433.333 490 L 480 447\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"462.267\" y=\"463.34\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:beleaf1:e1-3:bespine:e1-1:label\" data-cell-id=\"link_id:beleaf1:e1-3:bespine:e1-1:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g></g><g class=\"export-edge grafana-operstate-cell\" id=\"cell-bespine:e1-2\" data-cell-id=\"bespine:e1-2\"><rect x=\"370.333\" y=\"530\" width=\"6\" height=\"6\" rx=\"1\" ry=\"1\" fill=\"transparent\" stroke=\"none\"/></g><g class=\"export-edge\" data-id=\"Clab-Link10\"><g class=\"grafana-traffic-half\" id=\"cell-link_id:bespine:e1-2:beleaf2:e1-3\" data-cell-id=\"link_id:bespine:e1-2:beleaf2:e1-3\"><path d=\"M 373.333 533 L 316.667 490\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"351.8\" y=\"516.66\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:bespine:e1-2:beleaf2:e1-3:label\" data-cell-id=\"link_id:bespine:e1-2:beleaf2:e1-3:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g><g class=\"grafana-traffic-half\" id=\"cell-link_id:beleaf2:e1-3:bespine:e1-2\" data-cell-id=\"link_id:beleaf2:e1-3:bespine:e1-2\"><path d=\"M 316.667 490 L 260 447\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"281.533\" y=\"463.34\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:beleaf2:e1-3:bespine:e1-2:label\" data-cell-id=\"link_id:beleaf2:e1-3:bespine:e1-2:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g></g><g class=\"export-edge grafana-operstate-cell\" id=\"cell-beleaf1:e1-1\" data-cell-id=\"beleaf1:e1-1\"><rect x=\"483.667\" y=\"390\" width=\"6\" height=\"6\" rx=\"1\" ry=\"1\" fill=\"transparent\" stroke=\"none\"/></g><g class=\"export-edge\" data-id=\"Clab-Link11\"><g class=\"grafana-traffic-half\" id=\"cell-link_id:beleaf1:e1-1:cs1:eth1\" data-cell-id=\"link_id:beleaf1:e1-1:cs1:eth1\"><path d=\"M 486.667 393 L 523.333 340\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"500.6\" y=\"372.86\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:beleaf1:e1-1:cs1:eth1:label\" data-cell-id=\"link_id:beleaf1:e1-1:cs1:eth1:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g><g class=\"grafana-traffic-half\" id=\"cell-link_id:cs1:eth1:beleaf1:e1-1\" data-cell-id=\"link_id:cs1:eth1:beleaf1:e1-1\"><path d=\"M 523.333 340 L 560 287\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"546.067\" y=\"307.14\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:cs1:eth1:beleaf1:e1-1:label\" data-cell-id=\"link_id:cs1:eth1:beleaf1:e1-1:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g></g><g class=\"export-edge grafana-operstate-cell\" id=\"cell-beleaf1:e1-2\" data-cell-id=\"beleaf1:e1-2\"><rect x=\"470.333\" y=\"390\" width=\"6\" height=\"6\" rx=\"1\" ry=\"1\" fill=\"transparent\" stroke=\"none\"/></g><g class=\"export-edge\" data-id=\"Clab-Link12\"><g class=\"grafana-traffic-half\" id=\"cell-link_id:beleaf1:e1-2:cs2:eth1\" data-cell-id=\"link_id:beleaf1:e1-2:cs2:eth1\"><path d=\"M 473.333 393 L 436.667 340\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"459.578\" y=\"362.378\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:beleaf1:e1-2:cs2:eth1:label\" data-cell-id=\"link_id:beleaf1:e1-2:cs2:eth1:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g><g class=\"grafana-traffic-half\" id=\"cell-link_id:cs2:eth1:beleaf1:e1-2\" data-cell-id=\"link_id:cs2:eth1:beleaf1:e1-2\"><path d=\"M 436.667 340 L 400 287\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"413.933\" y=\"307.14\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:cs2:eth1:beleaf1:e1-2:label\" data-cell-id=\"link_id:cs2:eth1:beleaf1:e1-2:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g></g><g class=\"export-edge grafana-operstate-cell\" id=\"cell-beleaf2:e1-1\" data-cell-id=\"beleaf2:e1-1\"><rect x=\"263.667\" y=\"390\" width=\"6\" height=\"6\" rx=\"1\" ry=\"1\" fill=\"transparent\" stroke=\"none\"/></g><g class=\"export-edge\" data-id=\"Clab-Link13\"><g class=\"grafana-traffic-half\" id=\"cell-link_id:beleaf2:e1-1:cs3:eth1\" data-cell-id=\"link_id:beleaf2:e1-1:cs3:eth1\"><path d=\"M 266.667 393 L 303.333 340\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"280.6\" y=\"372.86\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:beleaf2:e1-1:cs3:eth1:label\" data-cell-id=\"link_id:beleaf2:e1-1:cs3:eth1:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g><g class=\"grafana-traffic-half\" id=\"cell-link_id:cs3:eth1:beleaf2:e1-1\" data-cell-id=\"link_id:cs3:eth1:beleaf2:e1-1\"><path d=\"M 303.333 340 L 340 287\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"326.067\" y=\"307.14\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:cs3:eth1:beleaf2:e1-1:label\" data-cell-id=\"link_id:cs3:eth1:beleaf2:e1-1:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g></g><g class=\"export-edge grafana-operstate-cell\" id=\"cell-beleaf2:e1-2\" data-cell-id=\"beleaf2:e1-2\"><rect x=\"250.333\" y=\"390\" width=\"6\" height=\"6\" rx=\"1\" ry=\"1\" fill=\"transparent\" stroke=\"none\"/></g><g class=\"export-edge\" data-id=\"Clab-Link14\"><g class=\"grafana-traffic-half\" id=\"cell-link_id:beleaf2:e1-2:cs4:eth1\" data-cell-id=\"link_id:beleaf2:e1-2:cs4:eth1\"><path d=\"M 253.333 393 L 216.667 340\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"239.578\" y=\"362.378\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:beleaf2:e1-2:cs4:eth1:label\" data-cell-id=\"link_id:beleaf2:e1-2:cs4:eth1:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g><g class=\"grafana-traffic-half\" id=\"cell-link_id:cs4:eth1:beleaf2:e1-2\" data-cell-id=\"link_id:cs4:eth1:beleaf2:e1-2\"><path d=\"M 216.667 340 L 180 287\" fill=\"none\" stroke=\"gray\" stroke-width=\"2.5\" opacity=\"0.5\"/><text x=\"193.933\" y=\"307.14\" font-size=\"10\" font-family=\"Helvetica, Arial, sans-serif\" id=\"cell-link_id:cs4:eth1:beleaf2:e1-2:label\" data-cell-id=\"link_id:cs4:eth1:beleaf2:e1-2:label\" fill=\"currentColor\" text-anchor=\"middle\" dominant-baseline=\"middle\" stroke=\"none\" style=\"color: rgb(255, 255, 255); filter: drop-shadow(rgba(0, 0, 0, 0.95) 0px 0px 1px);\">rate</text></g></g><g class=\"export-node topology-node\" data-id=\"fespine\"><g transform=\"rotate(0 260 -20)\"><rect x=\"240\" y=\"-40\" width=\"40\" height=\"40\" rx=\"4\" ry=\"4\" fill=\"#005aff\"/><g transform=\"translate(240, -40)\" style=\"color: #005aff\"><g transform=\"scale(0.3333)\">\n                        \n                        <rect height=\"120\" width=\"120\" fill=\"currentColor\"/>\n                        <g>\n                            <g>\n                                <path d=\"M71.7,19.7V48h28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M91.2,38.5l7.5,7.6c1.3,1.3,1.3,3.1,0,4.3L91.1,58\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M20,47.8h28.4v-28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M38.8,28.3l7.6-7.5c1.3-1.3,3.1-1.3,4.3,0l7.7,7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M48,100.3V72H20\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M28.5,81.5L21,73.9c-1.3-1.3-1.3-3.1,0-4.3l7.6-7.7\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M100,71.9H71.6v28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M81.2,91.4l-7.6,7.5c-1.3,1.3-3.1,1.3-4.3,0l-7.7-7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                        </g>\n                    </g></g></g><rect x=\"232.9\" y=\"-57\" width=\"54.199999999999996\" height=\"15\" fill=\"rgba(0, 0, 0, 0.85)\" rx=\"3\" ry=\"3\"/><text x=\"260\" y=\"-47.2\" font-size=\"11\" font-weight=\"500\" font-family=\"system-ui, -apple-system, sans-serif\" fill=\"#FFFFFF\" text-anchor=\"middle\" stroke=\"rgba(0, 0, 0, 0.95)\" stroke-width=\"0.8\" paint-order=\"stroke\" stroke-linejoin=\"round\">fespine</text></g><g class=\"export-node topology-node\" data-id=\"feleaf1\"><g transform=\"rotate(0 480 120)\"><rect x=\"460\" y=\"100\" width=\"40\" height=\"40\" rx=\"4\" ry=\"4\" fill=\"#005aff\"/><g transform=\"translate(460, 100)\" style=\"color: #005aff\"><g transform=\"scale(0.3333)\">\n                        \n                        <rect height=\"120\" width=\"120\" fill=\"currentColor\"/>\n                        <g>\n                            <g>\n                                <path d=\"M71.7,19.7V48h28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M91.2,38.5l7.5,7.6c1.3,1.3,1.3,3.1,0,4.3L91.1,58\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M20,47.8h28.4v-28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M38.8,28.3l7.6-7.5c1.3-1.3,3.1-1.3,4.3,0l7.7,7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M48,100.3V72H20\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M28.5,81.5L21,73.9c-1.3-1.3-1.3-3.1,0-4.3l7.6-7.7\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M100,71.9H71.6v28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M81.2,91.4l-7.6,7.5c-1.3,1.3-3.1,1.3-4.3,0l-7.7-7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                        </g>\n                    </g></g></g><rect x=\"494\" y=\"112.5\" width=\"54.199999999999996\" height=\"15\" fill=\"rgba(0, 0, 0, 0.85)\" rx=\"3\" ry=\"3\"/><text x=\"521.1\" y=\"122.3\" font-size=\"11\" font-weight=\"500\" font-family=\"system-ui, -apple-system, sans-serif\" fill=\"#FFFFFF\" text-anchor=\"middle\" stroke=\"rgba(0, 0, 0, 0.95)\" stroke-width=\"0.8\" paint-order=\"stroke\" stroke-linejoin=\"round\">feleaf1</text></g><g class=\"export-node topology-node\" data-id=\"feleaf2\"><g transform=\"rotate(0 260 120)\"><rect x=\"240\" y=\"100\" width=\"40\" height=\"40\" rx=\"4\" ry=\"4\" fill=\"#005aff\"/><g transform=\"translate(240, 100)\" style=\"color: #005aff\"><g transform=\"scale(0.3333)\">\n                        \n                        <rect height=\"120\" width=\"120\" fill=\"currentColor\"/>\n                        <g>\n                            <g>\n                                <path d=\"M71.7,19.7V48h28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M91.2,38.5l7.5,7.6c1.3,1.3,1.3,3.1,0,4.3L91.1,58\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M20,47.8h28.4v-28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M38.8,28.3l7.6-7.5c1.3-1.3,3.1-1.3,4.3,0l7.7,7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M48,100.3V72H20\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M28.5,81.5L21,73.9c-1.3-1.3-1.3-3.1,0-4.3l7.6-7.7\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M100,71.9H71.6v28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M81.2,91.4l-7.6,7.5c-1.3,1.3-3.1,1.3-4.3,0l-7.7-7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                        </g>\n                    </g></g></g><rect x=\"191.8\" y=\"112.5\" width=\"54.199999999999996\" height=\"15\" fill=\"rgba(0, 0, 0, 0.85)\" rx=\"3\" ry=\"3\"/><text x=\"218.9\" y=\"122.3\" font-size=\"11\" font-weight=\"500\" font-family=\"system-ui, -apple-system, sans-serif\" fill=\"#FFFFFF\" text-anchor=\"middle\" stroke=\"rgba(0, 0, 0, 0.95)\" stroke-width=\"0.8\" paint-order=\"stroke\" stroke-linejoin=\"round\">feleaf2</text></g><g class=\"export-node topology-node\" data-id=\"feleaf3\"><g transform=\"rotate(0 20 120)\"><rect x=\"0\" y=\"100\" width=\"40\" height=\"40\" rx=\"4\" ry=\"4\" fill=\"#005aff\"/><g transform=\"translate(0, 100)\" style=\"color: #005aff\"><g transform=\"scale(0.3333)\">\n                        \n                        <rect height=\"120\" width=\"120\" fill=\"currentColor\"/>\n                        <g>\n                            <g>\n                                <path d=\"M71.7,19.7V48h28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M91.2,38.5l7.5,7.6c1.3,1.3,1.3,3.1,0,4.3L91.1,58\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M20,47.8h28.4v-28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M38.8,28.3l7.6-7.5c1.3-1.3,3.1-1.3,4.3,0l7.7,7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M48,100.3V72H20\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M28.5,81.5L21,73.9c-1.3-1.3-1.3-3.1,0-4.3l7.6-7.7\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M100,71.9H71.6v28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M81.2,91.4l-7.6,7.5c-1.3,1.3-3.1,1.3-4.3,0l-7.7-7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                        </g>\n                    </g></g></g><rect x=\"-48.199999999999996\" y=\"112.5\" width=\"54.199999999999996\" height=\"15\" fill=\"rgba(0, 0, 0, 0.85)\" rx=\"3\" ry=\"3\"/><text x=\"-21.099999999999998\" y=\"122.3\" font-size=\"11\" font-weight=\"500\" font-family=\"system-ui, -apple-system, sans-serif\" fill=\"#FFFFFF\" text-anchor=\"middle\" stroke=\"rgba(0, 0, 0, 0.95)\" stroke-width=\"0.8\" paint-order=\"stroke\" stroke-linejoin=\"round\">feleaf3</text></g><g class=\"export-node topology-node\" data-id=\"bespine\"><g transform=\"rotate(0 380 560)\"><rect x=\"360\" y=\"540\" width=\"40\" height=\"40\" rx=\"4\" ry=\"4\" fill=\"#005aff\"/><g transform=\"translate(360, 540)\" style=\"color: #005aff\"><g transform=\"scale(0.3333)\">\n                        \n                        <rect height=\"120\" width=\"120\" fill=\"currentColor\"/>\n                        <g>\n                            <g>\n                                <path d=\"M71.7,19.7V48h28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M91.2,38.5l7.5,7.6c1.3,1.3,1.3,3.1,0,4.3L91.1,58\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M20,47.8h28.4v-28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M38.8,28.3l7.6-7.5c1.3-1.3,3.1-1.3,4.3,0l7.7,7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M48,100.3V72H20\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M28.5,81.5L21,73.9c-1.3-1.3-1.3-3.1,0-4.3l7.6-7.7\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M100,71.9H71.6v28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M81.2,91.4l-7.6,7.5c-1.3,1.3-3.1,1.3-4.3,0l-7.7-7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                        </g>\n                    </g></g></g><rect x=\"352.9\" y=\"582\" width=\"54.199999999999996\" height=\"15\" fill=\"rgba(0, 0, 0, 0.85)\" rx=\"3\" ry=\"3\"/><text x=\"380\" y=\"591.8\" font-size=\"11\" font-weight=\"500\" font-family=\"system-ui, -apple-system, sans-serif\" fill=\"#FFFFFF\" text-anchor=\"middle\" stroke=\"rgba(0, 0, 0, 0.95)\" stroke-width=\"0.8\" paint-order=\"stroke\" stroke-linejoin=\"round\">bespine</text></g><g class=\"export-node topology-node\" data-id=\"beleaf1\"><g transform=\"rotate(0 480 420)\"><rect x=\"460\" y=\"400\" width=\"40\" height=\"40\" rx=\"4\" ry=\"4\" fill=\"#005aff\"/><g transform=\"translate(460, 400)\" style=\"color: #005aff\"><g transform=\"scale(0.3333)\">\n                        \n                        <rect height=\"120\" width=\"120\" fill=\"currentColor\"/>\n                        <g>\n                            <g>\n                                <path d=\"M71.7,19.7V48h28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M91.2,38.5l7.5,7.6c1.3,1.3,1.3,3.1,0,4.3L91.1,58\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M20,47.8h28.4v-28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M38.8,28.3l7.6-7.5c1.3-1.3,3.1-1.3,4.3,0l7.7,7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M48,100.3V72H20\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M28.5,81.5L21,73.9c-1.3-1.3-1.3-3.1,0-4.3l7.6-7.7\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M100,71.9H71.6v28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M81.2,91.4l-7.6,7.5c-1.3,1.3-3.1,1.3-4.3,0l-7.7-7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                        </g>\n                    </g></g></g><rect x=\"494\" y=\"412.5\" width=\"54.199999999999996\" height=\"15\" fill=\"rgba(0, 0, 0, 0.85)\" rx=\"3\" ry=\"3\"/><text x=\"521.1\" y=\"422.3\" font-size=\"11\" font-weight=\"500\" font-family=\"system-ui, -apple-system, sans-serif\" fill=\"#FFFFFF\" text-anchor=\"middle\" stroke=\"rgba(0, 0, 0, 0.95)\" stroke-width=\"0.8\" paint-order=\"stroke\" stroke-linejoin=\"round\">beleaf1</text></g><g class=\"export-node topology-node\" data-id=\"beleaf2\"><g transform=\"rotate(0 260 420)\"><rect x=\"240\" y=\"400\" width=\"40\" height=\"40\" rx=\"4\" ry=\"4\" fill=\"#005aff\"/><g transform=\"translate(240, 400)\" style=\"color: #005aff\"><g transform=\"scale(0.3333)\">\n                        \n                        <rect height=\"120\" width=\"120\" fill=\"currentColor\"/>\n                        <g>\n                            <g>\n                                <path d=\"M71.7,19.7V48h28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M91.2,38.5l7.5,7.6c1.3,1.3,1.3,3.1,0,4.3L91.1,58\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M20,47.8h28.4v-28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M38.8,28.3l7.6-7.5c1.3-1.3,3.1-1.3,4.3,0l7.7,7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M48,100.3V72H20\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M28.5,81.5L21,73.9c-1.3-1.3-1.3-3.1,0-4.3l7.6-7.7\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M100,71.9H71.6v28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M81.2,91.4l-7.6,7.5c-1.3,1.3-3.1,1.3-4.3,0l-7.7-7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                        </g>\n                    </g></g></g><rect x=\"191.8\" y=\"412.5\" width=\"54.199999999999996\" height=\"15\" fill=\"rgba(0, 0, 0, 0.85)\" rx=\"3\" ry=\"3\"/><text x=\"218.9\" y=\"422.3\" font-size=\"11\" font-weight=\"500\" font-family=\"system-ui, -apple-system, sans-serif\" fill=\"#FFFFFF\" text-anchor=\"middle\" stroke=\"rgba(0, 0, 0, 0.95)\" stroke-width=\"0.8\" paint-order=\"stroke\" stroke-linejoin=\"round\">beleaf2</text></g><g class=\"export-node topology-node\" data-id=\"cs1\"><g transform=\"rotate(0 560 260)\"><rect x=\"540\" y=\"240\" width=\"40\" height=\"40\" rx=\"4\" ry=\"4\" fill=\"#005aff\"/><g transform=\"translate(540, 240)\" style=\"color: #005aff\"><g transform=\"scale(0.3333)\">\n                        \n                        <rect height=\"120\" width=\"120\" fill=\"currentColor\"/>\n                        <g>\n                            <g>\n                                <path d=\"M71.7,19.7V48h28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M91.2,38.5l7.5,7.6c1.3,1.3,1.3,3.1,0,4.3L91.1,58\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M20,47.8h28.4v-28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M38.8,28.3l7.6-7.5c1.3-1.3,3.1-1.3,4.3,0l7.7,7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M48,100.3V72H20\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M28.5,81.5L21,73.9c-1.3-1.3-1.3-3.1,0-4.3l7.6-7.7\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M100,71.9H71.6v28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M81.2,91.4l-7.6,7.5c-1.3,1.3-3.1,1.3-4.3,0l-7.7-7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                        </g>\n                    </g></g></g><rect x=\"574\" y=\"252.5\" width=\"27.799999999999997\" height=\"15\" fill=\"rgba(0, 0, 0, 0.85)\" rx=\"3\" ry=\"3\"/><text x=\"587.9\" y=\"262.3\" font-size=\"11\" font-weight=\"500\" font-family=\"system-ui, -apple-system, sans-serif\" fill=\"#FFFFFF\" text-anchor=\"middle\" stroke=\"rgba(0, 0, 0, 0.95)\" stroke-width=\"0.8\" paint-order=\"stroke\" stroke-linejoin=\"round\">cs1</text></g><g class=\"export-node topology-node\" data-id=\"cs2\"><g transform=\"rotate(0 400 260)\"><rect x=\"380\" y=\"240\" width=\"40\" height=\"40\" rx=\"4\" ry=\"4\" fill=\"#005aff\"/><g transform=\"translate(380, 240)\" style=\"color: #005aff\"><g transform=\"scale(0.3333)\">\n                        \n                        <rect height=\"120\" width=\"120\" fill=\"currentColor\"/>\n                        <g>\n                            <g>\n                                <path d=\"M71.7,19.7V48h28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M91.2,38.5l7.5,7.6c1.3,1.3,1.3,3.1,0,4.3L91.1,58\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M20,47.8h28.4v-28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M38.8,28.3l7.6-7.5c1.3-1.3,3.1-1.3,4.3,0l7.7,7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M48,100.3V72H20\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M28.5,81.5L21,73.9c-1.3-1.3-1.3-3.1,0-4.3l7.6-7.7\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M100,71.9H71.6v28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M81.2,91.4l-7.6,7.5c-1.3,1.3-3.1,1.3-4.3,0l-7.7-7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                        </g>\n                    </g></g></g><rect x=\"414\" y=\"252.5\" width=\"27.799999999999997\" height=\"15\" fill=\"rgba(0, 0, 0, 0.85)\" rx=\"3\" ry=\"3\"/><text x=\"427.9\" y=\"262.3\" font-size=\"11\" font-weight=\"500\" font-family=\"system-ui, -apple-system, sans-serif\" fill=\"#FFFFFF\" text-anchor=\"middle\" stroke=\"rgba(0, 0, 0, 0.95)\" stroke-width=\"0.8\" paint-order=\"stroke\" stroke-linejoin=\"round\">cs2</text></g><g class=\"export-node topology-node\" data-id=\"cs3\"><g transform=\"rotate(0 340 260)\"><rect x=\"320\" y=\"240\" width=\"40\" height=\"40\" rx=\"4\" ry=\"4\" fill=\"#005aff\"/><g transform=\"translate(320, 240)\" style=\"color: #005aff\"><g transform=\"scale(0.3333)\">\n                        \n                        <rect height=\"120\" width=\"120\" fill=\"currentColor\"/>\n                        <g>\n                            <g>\n                                <path d=\"M71.7,19.7V48h28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M91.2,38.5l7.5,7.6c1.3,1.3,1.3,3.1,0,4.3L91.1,58\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M20,47.8h28.4v-28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M38.8,28.3l7.6-7.5c1.3-1.3,3.1-1.3,4.3,0l7.7,7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M48,100.3V72H20\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M28.5,81.5L21,73.9c-1.3-1.3-1.3-3.1,0-4.3l7.6-7.7\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M100,71.9H71.6v28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M81.2,91.4l-7.6,7.5c-1.3,1.3-3.1,1.3-4.3,0l-7.7-7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                        </g>\n                    </g></g></g><rect x=\"298.2\" y=\"252.5\" width=\"27.799999999999997\" height=\"15\" fill=\"rgba(0, 0, 0, 0.85)\" rx=\"3\" ry=\"3\"/><text x=\"312.09999999999997\" y=\"262.3\" font-size=\"11\" font-weight=\"500\" font-family=\"system-ui, -apple-system, sans-serif\" fill=\"#FFFFFF\" text-anchor=\"middle\" stroke=\"rgba(0, 0, 0, 0.95)\" stroke-width=\"0.8\" paint-order=\"stroke\" stroke-linejoin=\"round\">cs3</text></g><g class=\"export-node topology-node\" data-id=\"cs4\"><g transform=\"rotate(0 180 260)\"><rect x=\"160\" y=\"240\" width=\"40\" height=\"40\" rx=\"4\" ry=\"4\" fill=\"#005aff\"/><g transform=\"translate(160, 240)\" style=\"color: #005aff\"><g transform=\"scale(0.3333)\">\n                        \n                        <rect height=\"120\" width=\"120\" fill=\"currentColor\"/>\n                        <g>\n                            <g>\n                                <path d=\"M71.7,19.7V48h28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M91.2,38.5l7.5,7.6c1.3,1.3,1.3,3.1,0,4.3L91.1,58\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M20,47.8h28.4v-28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M38.8,28.3l7.6-7.5c1.3-1.3,3.1-1.3,4.3,0l7.7,7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M48,100.3V72H20\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M28.5,81.5L21,73.9c-1.3-1.3-1.3-3.1,0-4.3l7.6-7.7\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M100,71.9H71.6v28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M81.2,91.4l-7.6,7.5c-1.3,1.3-3.1,1.3-4.3,0l-7.7-7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                        </g>\n                    </g></g></g><rect x=\"138.2\" y=\"252.5\" width=\"27.799999999999997\" height=\"15\" fill=\"rgba(0, 0, 0, 0.85)\" rx=\"3\" ry=\"3\"/><text x=\"152.1\" y=\"262.3\" font-size=\"11\" font-weight=\"500\" font-family=\"system-ui, -apple-system, sans-serif\" fill=\"#FFFFFF\" text-anchor=\"middle\" stroke=\"rgba(0, 0, 0, 0.95)\" stroke-width=\"0.8\" paint-order=\"stroke\" stroke-linejoin=\"round\">cs4</text></g><g class=\"export-node topology-node\" data-id=\"store1\"><g transform=\"rotate(0 -60 260)\"><rect x=\"-80\" y=\"240\" width=\"40\" height=\"40\" rx=\"4\" ry=\"4\" fill=\"#005aff\"/><g transform=\"translate(-80, 240)\" style=\"color: #005aff\"><g transform=\"scale(0.3333)\">\n                        \n                        <rect height=\"120\" width=\"120\" fill=\"currentColor\"/>\n                        <g>\n                            <g>\n                                <path d=\"M71.7,19.7V48h28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M91.2,38.5l7.5,7.6c1.3,1.3,1.3,3.1,0,4.3L91.1,58\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M20,47.8h28.4v-28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M38.8,28.3l7.6-7.5c1.3-1.3,3.1-1.3,4.3,0l7.7,7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M48,100.3V72H20\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M28.5,81.5L21,73.9c-1.3-1.3-1.3-3.1,0-4.3l7.6-7.7\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M100,71.9H71.6v28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M81.2,91.4l-7.6,7.5c-1.3,1.3-3.1,1.3-4.3,0l-7.7-7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                        </g>\n                    </g></g></g><rect x=\"-83.8\" y=\"282\" width=\"47.599999999999994\" height=\"15\" fill=\"rgba(0, 0, 0, 0.85)\" rx=\"3\" ry=\"3\"/><text x=\"-60\" y=\"291.8\" font-size=\"11\" font-weight=\"500\" font-family=\"system-ui, -apple-system, sans-serif\" fill=\"#FFFFFF\" text-anchor=\"middle\" stroke=\"rgba(0, 0, 0, 0.95)\" stroke-width=\"0.8\" paint-order=\"stroke\" stroke-linejoin=\"round\">store1</text></g><g class=\"export-node topology-node\" data-id=\"store2\"><g transform=\"rotate(0 80 260)\"><rect x=\"60\" y=\"240\" width=\"40\" height=\"40\" rx=\"4\" ry=\"4\" fill=\"#005aff\"/><g transform=\"translate(60, 240)\" style=\"color: #005aff\"><g transform=\"scale(0.3333)\">\n                        \n                        <rect height=\"120\" width=\"120\" fill=\"currentColor\"/>\n                        <g>\n                            <g>\n                                <path d=\"M71.7,19.7V48h28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M91.2,38.5l7.5,7.6c1.3,1.3,1.3,3.1,0,4.3L91.1,58\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M20,47.8h28.4v-28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M38.8,28.3l7.6-7.5c1.3-1.3,3.1-1.3,4.3,0l7.7,7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M48,100.3V72H20\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M28.5,81.5L21,73.9c-1.3-1.3-1.3-3.1,0-4.3l7.6-7.7\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                            <g>\n                                <path d=\"M100,71.9H71.6v28\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                                <path d=\"M81.2,91.4l-7.6,7.5c-1.3,1.3-3.1,1.3-4.3,0l-7.7-7.6\" fill=\"none\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n                            </g>\n                        </g>\n                    </g></g></g><rect x=\"56.2\" y=\"282\" width=\"47.599999999999994\" height=\"15\" fill=\"rgba(0, 0, 0, 0.85)\" rx=\"3\" ry=\"3\"/><text x=\"80\" y=\"291.8\" font-size=\"11\" font-weight=\"500\" font-family=\"system-ui, -apple-system, sans-serif\" fill=\"#FFFFFF\" text-anchor=\"middle\" stroke=\"rgba(0, 0, 0, 0.95)\" stroke-width=\"0.8\" paint-order=\"stroke\" stroke-linejoin=\"round\">store2</text></g></g></svg>",
+        "testDataEnabled": false,
+        "timeSliderEnabled": true,
+        "timeSliderMode": "local"
+      },
+      "pluginVersion": "1.20.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "interface_oper_state",
+          "instant": false,
+          "legendFormat": "oper-state:{{source}}:{{interface_name}}",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "interface_traffic_rate_out_bps",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{source}}:{{interface_name}}:out",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "interface_traffic_rate_in_bps",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{source}}:{{interface_name}}:in",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Network Status",
+      "transparent": true,
+      "type": "andrewbmchugh-flow-panel"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 5000,
+            "axisSoftMin": 1000,
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbits"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 10,
+        "x": 0,
+        "y": 13
+      },
+      "id": 25,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "interface_traffic_rate_in_bps{source=\"$NE\"}",
+          "instant": false,
+          "legendFormat": "{{interface_name}}:IN",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "interface_traffic_rate_out_bps{source=\"$NE\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{interface_name}}:OUT",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": " Interface Throughput",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "green",
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "max": 9,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 5,
+        "x": 0,
+        "y": 20
+      },
+      "id": 8,
+      "options": {
+        "minVizHeight": 100,
+        "minVizWidth": 100,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "manual"
+      },
+      "pluginVersion": "12.3.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "network_instance_route_table_ipv4_unicast_statistics_active_routes{network_instance_name=\"default\",source=\"$NE\"}",
+          "format": "time_series",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "IPv4 Active Routes",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "network_instance_route_table_ipv4_unicast_statistics_total_routes{network_instance_name=\"default\",source=\"$NE\"}",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "IPv4 Total Routes",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "network_instance_route_table_ipv4_unicast_statistics_active_routes_with_ecmp{network_instance_name=\"default\",source=\"$NE\"}",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "IPv4 Active ECMP Routes",
+          "refId": "C"
+        }
+      ],
+      "title": "Routing Stats",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "": {
+                  "text": ""
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "max": 16,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-blue",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 5,
+        "y": 20
+      },
+      "id": 11,
+      "options": {
+        "minVizHeight": 100,
+        "minVizWidth": 100,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "manual"
+      },
+      "pluginVersion": "12.3.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "network_instance_protocols_bgp_statistics_total_received_routes{network_instance_name=\"default\",source=\"$NE\"}",
+          "format": "time_series",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Total Received Routes",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "network_instance_protocols_bgp_statistics_total_active_routes{network_instance_name=\"default\",source=\"$NE\"}",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Total Active Routes",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "network_instance_protocols_bgp_statistics_total_paths{network_instance_name=\"default\",source=\"$NE\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Total Paths",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "BGP Route Stats",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "dark-yellow",
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 4,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "dark-blue",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Up Peers"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": 0
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total Peers"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-blue",
+                      "value": 0
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 5,
+        "y": 25
+      },
+      "id": 10,
+      "options": {
+        "minVizHeight": 100,
+        "minVizWidth": 100,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "manual"
+      },
+      "pluginVersion": "12.3.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "network_instance_protocols_bgp_statistics_up_peers{network_instance_name=\"default\",source=\"$NE\"}",
+          "format": "time_series",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Up Peers",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "network_instance_protocols_bgp_statistics_total_peers{network_instance_name=\"default\",source=\"$NE\"}",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Total Peers",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "network_instance_protocols_bgp_statistics_disabled_peers{network_instance_name=\"default\",source=\"$NE\"}",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Disabled Peers",
+          "refId": "C"
+        }
+      ],
+      "title": "BGP Peer Stats",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "green",
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "max": 9,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 0,
+        "y": 29
+      },
+      "id": 41,
+      "options": {
+        "minVizHeight": 100,
+        "minVizWidth": 100,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "manual"
+      },
+      "pluginVersion": "12.3.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "builder",
+          "expr": "sum(network_instance_bridge_table_statistics_active_entries{source=\"$NE\"})",
+          "format": "time_series",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Active Entries",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "builder",
+          "expr": "sum(network_instance_bridge_table_statistics_total_entries{source=\"$NE\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Total Entries",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "builder",
+          "expr": "sum(network_instance_bridge_table_statistics_failed_entries{source=\"$NE\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Failed Entries",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Bridge Stats (All Tables)",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 23,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 7,
+        "x": 5,
+        "y": 29
+      },
+      "id": 30,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "platform_control_cpu_total_instant{source=\"$NE\"}",
+          "legendFormat": "Total",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "CPU Utilization",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 2,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbits"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 7,
+        "x": 12,
+        "y": 29
+      },
+      "id": 28,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "platform_control_memory_free{source=\"$NE\"}",
+          "hide": false,
+          "legendFormat": "Free ",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "platform_control_memory_utilization{source=\"$NE\"}",
+          "hide": false,
+          "legendFormat": "Utilization",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "platform_control_memory_reserved{source=\"$NE\"}",
+          "hide": false,
+          "legendFormat": "Reserved",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "platform_control_memory_physical{source=\"$NE\"}",
+          "hide": false,
+          "legendFormat": "Physical",
+          "range": true,
+          "refId": "D"
+        }
+      ],
+      "title": "Memory Utilization",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "footer": {
+              "reducers": []
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 19,
+        "y": 29
+      },
+      "id": 34,
+      "options": {
+        "cellHeight": "sm",
+        "enablePagination": true,
+        "frameIndex": 0,
+        "showHeader": true
+      },
+      "pluginVersion": "12.3.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "system_app_management_application_pid{source='$NE'}",
+          "format": "table",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{application_name}}",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Running SR Linux applications",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "__name__": true,
+              "instance": true,
+              "job": true,
+              "source": true,
+              "subscription_name": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Value": "PID"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 37
+      },
+      "id": 24,
+      "panels": [],
+      "title": "$NE",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 38
+      },
+      "id": 35,
+      "panels": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 13,
+            "w": 15,
+            "x": 0,
+            "y": 49
+          },
+          "id": 37,
+          "options": {
+            "dedupStrategy": "none",
+            "enableInfiniteScrolling": false,
+            "enableLogDetails": true,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showControls": false,
+            "showLabels": false,
+            "showTime": true,
+            "sortOrder": "Descending",
+            "wrapLogMessage": true
+          },
+          "pluginVersion": "12.3.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "editorMode": "code",
+              "expr": "{application=\"$Logs\", source=\"$NE\"}",
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Log: $Logs",
+          "type": "logs"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                }
+              },
+              "mappings": []
+            },
+            "overrides": [
+              {
+                "__systemRef": "hideSeriesFrom",
+                "matcher": {
+                  "id": "byNames",
+                  "options": {
+                    "mode": "exclude",
+                    "names": [
+                      "sr_aaa_mgr",
+                      "sr_bgp_mgr",
+                      "sr_cli",
+                      "sr_gnmi_server",
+                      "sr_log_mgr",
+                      "sr_mgmt_server",
+                      "sr_xdp_cpm",
+                      "aaa_authkeys"
+                    ],
+                    "prefix": "All except:",
+                    "readOnly": true
+                  }
+                },
+                "properties": [
+                  {
+                    "id": "custom.hideFrom",
+                    "value": {
+                      "legend": false,
+                      "tooltip": true,
+                      "viz": true
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 21,
+            "w": 9,
+            "x": 15,
+            "y": 49
+          },
+          "id": 36,
+          "options": {
+            "displayLabels": [
+              "value"
+            ],
+            "legend": {
+              "displayMode": "list",
+              "placement": "right",
+              "showLegend": true
+            },
+            "pieType": "pie",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "sort": "desc",
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "12.3.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "editorMode": "code",
+              "expr": "sum by (application) (count_over_time({source=\"$NE\"}[$__range]))",
+              "legendFormat": "{{application}}",
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Total logs $NE",
+          "type": "piechart"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 1,
+                "barWidthFactor": 0.6,
+                "drawStyle": "bars",
+                "fillOpacity": 100,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "showValues": false,
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 15,
+            "x": 0,
+            "y": 62
+          },
+          "id": 38,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "12.3.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "P8E80F9AEF21F6940"
+              },
+              "editorMode": "code",
+              "expr": "sum by (level) (count_over_time({application=\"$Logs\",source=\"$NE\"} | logfmt [$__interval]))",
+              "legendFormat": "{{level}}",
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Log volume: $Logs",
+          "type": "timeseries"
+        }
+      ],
+      "title": "Logging $NE",
+      "type": "row"
+    }
+  ],
+  "preload": false,
+  "refresh": "5s",
+  "schemaVersion": 42,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": "leaf1",
+          "value": "leaf1"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "PBFA97CFB590B2093"
+        },
+        "definition": "label_values(source)",
+        "includeAll": false,
+        "name": "NE",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(source)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": "default",
+          "value": "default"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "PBFA97CFB590B2093"
+        },
+        "definition": "label_values(network_instance_name)",
+        "includeAll": false,
+        "name": "Services",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(network_instance_name)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": "sr_license_mgr",
+          "value": "sr_license_mgr"
+        },
+        "datasource": {
+          "type": "loki",
+          "uid": "P8E80F9AEF21F6940"
+        },
+        "definition": "",
+        "includeAll": false,
+        "name": "Logs",
+        "options": [],
+        "query": {
+          "label": "application",
+          "refId": "LokiVariableQueryEditor-VariableQuery",
+          "stream": "",
+          "type": 1
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Network Telemetry",
+  "uid": "ce11ch1funwu8d",
+  "version": 1
+}
