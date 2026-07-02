@@ -1,4 +1,4 @@
-.PHONY: deploy destroy reset status help up bgp-wait test-vxlan test-frontend test-backend test-all test-continuous test-lldp test-interfaces push-configs
+.PHONY: deploy destroy reset status help up bgp-wait test-frontend test-backend test-all test-continuous test-lldp test-interfaces push-configs
 
 deploy:
 	containerlab deploy -t aifab.clab.yaml --reconfigure
@@ -26,7 +26,6 @@ help:
 	@echo "  make status               	- Check current topology status"
 	@echo "  make help                 	- Show this help message"
 	@echo "  make bgp-wait             	- Wait for all BGP sessions to become established"
-	@echo "  make test-vxlan           	- Verify that VXLAN tunnels are up between the front end leaf nodes"
 	@echo "  make test-lldp            	- Verify LLDP neighbors match expected topology"
 	@echo "  make test-interfaces      	- Verify all interfaces are up/up (includes client links)"
 	@echo "  make test-frontend        	- Verify connectivity between the frontend clients and storage"
@@ -62,10 +61,6 @@ test-frontend:
 test-backend:
 	@echo "Testing connectivity between backend compute clients..."
 	@./scripts/test-connectivity.sh test-backend
-
-test-vxlan:
-	@echo "Verifying VXLAN tunnels are up between front end leaf nodes..."
-	@./scripts/test-vxlan.sh check
 
 test-all:
 	@echo "Running comprehensive all-to-all connectivity tests on the front and back ends..."

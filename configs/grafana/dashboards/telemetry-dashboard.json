@@ -302,7 +302,7 @@
         "panelConfig": "https://raw.githubusercontent.com/mjmccoy97/AI-NVD/main/configs/grafana/flow_panels/aifab_grafana.flow_panel.yaml",
         "siteConfig": "https://raw.githubusercontent.com/mjmccoy97/AI-NVD/main/configs/grafana/flow_panels/aifab_grafana.flow_panel.yaml",
         "svg": "https://raw.githubusercontent.com/mjmccoy97/AI-NVD/main/configs/grafana/flow_panels/aifab_grafana.svg",
-        "testDataEnabled": true,
+        "testDataEnabled": false,
         "timeSliderEnabled": true,
         "timeSliderMode": "local"
       },

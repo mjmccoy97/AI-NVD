@@ -14,7 +14,7 @@ topology:
     linux:
       image: aninchat/ubuntu-server:v1
       binds:
-        - configs:/linux
+        - configs/linux:/linux
   nodes:
     spine1:
       mgmt-ipv4: 172.21.21.101
@@ -144,6 +144,8 @@ topology:
       labels:
         graph-level: 2
         graph-icon: network
+    
+    ### STORAGE STACK ###
     s1:
       mgmt-ipv4: 172.21.21.51
       kind: linux
@@ -164,6 +166,7 @@ topology:
       kind: linux
       exec:
         - bash linux/s4.sh
+    ### COMPUTE STACK ###
     weka1:
       mgmt-ipv4: 172.21.21.60
       kind: linux
@@ -204,16 +207,19 @@ topology:
       kind: linux
       exec:
         - bash linux/weka8.sh
-    #TELEMETRY STACK
+    ### TELEMETRY STACK ###
     gnmic:
       kind: linux
+      mgmt-ipv4: 172.21.21.70
       image: ghcr.io/openconfig/gnmic:0.39.1
       binds:
         - configs/gnmic/gnmic-config.yml:/gnmic-config.yml:ro
       cmd: --config /gnmic-config.yml --log subscribe
       group: '10'
+    
     prometheus:
       kind: linux
+      mgmt-ipv4: 172.21.21.71
       image: quay.io/prometheus/prometheus:v2.54.1
       binds:
         - configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
@@ -221,9 +227,11 @@ topology:
       ports:
         - 9090:9090
       group: '10'
+    
     grafana:
       kind: linux
-      image: grafana-custom:12.3.2
+      mgmt-ipv4: 172.21.21.72
+      image: grafana/grafana:12.3.2
       binds:
         - configs/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
         - configs/grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yaml:ro
@@ -232,6 +240,7 @@ topology:
       ports:
         - 3000:3000
       env:
+        GF_INSTALL_PLUGINS: "andrewbmchugh-flow-panel"
         GF_ORG_ROLE: Admin
         GF_ORG_NAME: Main Org
         GF_AUTH_ANONYMOUS_ENABLED: "true"
@@ -239,16 +248,20 @@ topology:
         GF_AUTH_ANONYMOUS: "true"
         GF_AUTH_OAUTH_AUTO_LOGIN: "true"
       group: '10'
+    ### LOGGING STACK ###
     promtail:
       kind: linux
+      mgmt-ipv4: 172.21.21.73
       image: grafana/promtail:3.2.0
       binds:
         - configs/promtail:/etc/promtail
       cmd: --config.file=/etc/promtail/promtail-config.yml
       ports:
         - 9080:9080
+    
     loki:
       kind: linux
+      mgmt-ipv4: 172.21.21.74
       image: grafana/loki:3.2.0
       binds:
         - configs/loki:/etc/loki
@@ -349,191 +362,3 @@ topology:
     - endpoints: [ 'weka8:eth1', 'frontend-leaf1:e1-14' ]
     - endpoints: [ 'weka8:eth2', 'frontend-leaf2:e1-14' ]
 
-# annotations:
-#   freeTextAnnotations: []
-#   freeShapeAnnotations: []
-#   trafficRateAnnotations: []
-#   groupStyleAnnotations: []
-#   networkNodeAnnotations: []
-#   nodeAnnotations:
-#   - id: spine1
-#     interfacePattern: e1-{n}
-#     position:
-#       x: 560
-#       y: 140
-#   - id: spine2
-#     interfacePattern: e1-{n}
-#     position:
-#       x: 520
-#       y: 60
-#   - id: stripe1-leaf1
-#     interfacePattern: e1-{n}
-#     position:
-#       x: -100
-#       y: 180
-#   - id: stripe1-leaf2
-#     interfacePattern: e1-{n}
-#     position:
-#       x: 400
-#       y: -300
-#   - id: stripe1-leaf3
-#     interfacePattern: e1-{n}
-#     position:
-#       x: 300
-#       y: -120
-#   - id: stripe1-leaf4
-#     interfacePattern: e1-{n}
-#     position:
-#       x: 20
-#       y: -20
-#   - id: stripe1-leaf5
-#     interfacePattern: e1-{n}
-#     position:
-#       x: 520
-#       y: -140
-#   - id: stripe1-leaf6
-#     interfacePattern: e1-{n}
-#     position:
-#       x: 700
-#       y: -120
-#   - id: stripe1-leaf7
-#     interfacePattern: e1-{n}
-#     position:
-#       x: 920
-#       y: -120
-#   - id: stripe1-leaf8
-#     interfacePattern: e1-{n}
-#     position:
-#       x: 660
-#       y: 140
-#   - id: stripe2-leaf1
-#     interfacePattern: e1-{n}
-#     position:
-#       x: 320
-#       y: 220
-#   - id: stripe2-leaf2
-#     interfacePattern: e1-{n}
-#     position:
-#       x: 360
-#       y: 320
-#   - id: stripe2-leaf3
-#     interfacePattern: e1-{n}
-#     position:
-#       x: 480
-#       y: 320
-#   - id: stripe2-leaf4
-#     interfacePattern: e1-{n}
-#     position:
-#       x: 420
-#       y: 240
-#   - id: stripe2-leaf5
-#     interfacePattern: e1-{n}
-#     position:
-#       x: 520
-#       y: 240
-#   - id: stripe2-leaf6
-#     interfacePattern: e1-{n}
-#     position:
-#       x: 620
-#       y: 240
-#   - id: stripe2-leaf7
-#     interfacePattern: e1-{n}
-#     position:
-#       x: 660
-#       y: 340
-#   - id: stripe2-leaf8
-#     interfacePattern: e1-{n}
-#     position:
-#       x: 560
-#       y: 320
-#   - id: frontend-spine1
-#     interfacePattern: e1-{n}
-#     position:
-#       x: 340
-#       y: 540
-#   - id: frontend-spine2
-#     interfacePattern: e1-{n}
-#     position:
-#       x: 240
-#       y: 580
-#   - id: frontend-leaf1
-#     interfacePattern: e1-{n}
-#     position:
-#       x: 160
-#       y: -60
-#   - id: frontend-leaf2
-#     interfacePattern: e1-{n}
-#     position:
-#       x: 320
-#       y: 400
-#   - id: s1
-#     position:
-#       x: -40
-#       y: -300
-#   - id: s2
-#     position:
-#       x: 460
-#       y: 140
-#   - id: s3
-#     position:
-#       x: 520
-#       y: 420
-#   - id: s4
-#     position:
-#       x: 420
-#       y: 400
-#   - id: weka1
-#     position:
-#       x: 420
-#       y: 500
-#   - id: weka2
-#     position:
-#       x: 260
-#       y: 480
-#   - id: weka3
-#     position:
-#       x: 160
-#       y: 420
-#   - id: weka4
-#     position:
-#       x: 160
-#       y: 520
-#   - id: weka5
-#     position:
-#       x: 120
-#       y: 240
-#   - id: weka6
-#     position:
-#       x: 160
-#       y: 320
-#   - id: weka7
-#     position:
-#       x: 80
-#       y: 360
-#   - id: weka8
-#     position:
-#       x: 80
-#       y: 460
-#   - id: gnmic
-#     position:
-#       x: 580
-#       y: 1140
-#   - id: prometheus
-#     position:
-#       x: 740
-#       y: 920
-#   - id: grafana
-#     position:
-#       x: 960
-#       y: 1120
-#   - id: promtail
-#     position:
-#       x: 1060
-#       y: 840
-#   - id: loki
-#     position:
-#       x: 1120
-#       y: 600
-#   edgeAnnotations: []
-#   aliasEndpointAnnotations: []
-#   viewerSettings: {}
