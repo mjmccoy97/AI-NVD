@@ -269,6 +269,7 @@ topology:
       ports:
         - 3100:3100
   links:
+   # stripe leafs to spines connectivity
     - endpoints: [ 'stripe1-leaf1:e1-1', 'spine1:e1-1' ]
     - endpoints: [ 'stripe1-leaf1:e1-2', 'spine2:e1-1' ]
     - endpoints: [ 'stripe1-leaf2:e1-1', 'spine1:e1-2' ]
@@ -301,6 +302,7 @@ topology:
     - endpoints: [ 'stripe2-leaf7:e1-2', 'spine2:e1-15' ]
     - endpoints: [ 'stripe2-leaf8:e1-1', 'spine1:e1-16' ]
     - endpoints: [ 'stripe2-leaf8:e1-2', 'spine2:e1-16' ]
+    # server to leaf backend connectivity
     - endpoints: [ 's1:eth1', 'stripe1-leaf1:e1-3' ]
     - endpoints: [ 's1:eth2', 'stripe1-leaf2:e1-3' ]
     - endpoints: [ 's1:eth3', 'stripe1-leaf3:e1-3' ]
@@ -333,6 +335,7 @@ topology:
     - endpoints: [ 's4:eth6', 'stripe2-leaf6:e1-4' ]
     - endpoints: [ 's4:eth7', 'stripe2-leaf7:e1-4' ]
     - endpoints: [ 's4:eth8', 'stripe2-leaf8:e1-4' ]
+    # frontend/storage leaf-spine connectivity
     - endpoints: [ 'frontend-leaf1:e1-1', 'frontend-spine1:e1-1' ]
     - endpoints: [ 'frontend-leaf1:e1-2', 'frontend-spine2:e1-1' ]
     - endpoints: [ 'frontend-leaf2:e1-1', 'frontend-spine1:e1-2' ]
@@ -345,6 +348,7 @@ topology:
     - endpoints: [ 's3:eth10', 'frontend-leaf2:e1-5' ]
     - endpoints: [ 's4:eth9', 'frontend-leaf1:e1-6' ]
     - endpoints: [ 's4:eth10', 'frontend-leaf2:e1-6' ]
+    # Weka servers to frontend/storage fabric connectivity
     - endpoints: [ 'weka1:eth1', 'frontend-leaf1:e1-7' ]
     - endpoints: [ 'weka1:eth2', 'frontend-leaf2:e1-7' ]
     - endpoints: [ 'weka2:eth1', 'frontend-leaf1:e1-8' ]

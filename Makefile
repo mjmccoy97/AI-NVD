@@ -1,4 +1,4 @@
-.PHONY: deploy destroy reset status help up bgp-wait test-frontend test-backend test-all test-continuous test-lldp test-interfaces push-configs
+.PHONY: deploy destroy reset status help up bgp-wait test-frontend test-frontend-weka test-backend test-backend-intra test-backend-inter test-all test-continuous test-lldp test-interfaces push-configs
 
 deploy:
 	containerlab deploy -t aifab.clab.yaml --reconfigure
@@ -28,8 +28,11 @@ help:
 	@echo "  make bgp-wait             	- Wait for all BGP sessions to become established"
 	@echo "  make test-lldp            	- Verify LLDP neighbors match expected topology"
 	@echo "  make test-interfaces      	- Verify all interfaces are up/up (includes client links)"
-	@echo "  make test-frontend        	- Verify connectivity between the frontend clients and storage"
-	@echo "  make test-backend        	- Verify connectivity between the backend compute clients"
+	@echo "  make test-frontend        	- Verify connectivity between the frontend storage clients"
+	@echo "  make test-frontend-weka   	- Verify connectivity between the frontend Weka storage clients"
+	@echo "  make test-backend-intra   	- Verify intra-stripe backend links (s1<->s2, s3<->s4; same leaf)"
+	@echo "  make test-backend-inter   	- Verify inter-stripe backend links (s1/s2 <-> s3/s4; via spine)"
+	@echo "  make test-backend        	- Verify both intra- and inter-stripe backend links"
 	@echo "  make test-all			- Run comprehensive all-to-all connectivity tests on the front and back ends"
 	@echo "  make test-continuous      	- Send continuous traffic on all frontend and backend pairs until Ctrl+C"
 	@echo "  make push-configs         	- Push configurations to all SR Linux devices via JSON-RPC"
@@ -44,7 +47,7 @@ bgp-wait:
 
 test-connectivity:
 	@echo "Testing all VLAN connectivity with comprehensive matrix..."
-	@./scripts/test-connectivity.sh matrix
+	@./scripts/test-connectivity.sh test-all
 
 test-lldp:
 	@echo "Verifying LLDP neighbors match expected topology..."
@@ -55,11 +58,23 @@ test-interfaces:
 	@./scripts/test-interfaces.sh aifab.clab.yaml -v
 
 test-frontend:
-	@echo "Testing connectivity between frontend clients and storage..."
+	@echo "Testing connectivity between frontend storage clients..."
 	@./scripts/test-connectivity.sh test-frontend
 
+test-frontend-weka:
+	@echo "Testing connectivity between frontend Weka storage clients..."
+	@./scripts/test-connectivity.sh test-frontend-weka
+
+test-backend-intra:
+	@echo "Testing intra-stripe backend connectivity (s1<->s2, s3<->s4)..."
+	@./scripts/test-connectivity.sh test-backend-intra
+
+test-backend-inter:
+	@echo "Testing inter-stripe backend connectivity (s1/s2 <-> s3/s4)..."
+	@./scripts/test-connectivity.sh test-backend-inter
+
 test-backend:
-	@echo "Testing connectivity between backend compute clients..."
+	@echo "Testing connectivity across the rail-optimized IPv6 backend links..."
 	@./scripts/test-connectivity.sh test-backend
 
 test-all:
