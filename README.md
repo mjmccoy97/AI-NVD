@@ -8,15 +8,15 @@
 
 # Getting Started
 
-This containerlab is a virtual version of two-stripe rail-optimized frontend and backend AI fabrics as described in the Nokia Validated Design. It is comprised of containerized versions of 7220 IXR-D5 platform for the frontend leafs, the 7220 IXR-H5-64 platform for the frontend spines, and a combination of 7220 IXR-H4 and H5 nodes for the backend leafs and spines nodes. All nodes are running release 25.10.1 as noted in the aifab.clab.yml file that defines the topology. Additionally, there are light weight Alpine Linux clients that are used to emulate compute and storage devices and are intented to be used as needed for testing connectivity through the fabrics
+This containerlab is a virtual version of two-stripe rail-optimized frontend and backend AI fabrics as described in the Nokia Validated Design. It is comprised of containerized versions of 7220 IXR-D5 platform for the frontend leafs, the 7220 IXR-H5-64 platform for the frontend spines, and a combination of 7220 IXR-H4 and H5 nodes for the backend leaf and spine nodes. All nodes are running release 25.10.1 as noted in the aifab.clab.yaml file that defines the topology. Additionally, there are lightweight Ubuntu Linux clients that are used to emulate compute and storage devices and are intended to be used as needed for testing connectivity through the fabrics
 
-If changes are required in terms of the SRL release, or the platforms being tested, that can be easily accomplished by changing the cs.clab.yml file. If a different release is specified it will be automatically downloaded from the public repo and installed as a docker image when the lab is deployed. 
+If changes are required in terms of the SRL release, or the platforms being tested, that can be easily accomplished by changing the aifab.clab.yaml file. If a different release is specified it will be automatically downloaded from the public repo and installed as a docker image when the lab is deployed. 
 
-Please refer to the containerlab documentation (https://containerlab.dev/) for complete details on installing containerlab, as well starting a lab and accessing the nodes. 
+Please refer to the containerlab documentation (https://containerlab.dev/) for complete details on installing containerlab, as well as starting a lab and accessing the nodes. 
 
-There is an included make file that is intended to be used as a command orchestrator. It can used to maintain the lab lifecycle (i.e. deploy, destroy and status - which are the functional equivalent of native containerlab commands), but it is not required. Its primary function is to execute bash scripts that were written to validate the functional health of the topology by validating the status of the interfaces and bgp peers, as well as for testing connectivity between compute and storage devices. These scripts can also be executed manually if desired. 
+There is an included make file that is intended to be used as a command orchestrator. It can be used to maintain the lab lifecycle (i.e. deploy, destroy and status - which are the functional equivalent of native containerlab commands), but it is not required. Its primary function is to execute bash scripts that were written to validate the functional health of the topology by validating the status of the interfaces and bgp peers, as well as for testing connectivity between compute and storage devices. These scripts can also be executed manually if desired. 
 
-This lab includes the integration of a telemetry stack (gNMIC, Promethues, Loki and Grafana) and there are some basic instructions for customizing these components later in this document. One important note is that a custom docker image may be required for Grafana depending on the environment. The related dockerfile can be found in the ./docker folder. Please refer to the Phase 2 section for additional details
+This lab includes the integration of a telemetry stack (gNMIC, Prometheus, Loki and Grafana) and there are some basic instructions for customizing these components later in this document. One important note is that a custom docker image may be required for Grafana depending on the environment. The related dockerfile can be found in the ./docker folder. Please refer to the Phase 2 section for additional details
 
 ## Nokia SRL Resources and References
 
@@ -48,11 +48,11 @@ This AI NVD covers the following features:
 
 # Phase 1: Lab Initialization
 
-Once containerlab has been installed (https://containerlab.dev/), the lab is ready to be deployed. It is controlled/defined by the aifab.clab.yml file. During the initial deployment, any required images will be downloaded automatically and installed as Docker images. 
+Once containerlab has been installed (https://containerlab.dev/), the lab is ready to be deployed. It is controlled/defined by the aifab.clab.yaml file. During the initial deployment, any required images will be downloaded automatically and installed as Docker images. 
 
 As illustrated in the following out, the SRLinux image is downloaded and installed. This will only be necessary the first time that the lab is deployed, unless that Docker image is removed from the system.
 
-The lab can be deployed using the standard containerlab method, or my using the included make file which functions as a command orchestrator
+The lab can be deployed using the standard containerlab method, or by using the included make file which functions as a command orchestrator
 
 <pre style="background-color: #f4f4f4; border: 1px solid #ddd; padding: 10px; border-radius: 5px;">
 └──> make help
@@ -477,7 +477,7 @@ Traffic can be sent continuously between all compute/storage nodes on the front 
 
 # Phase 2 : Telemetry
 
-This lab includes the integration of a full telemetry stack (gNMIC, Promethues, Loki and Grafana). All of the necessary components are included in the clab.cs.yml file, but were commented out for Phase 1. For this phase of the lab, simply uncomment the relevant lines (snippet below) in that file and re-deploy the lab. As with the inital lab deployment all of the necessary docker images will be downloaded automatically during initialization.
+This lab includes the integration of a full telemetry stack (gNMIC, Prometheus, Loki and Grafana). All of the necessary components are included in the aifab.clab.yaml file, but were commented out for Phase 1. For this phase of the lab, simply uncomment the relevant lines (snippet below) in that file and re-deploy the lab. As with the initial lab deployment all of the necessary docker images will be downloaded automatically during initialization.
 
 
 __One word of caution -- do not make changes to the .yml file while the lab is deployed, otherwise errors will be encountered during the cleanup phase when the lab is destroyed.__
@@ -543,7 +543,7 @@ Please note the section below regarding building a Grafana Docker image that inc
     </pre>
 
 ## Custom Docker Image for Grafana
-The stock Grafana image will work in most lab environemnts. If that's the case for your environment, simply modify the clab.cs.yml file to reflect the stock image. However when running on a Mac with Orbstack an issue with proxyDNS prevented the Grafana container from installing the required plugins after initilization. This custom docker image for Grafana bundles all of the required plugins and should run in any environment. 
+The stock Grafana image will work in most lab environments. If that's the case for your environment, simply modify the aifab.clab.yaml file to reflect the stock image. However when running on a Mac with Orbstack an issue with proxyDNS prevented the Grafana container from installing the required plugins after initialization. This custom docker image for Grafana bundles all of the required plugins and should run in any environment. 
 
 ### Grafana Image Build
 <pre style="background-color: #f4f4f4; border: 1px solid #ddd; padding: 10px; border-radius: 5px;">
@@ -551,7 +551,7 @@ The stock Grafana image will work in most lab environemnts. If that's the case f
 └──> docker build -f Dockerfile.grafana -t grafana-custom:12.3.2 .
 </pre>
 
-If running this on Ubuntu, and you don't wish to build a custom image , simply modify the yaml file by changing the image abd uncommenting GF_INSTALL_PLUGINS: 
+If running this on Ubuntu, and you don't wish to build a custom image , simply modify the yaml file by changing the image and uncommenting GF_INSTALL_PLUGINS: 
 <pre style="background-color: #f4f4f4; border: 1px solid #ddd; padding: 10px; border-radius: 5px;">
 
     grafana:
@@ -566,7 +566,7 @@ If running this on Ubuntu, and you don't wish to build a custom image , simply m
       ports:
       - 3000:3000
       env:
-        #GF_INSTALL_PLUGINS: andrewbmchugh-flow-panel <-- CHANGE to uncomment>
+        #GF_INSTALL_PLUGINS: andrewbmchugh-flow-panel <-- UNCOMMENT IF USING THE PUBLIC GRAFANA IMAGE>
         GF_ORG_ROLE: Admin
         GF_ORG_NAME: Main Org
         GF_AUTH_ANONYMOUS_ENABLED: 'true'
@@ -580,7 +580,7 @@ If running this on Ubuntu, and you don't wish to build a custom image , simply m
 
 Once the containerlab has been started, Grafana can be reached as http://localhost:3000
 
-Note that the topology depicted in the dashboard will update in near real time to reflect port status, and the links will change color depending on the traffic rate. For the purposes of this lab testing, those rates have been set very low to reflect the modest traffic rates observed in this virtual topology. These threhsold rates can be modified by editing the yaml file in the flow panel (./configs/grafana/flow_panels/topology.flow_panel.yaml).
+Note that the topology depicted in the dashboard will update in near real time to reflect port status, and the links will change color depending on the traffic rate. For the purposes of this lab testing, those rates have been set very low to reflect the modest traffic rates observed in this virtual topology. These threshold rates can be modified by editing the yaml file in the flow panel (./configs/grafana/flow_panels/topology.flow_panel.yaml).
 
 ### Dashboard View
 <div style="text-align: center;">
@@ -591,7 +591,7 @@ Note that the topology depicted in the dashboard will update in near real time t
 
 ## gNMIC Path Subscription for Testing
 
-Paths can changed as required, and will be automatically exported to Prometheus, by modifing the ./config/gnmic/gnmic-config.yml file. Currently the native SRL paths are being used for collection, however the gNMIC tool does support OpenConfig paths.
+Paths can be changed as required, and will be automatically exported to Prometheus, by modifying the ./config/gnmic/gnmic-config.yml file. Currently the native SRL paths are being used for collection, however the gNMIC tool does support OpenConfig paths.
 
 - Please refer to the gNMIC GitHub page for instructions on usage of the tool https://github.com/openconfig/gnmic
 - A comprehensive list of paths for each SRL release can be found here https://yangbrowser.nokia.com/srlinux/25.10.2?from=0&pathfmt=gnmi
@@ -645,7 +645,7 @@ gnmic> --address aifab-stripe1-leaf1:57400 -u admin -p NokiaSrl1! --skip-verify 
 
 ## Prometheus
 
-In this setup, gnmic sends the collected data to Promethues which is the data source used by grafana. The config file (./cofigs/prometheus/prometheus.yml) is minimal. If debuggging the flow the the data chain (i.e. router --> gnmic --> prometheus --> grafana), the Prometheus interface can be accessed as http://localhost:9090
+In this setup, gnmic sends the collected data to Prometheus which is the data source used by grafana. The config file (./configs/prometheus/prometheus.yml) is minimal. If debugging the flow of the data chain (i.e. router --> gnmic --> prometheus --> grafana), the Prometheus interface can be accessed as http://localhost:9090
 
 
 
