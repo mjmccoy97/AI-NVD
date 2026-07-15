@@ -75,7 +75,7 @@
       "id": "stripe1-leaf7",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 120,
+        "x": 20,
         "y": 100
       }
     },
@@ -83,7 +83,7 @@
       "id": "stripe1-leaf8",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 200,
+        "x": 100,
         "y": 100
       }
     },
@@ -99,7 +99,7 @@
       "id": "stripe2-leaf2",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 340,
+        "x": 360,
         "y": 100
       }
     },
