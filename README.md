@@ -506,7 +506,7 @@ This can be useful during the initial lab spin up to determine whether the fabri
 
 ### Verifying Backend Connectivity Inter-Stripe
 
-Please note that during the first execution of the Inter-Strip test, some of the node-to-node tests may fail. This is due to the fact that hosts have not yet been programmed into the forwarding table of the leaf nodes. Simply run the test a second time, and there should be full connectivity reported.
+Please note that during the first execution of the Inter-Stripe test, some of the node-to-node tests may fail. This is due to the fact that hosts have not yet been programmed into the forwarding table of the leaf nodes. Simply run the test a second time, and there should be full connectivity reported.
 
 <div style="text-align: center;">
   <img src="./images/Test-Backend-Inter.png" alt="Centered Image">
