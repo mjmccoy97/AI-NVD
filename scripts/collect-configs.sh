@@ -39,7 +39,7 @@ FAILED=0
 for NODE in "${!NODES[@]}"; do
     OUTPUT_FILE="$OUTPUT_DIR/$NODE"
     echo -n "Collecting config from $NODE ... "
-    if docker exec "$NODE" sr_cli "info flat" > "$OUTPUT_FILE" 2>&1; then
+    if docker exec "aifab-$NODE" sr_cli "info flat" > "$OUTPUT_FILE" 2>&1; then
         echo "OK -> $OUTPUT_FILE"
         SUCCESS=$(( SUCCESS + 1 ))
     else

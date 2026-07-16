@@ -8,7 +8,14 @@
 
 # Getting Started
 
-This containerlab is a virtual version of two-stripe rail-optimized frontend and backend AI fabrics as described in the Nokia Validated Design. It is comprised of containerized versions of 7220 IXR-D5 platform for the frontend leafs, the 7220 IXR-H5-64 platform for the frontend spines, and a combination of 7220 IXR-H4 and H5 nodes for the backend leaf and spine nodes. All nodes are running release 25.10.1 as noted in the aifab.clab.yaml file that defines the topology. Additionally, there are lightweight Ubuntu Linux clients that are used to emulate compute and storage devices and are intended to be used as needed for testing connectivity through the fabrics
+This containerlab is a virtual version of two-stripe rail-optimized frontend and backend AI fabrics as described in the Nokia Validated Design. It is comprised of containerized versions of varios 7220 IXR platforms:
+- Backend Spines : 7220 IXR-H4
+- Backend Leafs (Stripe1) : 7220 IXR-H4
+- Backend Leafs (Stripe2) : 7220 IXR-H5-64d
+- Frontend Spines : 7220 IXR-H5-64o
+- Frontend Leafs : 7220 IXR-D5
+
+All nodes are running release 25.10.1 as noted in the aifab.clab.yaml file that defines the topology. Additionally, there are lightweight Ubuntu Linux clients that are used in place of compute and storage devices, and are intended to be used as needed for testing connectivity through the fabrics.
 
 If changes are required in terms of the SRL release, or the platforms being tested, that can be easily accomplished by changing the aifab.clab.yaml file. If a different release is specified it will be automatically downloaded from the public repo and installed as a docker image when the lab is deployed. 
 
@@ -17,6 +24,8 @@ Please refer to the containerlab documentation (https://containerlab.dev/) for c
 There is an included make file that is intended to be used as a command orchestrator. It can be used to maintain the lab lifecycle (i.e. deploy, destroy and status - which are the functional equivalent of native containerlab commands), but it is not required. Its primary function is to execute bash scripts that were written to validate the functional health of the topology by validating the status of the interfaces and bgp peers, as well as for testing connectivity between compute and storage devices. These scripts can also be executed manually if desired. 
 
 This lab includes the integration of a telemetry stack (gNMIC, Prometheus, Loki and Grafana) and there are some basic instructions for customizing these components later in this document. One important note is that a custom docker image may be required for Grafana depending on the environment. The related dockerfile can be found in the ./docker folder. Please refer to the Phase 2 section for additional details
+
+Note that this entire lab running in a Debian/Ubuntu environment will consume ~12-13GB or RAM. 
 
 ## Nokia SRL Resources and References
 
@@ -50,7 +59,7 @@ This AI NVD covers the following features:
 
 Once containerlab has been installed (https://containerlab.dev/), the lab is ready to be deployed. It is controlled/defined by the aifab.clab.yaml file. During the initial deployment, any required images will be downloaded automatically and installed as Docker images. 
 
-As illustrated in the following out, the SRLinux image is downloaded and installed. This will only be necessary the first time that the lab is deployed, unless that Docker image is removed from the system.
+*Note that for this initial Phase 1 deployment, it may be desireable to comment out the telemetry stack in the yaml file, and simply bring up the network and linux devices for basic validation.*
 
 The lab can be deployed using the standard containerlab method, or by using the included make file which functions as a command orchestrator
 
@@ -75,6 +84,8 @@ Available targets:
   make test-continuous          - Send continuous traffic on all frontend and backend pairs until Ctrl+C
   make push-configs             - Push configurations to all SR Linux devices via JSON-RPC
 </pre>
+
+## Deploying the Lab
 
 <pre style="background-color: #f4f4f4; border: 1px solid #ddd; padding: 10px; border-radius: 5px;">
 └──> make deploy
@@ -384,12 +395,35 @@ Containerlab creates a host entry for each node when the lab is initialized.
 </pre>
 
 To connect to the CLI of a node, simply SSH by either IP address or hostname. 
-- The admin password for the Nokia devices is: NokiaSrl1!
-- The admin password for the Linux hosts is: multit00l
+- If prompted, the admin password for the Nokia devices is: NokiaSrl1!
 
-<div style="text-align: center;">
-  <img src="./images/CLI-Snapshot.png" alt="Centered Image">
-</div>
+
+<pre style="background-color: #f4f4f4; border: 1px solid #ddd; padding: 10px; border-radius: 5px;">
+└──> ssh aifab-stripe1-leaf1
+Warning: Permanently added 'aifab-stripe1-leaf1' (ED25519) to the list of known hosts.
+................................................................
+:                  Welcome to Nokia SR Linux!                  :
+:              Open Network OS for the NetOps era.             :
+:                                                              :
+:    This is a freely distributed official container image.    :
+:                      Use it - Share it                       :
+:                                                              :
+: Get started: https://learn.srlinux.dev                       :
+: Container:   https://go.srlinux.dev/container-image          :
+: Docs:        https://doc.srlinux.dev/25-10                   :
+: Rel. notes:  https://doc.srlinux.dev/rnn                     :
+: YANG:        https://yang.srlinux.dev/25.10.1                :
+: Discord:     https://go.srlinux.dev/discord                  :
+: Contact:     https://go.srlinux.dev/contact-sales            :
+................................................................
+
+Loading environment configuration file(s): ['/etc/opt/srlinux/srlinux.rc', '/home/admin/.srlinuxrc']
+Welcome to the Nokia SR Linux CLI.
+
+
+--{ running }--[  ]--
+A:admin@stripe1-leaf1#
+</pre>
 
 ## Lab Teardown
 <pre style="background-color: #f4f4f4; border: 1px solid #ddd; padding: 10px; border-radius: 5px;">
@@ -441,27 +475,38 @@ containerlab destroy -t aifab.clab.yaml --cleanup
 16:30:50 INFO Removing SSH config path=/etc/ssh/ssh_config.d/clab-aifab.conf
 </pre>
 
-## Lab Validation and Connectivity Testing
+## Lab Validation and Connectivity Testing Using the Make File
 
-## BGP Peering Validation
+The included make file can be used as a command orchetsrator to execut some containerlab commands (deploy, detsroy, etc...) or to run the batch scripts that are contained in the ./scripts directory.
+
+<div style="text-align: center;">
+  <img src="./images/Make-Help.png" alt="Centered Image">
+</div>
+
+### BGP Peering Validation
+
+This script will run in a loop until all of the BGP peers in the topology have been established. It autodetects both static and dynamic peers.
+This can be useful during the initial lab spin up to determine whether the fabric has convered from a peering perspective. 
 
 <div style="text-align: center;">
   <img src="./images/BGP-Wait-Screenshot.png" alt="Centered Image">
 </div>
 
-## Verifying Frontend Connectivity 
+### Verifying Frontend Connectivity 
 
 <div style="text-align: center;">
   <img src="./images/Test-Frontend.png" alt="Centered Image">
 </div>
 
-## Verifying Backend Connectivity Intra-Stripe
+### Verifying Backend Connectivity Intra-Stripe
 
 <div style="text-align: center;">
   <img src="./images/Test-Backend-Intra.png" alt="Centered Image">
 </div>
 
-## Verifying Backend Connectivity Inter-Stripe
+### Verifying Backend Connectivity Inter-Stripe
+
+Please note that during the first execution of the Inter-Strip test, some of the node-to-node tests may fail. This is due to the fact that hosts have not yet been programmed into the forwarding table of the leaf nodes. Simply run the test a second time, and there should be full connectivity reported.
 
 <div style="text-align: center;">
   <img src="./images/Test-Backend-Inter.png" alt="Centered Image">
@@ -469,7 +514,7 @@ containerlab destroy -t aifab.clab.yaml --cleanup
 
 ## Sending Continuous Traffic
 
-Traffic can be sent continuously between all compute/storage nodes on the front and backends using another make option:
+Traffic can be sent continuously between all compute/storage nodes on the front and backends using the test-contunuous option.
 
 <div style="text-align: center;">
   <img src="./images/Test-Continuous.png" alt="Centered Image">
@@ -477,7 +522,7 @@ Traffic can be sent continuously between all compute/storage nodes on the front 
 
 # Phase 2 : Telemetry
 
-This lab includes the integration of a full telemetry stack (gNMIC, Prometheus, Loki and Grafana). All of the necessary components are included in the aifab.clab.yaml file, but were commented out for Phase 1. For this phase of the lab, simply uncomment the relevant lines (snippet below) in that file and re-deploy the lab. As with the initial lab deployment all of the necessary docker images will be downloaded automatically during initialization.
+This lab includes the integration of a full telemetry stack (gNMIC, Prometheus, Loki and Grafana). All of the necessary components are included in the aifab.clab.yaml file, but it may be advantageous to comment these out for Phase 1. For this phase of the lab, simply uncomment the relevant lines (snippet below) in that file and re-deploy the lab. As with the initial lab deployment all of the necessary docker images will be downloaded automatically during initialization.
 
 
 __One word of caution -- do not make changes to the .yml file while the lab is deployed, otherwise errors will be encountered during the cleanup phase when the lab is destroyed.__
@@ -647,6 +692,3 @@ gnmic> --address aifab-stripe1-leaf1:57400 -u admin -p NokiaSrl1! --skip-verify 
 
 In this setup, gnmic sends the collected data to Prometheus which is the data source used by grafana. The config file (./configs/prometheus/prometheus.yml) is minimal. If debugging the flow of the data chain (i.e. router --> gnmic --> prometheus --> grafana), the Prometheus interface can be accessed as http://localhost:9090
 
-
-
-# Appendix

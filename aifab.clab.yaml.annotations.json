@@ -67,7 +67,7 @@
       "id": "stripe1-leaf6",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": -60,
+        "x": -80,
         "y": 100
       }
     },
@@ -75,7 +75,7 @@
       "id": "stripe1-leaf7",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 20,
+        "x": 0,
         "y": 100
       }
     },
@@ -107,7 +107,7 @@
       "id": "stripe2-leaf3",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 440,
+        "x": 460,
         "y": 100
       }
     },
@@ -147,7 +147,7 @@
       "id": "stripe2-leaf8",
       "interfacePattern": "e1-{n}",
       "position": {
-        "x": 960,
+        "x": 920,
         "y": 100
       }
     },

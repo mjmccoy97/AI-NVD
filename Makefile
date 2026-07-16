@@ -1,4 +1,4 @@
-.PHONY: deploy destroy reset status help up bgp-wait test-frontend test-frontend-weka test-backend test-backend-intra test-backend-inter test-all test-continuous test-lldp test-interfaces push-configs
+.PHONY: deploy destroy reset status help up bgp-wait test-frontend test-frontend-weka test-backend test-backend-intra test-backend-inter test-all test-continuous test-lldp test-interfaces push-configs collect-configs
 
 deploy:
 	containerlab deploy -t aifab.clab.yaml --reconfigure
@@ -36,6 +36,7 @@ help:
 	@echo "  make test-all			- Run comprehensive all-to-all connectivity tests on the front and back ends"
 	@echo "  make test-continuous      	- Send continuous traffic on all frontend and backend pairs until Ctrl+C"
 	@echo "  make push-configs         	- Push configurations to all SR Linux devices via JSON-RPC"
+	@echo "  make collect-configs      	- Collect 'info flat' running configs from all SR Linux devices"
 
 
 bgp-wait:
@@ -88,5 +89,9 @@ test-continuous:
 push-configs:
 	@echo "Pushing configurations to all SR Linux devices via JSON-RPC..."
 	@./scripts/push-configs.sh
+
+collect-configs:
+	@echo "Collecting 'info flat' running configs from all SR Linux devices..."
+	@./scripts/collect-configs.sh
 
 

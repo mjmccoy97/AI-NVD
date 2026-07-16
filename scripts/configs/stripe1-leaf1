@@ -1,0 +1,913 @@
+set / interface ethernet-1/1 admin-state enable
+set / interface ethernet-1/1 ethernet flow-control receive false
+set / interface ethernet-1/1 subinterface 0 admin-state enable
+set / interface ethernet-1/1 subinterface 0 ipv6 admin-state enable
+set / interface ethernet-1/1 subinterface 0 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/1 subinterface 0 ipv6 router-advertisement router-role max-advertisement-interval 10
+set / interface ethernet-1/1 subinterface 0 ipv6 router-advertisement router-role min-advertisement-interval 4
+set / interface ethernet-1/2 admin-state enable
+set / interface ethernet-1/2 ethernet flow-control receive false
+set / interface ethernet-1/2 subinterface 0 admin-state enable
+set / interface ethernet-1/2 subinterface 0 ipv6 admin-state enable
+set / interface ethernet-1/2 subinterface 0 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/2 subinterface 0 ipv6 router-advertisement router-role max-advertisement-interval 10
+set / interface ethernet-1/2 subinterface 0 ipv6 router-advertisement router-role min-advertisement-interval 4
+set / interface ethernet-1/3 admin-state enable
+set / interface ethernet-1/3 vlan-tagging true
+set / interface ethernet-1/3 subinterface 100 type routed
+set / interface ethernet-1/3 subinterface 100 description "Backend: dc1-backend Stripe: stripe1"
+set / interface ethernet-1/3 subinterface 100 admin-state enable
+set / interface ethernet-1/3 subinterface 100 ip-mtu 1500
+set / interface ethernet-1/3 subinterface 100 ipv6 admin-state enable
+set / interface ethernet-1/3 subinterface 100 ipv6 address fd00:100:1:1:0:3:0:1/96 primary
+set / interface ethernet-1/3 subinterface 100 ipv6 neighbor-discovery host-route populate dynamic datapath-programming true
+set / interface ethernet-1/3 subinterface 100 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/3 subinterface 100 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/3 subinterface 100 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/3 subinterface 100 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/3 subinterface 100 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/3 subinterface 100 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/3 subinterface 100 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/3 subinterface 100 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/3 subinterface 100 ipv6 router-advertisement router-role router-lifetime 1800
+set / interface ethernet-1/3 subinterface 100 vlan encap single-tagged vlan-id 100
+set / interface ethernet-1/4 admin-state enable
+set / interface ethernet-1/4 vlan-tagging true
+set / interface ethernet-1/4 subinterface 100 type routed
+set / interface ethernet-1/4 subinterface 100 description "Backend: dc1-backend Stripe: stripe1"
+set / interface ethernet-1/4 subinterface 100 admin-state enable
+set / interface ethernet-1/4 subinterface 100 ip-mtu 1500
+set / interface ethernet-1/4 subinterface 100 ipv6 admin-state enable
+set / interface ethernet-1/4 subinterface 100 ipv6 address fd00:100:1:1:0:4:0:1/96 primary
+set / interface ethernet-1/4 subinterface 100 ipv6 neighbor-discovery host-route populate dynamic datapath-programming true
+set / interface ethernet-1/4 subinterface 100 ipv6 router-advertisement router-role admin-state enable
+set / interface ethernet-1/4 subinterface 100 ipv6 router-advertisement router-role current-hop-limit 64
+set / interface ethernet-1/4 subinterface 100 ipv6 router-advertisement router-role managed-configuration-flag false
+set / interface ethernet-1/4 subinterface 100 ipv6 router-advertisement router-role other-configuration-flag false
+set / interface ethernet-1/4 subinterface 100 ipv6 router-advertisement router-role max-advertisement-interval 600
+set / interface ethernet-1/4 subinterface 100 ipv6 router-advertisement router-role min-advertisement-interval 200
+set / interface ethernet-1/4 subinterface 100 ipv6 router-advertisement router-role reachable-time 0
+set / interface ethernet-1/4 subinterface 100 ipv6 router-advertisement router-role retransmit-time 0
+set / interface ethernet-1/4 subinterface 100 ipv6 router-advertisement router-role router-lifetime 1800
+set / interface ethernet-1/4 subinterface 100 vlan encap single-tagged vlan-id 100
+set / interface mgmt0 admin-state enable
+set / interface mgmt0 subinterface 0 admin-state enable
+set / interface mgmt0 subinterface 0 ipv4 admin-state enable
+set / interface mgmt0 subinterface 0 ipv4 dhcp-client trace-options trace [ messages ]
+set / interface mgmt0 subinterface 0 ipv6 admin-state enable
+set / interface mgmt0 subinterface 0 ipv6 dhcp-client trace-options trace [ messages ]
+set / interface system0 subinterface 0 admin-state enable
+set / interface system0 subinterface 0 ipv4 admin-state enable
+set / interface system0 subinterface 0 ipv4 address 192.0.2.9/32
+set / network-instance all-rails type ip-vrf
+set / network-instance all-rails admin-state enable
+set / network-instance all-rails description "Backend: dc1-backend"
+set / network-instance all-rails interface ethernet-1/3.100
+set / network-instance all-rails interface ethernet-1/4.100
+set / network-instance all-rails inter-instance-policies apply-policy import-policy import-routeleak-all-rails-dc1-backend
+set / network-instance all-rails inter-instance-policies apply-policy export-policy export-routeleak-all-rails-dc1-backend
+set / network-instance default type default
+set / network-instance default admin-state enable
+set / network-instance default description "fabric: stripe1 role: leaf"
+set / network-instance default router-id 192.0.2.9
+set / network-instance default ip-forwarding receive-ipv4-check false
+set / network-instance default ip-load-balancing dynamic-load-balancing prefix ::/0
+set / network-instance default interface ethernet-1/1.0
+set / network-instance default interface ethernet-1/2.0
+set / network-instance default interface system0.0
+set / network-instance default protocols bgp admin-state enable
+set / network-instance default protocols bgp autonomous-system 115
+set / network-instance default protocols bgp router-id 192.0.2.9
+set / network-instance default protocols bgp dynamic-neighbors interface ethernet-1/1.0 peer-group bgpgroup-ebgp-backend
+set / network-instance default protocols bgp dynamic-neighbors interface ethernet-1/1.0 allowed-peer-as [ 116 ]
+set / network-instance default protocols bgp dynamic-neighbors interface ethernet-1/2.0 peer-group bgpgroup-ebgp-backend
+set / network-instance default protocols bgp dynamic-neighbors interface ethernet-1/2.0 allowed-peer-as [ 116 ]
+set / network-instance default protocols bgp ebgp-default-policy import-reject-all true
+set / network-instance default protocols bgp ebgp-default-policy export-reject-all true
+set / network-instance default protocols bgp afi-safi evpn admin-state disable
+set / network-instance default protocols bgp afi-safi ipv4-unicast admin-state enable
+set / network-instance default protocols bgp afi-safi ipv4-unicast multipath allow-multiple-as true
+set / network-instance default protocols bgp afi-safi ipv4-unicast multipath ebgp maximum-paths 1
+set / network-instance default protocols bgp afi-safi ipv4-unicast multipath ibgp maximum-paths 1
+set / network-instance default protocols bgp afi-safi ipv4-unicast ipv4-unicast advertise-ipv6-next-hops true
+set / network-instance default protocols bgp afi-safi ipv4-unicast ipv4-unicast receive-ipv6-next-hops true
+set / network-instance default protocols bgp afi-safi ipv6-unicast admin-state disable
+set / network-instance default protocols bgp afi-safi ipv6-unicast multipath allow-multiple-as true
+set / network-instance default protocols bgp afi-safi ipv6-unicast multipath ebgp maximum-paths 2
+set / network-instance default protocols bgp preference ebgp 170
+set / network-instance default protocols bgp preference ibgp 170
+set / network-instance default protocols bgp route-advertisement rapid-withdrawal true
+set / network-instance default protocols bgp route-advertisement wait-for-fib-install false
+set / network-instance default protocols bgp group bgpgroup-ebgp-backend admin-state enable
+set / network-instance default protocols bgp group bgpgroup-ebgp-backend export-policy [ ebgp-isl-export-stripeconnector-backend-dc1-backend ]
+set / network-instance default protocols bgp group bgpgroup-ebgp-backend import-policy [ ebgp-isl-import-policy-backend ]
+set / network-instance default protocols bgp group bgpgroup-ebgp-backend afi-safi evpn admin-state disable
+set / network-instance default protocols bgp group bgpgroup-ebgp-backend afi-safi ipv4-unicast admin-state enable
+set / network-instance default protocols bgp group bgpgroup-ebgp-backend afi-safi ipv4-unicast ipv4-unicast advertise-ipv6-next-hops true
+set / network-instance default protocols bgp group bgpgroup-ebgp-backend afi-safi ipv4-unicast ipv4-unicast receive-ipv6-next-hops true
+set / network-instance default protocols bgp group bgpgroup-ebgp-backend afi-safi ipv6-unicast admin-state enable
+set / network-instance default inter-instance-policies apply-policy import-policy default-import-routeleak-dc1-backend
+set / network-instance default inter-instance-policies apply-policy export-policy default-export-routeleak-dc1-backend
+set / network-instance default aggregate-routes route fd00:100:1:1::/93 admin-state enable
+set / network-instance default aggregate-routes route fd00:100:1:1::/93 summary-only true
+set / network-instance default aggregate-routes route fd00:100:1:1::/93 aggregator address 192.0.2.9
+set / network-instance mgmt type ip-vrf
+set / network-instance mgmt admin-state enable
+set / network-instance mgmt description "Management network instance"
+set / network-instance mgmt interface mgmt0.0
+set / network-instance mgmt protocols linux import-routes true
+set / network-instance mgmt protocols linux export-routes true
+set / network-instance mgmt protocols linux export-neighbors true
+set / qos explicit-congestion-notification
+set / qos queues queue unicast-0 queue-index 0
+set / qos queues queue unicast-3 queue-index 3
+set / qos queues queue unicast-6 queue-index 6
+set / qos queues pfc-queue pfc-3 queue-index 3
+set / qos forwarding-classes forwarding-class fc0 output unicast-queue unicast-0
+set / qos forwarding-classes forwarding-class fc3 output unicast-queue unicast-3
+set / qos forwarding-classes forwarding-class fc6 output unicast-queue unicast-6
+set / qos pfc-mapping-profile fabric-backend pfc-priority 3 pfc-enable true
+set / qos pfc-mapping-profile fabric-backend received-traffic unicast-mapping pfc-queue pfc-3 forwarding-class fc3
+set / qos pfc-mapping-profile fabric-backend received-traffic unicast-mapping pfc-queue pfc-3 pfc-pause-frame-priority 3
+set / qos pfc-mapping-profile fabric-backend received-pfc-pause-frames deadlock enable true
+set / qos pfc-mapping-profile fabric-backend received-pfc-pause-frames deadlock detection-timer 750
+set / qos pfc-mapping-profile fabric-backend received-pfc-pause-frames deadlock recovery-timer 750
+set / qos pfc-mapping-profile fabric-backend received-pfc-pause-frames queue unicast-3 pfc-pause-frame-priority 3
+set / qos classifiers dscp-policy ingress-backend-dc1-backend dscp 0 forwarding-class fc0
+set / qos classifiers dscp-policy ingress-backend-dc1-backend dscp 0 drop-probability low
+set / qos classifiers dscp-policy ingress-backend-dc1-backend dscp 26 forwarding-class fc3
+set / qos classifiers dscp-policy ingress-backend-dc1-backend dscp 26 drop-probability low
+set / qos classifiers dscp-policy ingress-backend-dc1-backend dscp 48 forwarding-class fc6
+set / qos classifiers dscp-policy ingress-backend-dc1-backend dscp 48 drop-probability low
+set / qos scheduler-policies scheduler-policy egress-backend-dc1-backend scheduler 0 priority strict
+set / qos scheduler-policies scheduler-policy egress-backend-dc1-backend scheduler 0 input unicast-6 queue-name unicast-6
+set / qos scheduler-policies scheduler-policy egress-backend-dc1-backend scheduler 0 input unicast-6 peak-rate-percent 80
+set / qos scheduler-policies scheduler-policy egress-backend-dc1-backend scheduler 1 input unicast-0 queue-name unicast-0
+set / qos scheduler-policies scheduler-policy egress-backend-dc1-backend scheduler 1 input unicast-0 peak-rate-percent 10
+set / qos scheduler-policies scheduler-policy egress-backend-dc1-backend scheduler 1 input unicast-0 weight 10
+set / qos scheduler-policies scheduler-policy egress-backend-dc1-backend scheduler 1 input unicast-3 queue-name unicast-3
+set / qos scheduler-policies scheduler-policy egress-backend-dc1-backend scheduler 1 input unicast-3 peak-rate-percent 100
+set / qos scheduler-policies scheduler-policy egress-backend-dc1-backend scheduler 1 input unicast-3 weight 50
+set / qos interfaces interface ethernet-1/1 interface-ref interface ethernet-1/1
+set / qos interfaces interface ethernet-1/1 pfc pfc-mapping-profile fabric-backend
+set / qos interfaces interface ethernet-1/1 pfc pfc-enable true
+set / qos interfaces interface ethernet-1/1 input pfc-buffer-allocation-profile ingress-backend-dc1-backend
+set / qos interfaces interface ethernet-1/1 output buffer-allocation-profile egress-backend-dc1-backend
+set / qos interfaces interface ethernet-1/1 output queues queue unicast-3 queue-management-profile egress-backend-dc1-backend-2
+set / qos interfaces interface ethernet-1/1 output scheduler scheduler-policy egress-backend-dc1-backend
+set / qos interfaces interface ethernet-1/1.0 interface-ref interface ethernet-1/1
+set / qos interfaces interface ethernet-1/1.0 interface-ref subinterface 0
+set / qos interfaces interface ethernet-1/1.0 input classifiers dscp-policy ingress-backend-dc1-backend
+set / qos interfaces interface ethernet-1/2 interface-ref interface ethernet-1/2
+set / qos interfaces interface ethernet-1/2 pfc pfc-mapping-profile fabric-backend
+set / qos interfaces interface ethernet-1/2 pfc pfc-enable true
+set / qos interfaces interface ethernet-1/2 input pfc-buffer-allocation-profile ingress-backend-dc1-backend
+set / qos interfaces interface ethernet-1/2 output buffer-allocation-profile egress-backend-dc1-backend
+set / qos interfaces interface ethernet-1/2 output queues queue unicast-3 queue-management-profile egress-backend-dc1-backend-2
+set / qos interfaces interface ethernet-1/2 output scheduler scheduler-policy egress-backend-dc1-backend
+set / qos interfaces interface ethernet-1/2.0 interface-ref interface ethernet-1/2
+set / qos interfaces interface ethernet-1/2.0 interface-ref subinterface 0
+set / qos interfaces interface ethernet-1/2.0 input classifiers dscp-policy ingress-backend-dc1-backend
+set / qos buffer-management queue-management-profile egress-backend-dc1-backend-2 weight-factor 0
+set / qos buffer-management queue-management-profile egress-backend-dc1-backend-2 wred wred-slope all drop-probability all enable-ecn true min-threshold-percent 30
+set / qos buffer-management queue-management-profile egress-backend-dc1-backend-2 wred wred-slope all drop-probability all enable-ecn true max-threshold-percent 85
+set / qos buffer-management queue-management-profile egress-backend-dc1-backend-2 wred wred-slope all drop-probability all enable-ecn true slope-enabled true
+set / qos buffer-management queue-management-profile egress-backend-dc1-backend-2 wred wred-slope all drop-probability all enable-ecn true max-drop-probability-percent 100
+set / qos buffer-management buffer-allocation-profile egress-backend-dc1-backend queues queue unicast-0 maximum-burst-size 5211064
+set / qos buffer-management buffer-allocation-profile egress-backend-dc1-backend queues queue unicast-3 maximum-burst-size 52110640
+set / qos buffer-management buffer-allocation-profile egress-backend-dc1-backend queues queue unicast-6 maximum-burst-size 52110640
+set / qos buffer-management buffer-allocation-profile ingress-backend-dc1-backend queues pfc-queue pfc-3 maximum-burst-size 52110640
+set / qos linecard 1 forwarding-complex 0 input pfc-buffer-reservation 10
+set / routing-policy prefix-set prefixset-backend-dc1-backend-stripeconnector-backend prefix 192.0.2.0/24 mask-length-range 32..32
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:1:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:1:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:2:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:2:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:3:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:3:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:4:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:4:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:5:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:5:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:6:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:6:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:7:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:7:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:8:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:100:8:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:9:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:9:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:10:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:10:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:11:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:11:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:12:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:12:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:13:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:13:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:14:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:14:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:15:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:15:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:16:1:0:3::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-export-all-rails-dc1-backend prefix fd00:200:16:1:0:4::/96 mask-length-range 96..96
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:100:1:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:100:2:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:100:3:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:100:4:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:100:5:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:100:6:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:100:7:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:100:8:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:200:9:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:200:10:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:200:11:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:200:12:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:200:13:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:200:14:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:200:15:1::/93 mask-length-range 93..93
+set / routing-policy prefix-set prefixset-routeleak-import-all-rails-dc1-backend prefix fd00:200:16:1::/93 mask-length-range 93..93
+set / routing-policy policy default-export-routeleak-dc1-backend default-action policy-result accept
+set / routing-policy policy default-import-routeleak-dc1-backend default-action policy-result accept
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend default-action policy-result reject
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 10 match protocol local
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 10 match prefix prefix-set prefixset-backend-dc1-backend-stripeconnector-backend
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 10 action policy-result accept
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 10 action bgp local-preference set 100
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 15 match protocol bgp
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 15 action policy-result accept
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 15 action bgp local-preference set 100
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 20 match protocol aggregate
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 20 action policy-result accept
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 20 action bgp local-preference set 100
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 25 match bgp evpn route-type [ 1 ]
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 25 action policy-result accept
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 25 action bgp local-preference set 100
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 30 match bgp evpn route-type [ 2 ]
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 30 action policy-result accept
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 30 action bgp local-preference set 100
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 35 match bgp evpn route-type [ 3 ]
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 35 action policy-result accept
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 35 action bgp local-preference set 100
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 40 match bgp evpn route-type [ 4 ]
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 40 action policy-result accept
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 40 action bgp local-preference set 100
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 45 match bgp evpn route-type [ 5 ]
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 45 action policy-result accept
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 45 action bgp local-preference set 100
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 60 match prefix prefix-set prefixset-routeleak-import-all-rails-dc1-backend
+set / routing-policy policy ebgp-isl-export-stripeconnector-backend-dc1-backend statement 60 action policy-result accept
+set / routing-policy policy ebgp-isl-import-policy-backend default-action policy-result reject
+set / routing-policy policy ebgp-isl-import-policy-backend statement 10 match protocol bgp
+set / routing-policy policy ebgp-isl-import-policy-backend statement 10 action policy-result accept
+set / routing-policy policy ebgp-isl-import-policy-backend statement 10 action bgp local-preference set 100
+set / routing-policy policy export-routeleak-all-rails-dc1-backend default-action policy-result reject
+set / routing-policy policy export-routeleak-all-rails-dc1-backend statement 10 match protocol local
+set / routing-policy policy export-routeleak-all-rails-dc1-backend statement 10 match prefix prefix-set prefixset-routeleak-export-all-rails-dc1-backend
+set / routing-policy policy export-routeleak-all-rails-dc1-backend statement 10 action policy-result accept
+set / routing-policy policy export-routeleak-all-rails-dc1-backend statement 20 match protocol arp-nd
+set / routing-policy policy export-routeleak-all-rails-dc1-backend statement 20 action policy-result accept
+set / routing-policy policy import-routeleak-all-rails-dc1-backend default-action policy-result reject
+set / routing-policy policy import-routeleak-all-rails-dc1-backend statement 10 match protocol bgp
+set / routing-policy policy import-routeleak-all-rails-dc1-backend statement 10 match prefix prefix-set prefixset-routeleak-import-all-rails-dc1-backend
+set / routing-policy policy import-routeleak-all-rails-dc1-backend statement 10 action policy-result accept
+set / acl acl-filter cpm type ipv4 statistics-per-entry true
+set / acl acl-filter cpm type ipv4 entry 10 description "Accept incoming ICMP unreachable messages"
+set / acl acl-filter cpm type ipv4 entry 10 match ipv4 protocol icmp
+set / acl acl-filter cpm type ipv4 entry 10 match ipv4 icmp type dest-unreachable
+set / acl acl-filter cpm type ipv4 entry 10 action accept rate-limit system-cpu-policer icmp
+set / acl acl-filter cpm type ipv4 entry 20 description "Accept incoming ICMP time-exceeded messages"
+set / acl acl-filter cpm type ipv4 entry 20 match ipv4 protocol icmp
+set / acl acl-filter cpm type ipv4 entry 20 match ipv4 icmp type time-exceeded
+set / acl acl-filter cpm type ipv4 entry 20 action accept rate-limit system-cpu-policer icmp
+set / acl acl-filter cpm type ipv4 entry 40 description "Accept incoming ICMP echo messages"
+set / acl acl-filter cpm type ipv4 entry 40 match ipv4 protocol icmp
+set / acl acl-filter cpm type ipv4 entry 40 match ipv4 icmp type echo
+set / acl acl-filter cpm type ipv4 entry 40 action accept rate-limit system-cpu-policer icmp
+set / acl acl-filter cpm type ipv4 entry 50 description "Accept incoming ICMP echo-reply messages"
+set / acl acl-filter cpm type ipv4 entry 50 match ipv4 protocol icmp
+set / acl acl-filter cpm type ipv4 entry 50 match ipv4 icmp type echo-reply
+set / acl acl-filter cpm type ipv4 entry 50 action accept rate-limit system-cpu-policer icmp
+set / acl acl-filter cpm type ipv4 entry 60 description "Accept incoming SSH when the other host initiates the TCP connection"
+set / acl acl-filter cpm type ipv4 entry 60 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 60 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 60 match transport destination-port value 22
+set / acl acl-filter cpm type ipv4 entry 60 action accept
+set / acl acl-filter cpm type ipv4 entry 70 description "Accept incoming SSH when this router initiates the TCP connection"
+set / acl acl-filter cpm type ipv4 entry 70 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 70 match transport source-port operator eq
+set / acl acl-filter cpm type ipv4 entry 70 match transport source-port value 22
+set / acl acl-filter cpm type ipv4 entry 70 action accept
+set / acl acl-filter cpm type ipv4 entry 88 description "Containerlab-added rule: Accept incoming Telnet when the other host initiates the TCP connection"
+set / acl acl-filter cpm type ipv4 entry 88 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 88 match transport source-port operator eq
+set / acl acl-filter cpm type ipv4 entry 88 match transport source-port value 23
+set / acl acl-filter cpm type ipv4 entry 88 action accept
+set / acl acl-filter cpm type ipv4 entry 98 description "Containerlab-added rule: Accept incoming Telnet when this router initiates the TCP connection"
+set / acl acl-filter cpm type ipv4 entry 98 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 98 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 98 match transport destination-port value 23
+set / acl acl-filter cpm type ipv4 entry 98 action accept
+set / acl acl-filter cpm type ipv4 entry 100 description "Accept incoming TACACS+ when the other host initiates the TCP connection"
+set / acl acl-filter cpm type ipv4 entry 100 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 100 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 100 match transport destination-port value 49
+set / acl acl-filter cpm type ipv4 entry 100 action accept
+set / acl acl-filter cpm type ipv4 entry 110 description "Accept incoming TACACS+ when this router initiates the TCP connection"
+set / acl acl-filter cpm type ipv4 entry 110 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 110 match transport source-port operator eq
+set / acl acl-filter cpm type ipv4 entry 110 match transport source-port value 49
+set / acl acl-filter cpm type ipv4 entry 110 action accept
+set / acl acl-filter cpm type ipv4 entry 120 description "Accept incoming DNS response messages"
+set / acl acl-filter cpm type ipv4 entry 120 match ipv4 protocol udp
+set / acl acl-filter cpm type ipv4 entry 120 match transport source-port operator eq
+set / acl acl-filter cpm type ipv4 entry 120 match transport source-port value 53
+set / acl acl-filter cpm type ipv4 entry 120 action accept
+set / acl acl-filter cpm type ipv4 entry 130 description "Accept incoming DHCP messages targeted for BOOTP/DHCP client"
+set / acl acl-filter cpm type ipv4 entry 130 match ipv4 protocol udp
+set / acl acl-filter cpm type ipv4 entry 130 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 130 match transport destination-port value 68
+set / acl acl-filter cpm type ipv4 entry 130 action accept
+set / acl acl-filter cpm type ipv4 entry 158 description "Containerlab-added rule: Accept incoming HTTP(JSON-RPC) when the other host initiates the TCP connection"
+set / acl acl-filter cpm type ipv4 entry 158 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 158 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 158 match transport destination-port value 80
+set / acl acl-filter cpm type ipv4 entry 158 action accept
+set / acl acl-filter cpm type ipv4 entry 160 description "Accept incoming HTTP(JSON-RPC) when this router initiates the TCP connection"
+set / acl acl-filter cpm type ipv4 entry 160 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 160 match transport source-port operator eq
+set / acl acl-filter cpm type ipv4 entry 160 match transport source-port value 80
+set / acl acl-filter cpm type ipv4 entry 160 action accept
+set / acl acl-filter cpm type ipv4 entry 170 description "Accept incoming NTP messages from servers"
+set / acl acl-filter cpm type ipv4 entry 170 match ipv4 protocol udp
+set / acl acl-filter cpm type ipv4 entry 170 match transport source-port operator eq
+set / acl acl-filter cpm type ipv4 entry 170 match transport source-port value 123
+set / acl acl-filter cpm type ipv4 entry 170 action accept
+set / acl acl-filter cpm type ipv4 entry 180 description "Accept incoming SNMP GET/GETNEXT messages from servers"
+set / acl acl-filter cpm type ipv4 entry 180 match ipv4 protocol udp
+set / acl acl-filter cpm type ipv4 entry 180 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 180 match transport destination-port value 161
+set / acl acl-filter cpm type ipv4 entry 180 action accept
+set / acl acl-filter cpm type ipv4 entry 190 description "Accept incoming BGP when the other router initiates the TCP connection"
+set / acl acl-filter cpm type ipv4 entry 190 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 190 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 190 match transport destination-port value 179
+set / acl acl-filter cpm type ipv4 entry 190 action accept
+set / acl acl-filter cpm type ipv4 entry 200 description "Accept incoming BGP when this router initiates the TCP connection"
+set / acl acl-filter cpm type ipv4 entry 200 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 200 match transport source-port operator eq
+set / acl acl-filter cpm type ipv4 entry 200 match transport source-port value 179
+set / acl acl-filter cpm type ipv4 entry 200 action accept
+set / acl acl-filter cpm type ipv4 entry 210 description "Accept incoming HTTPS(JSON-RPC) when the other host initiates the TCP connection"
+set / acl acl-filter cpm type ipv4 entry 210 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 210 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 210 match transport destination-port value 443
+set / acl acl-filter cpm type ipv4 entry 210 action accept
+set / acl acl-filter cpm type ipv4 entry 220 description "Accept incoming HTTPS(JSON-RPC) when this router initiates the TCP connection"
+set / acl acl-filter cpm type ipv4 entry 220 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 220 match transport source-port operator eq
+set / acl acl-filter cpm type ipv4 entry 220 match transport source-port value 443
+set / acl acl-filter cpm type ipv4 entry 220 action accept
+set / acl acl-filter cpm type ipv4 entry 230 description "Accept incoming single-hop BFD session messages"
+set / acl acl-filter cpm type ipv4 entry 230 match ipv4 protocol udp
+set / acl acl-filter cpm type ipv4 entry 230 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 230 match transport destination-port value 3784
+set / acl acl-filter cpm type ipv4 entry 230 action accept
+set / acl acl-filter cpm type ipv4 entry 240 description "Accept incoming multi-hop BFD session messages"
+set / acl acl-filter cpm type ipv4 entry 240 match ipv4 protocol udp
+set / acl acl-filter cpm type ipv4 entry 240 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 240 match transport destination-port value 4784
+set / acl acl-filter cpm type ipv4 entry 240 action accept
+set / acl acl-filter cpm type ipv4 entry 250 description "Accept incoming uBFD session messages"
+set / acl acl-filter cpm type ipv4 entry 250 match ipv4 protocol udp
+set / acl acl-filter cpm type ipv4 entry 250 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 250 match transport destination-port value 6784
+set / acl acl-filter cpm type ipv4 entry 250 action accept
+set / acl acl-filter cpm type ipv4 entry 260 description "Accept incoming gRPC messages when the other host initiates the TCP connection"
+set / acl acl-filter cpm type ipv4 entry 260 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 260 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 260 match transport destination-port value 57400
+set / acl acl-filter cpm type ipv4 entry 260 action accept
+set / acl acl-filter cpm type ipv4 entry 270 description "Accept incoming UDP traceroute messages"
+set / acl acl-filter cpm type ipv4 entry 270 match ipv4 protocol udp
+set / acl acl-filter cpm type ipv4 entry 270 match transport destination-port range start 33434
+set / acl acl-filter cpm type ipv4 entry 270 match transport destination-port range end 33464
+set / acl acl-filter cpm type ipv4 entry 270 action accept
+set / acl acl-filter cpm type ipv4 entry 290 description "Accept incoming OSPF messages"
+set / acl acl-filter cpm type ipv4 entry 290 match ipv4 protocol 89
+set / acl acl-filter cpm type ipv4 entry 290 action accept
+set / acl acl-filter cpm type ipv4 entry 300 description "Accept incoming DHCP relay messages targeted for BOOTP/DHCP server"
+set / acl acl-filter cpm type ipv4 entry 300 match ipv4 protocol udp
+set / acl acl-filter cpm type ipv4 entry 300 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 300 match transport destination-port value 67
+set / acl acl-filter cpm type ipv4 entry 300 action accept
+set / acl acl-filter cpm type ipv4 entry 310 description "Accept ICMP fragment packets"
+set / acl acl-filter cpm type ipv4 entry 310 match ipv4 fragment true
+set / acl acl-filter cpm type ipv4 entry 310 match ipv4 protocol icmp
+set / acl acl-filter cpm type ipv4 entry 310 action accept rate-limit system-cpu-policer icmp
+set / acl acl-filter cpm type ipv4 entry 320 description "Accept incoming LDP packets"
+set / acl acl-filter cpm type ipv4 entry 320 match ipv4 protocol udp
+set / acl acl-filter cpm type ipv4 entry 320 match transport source-port operator eq
+set / acl acl-filter cpm type ipv4 entry 320 match transport source-port value 646
+set / acl acl-filter cpm type ipv4 entry 320 action accept
+set / acl acl-filter cpm type ipv4 entry 330 description "Accept incoming LDP packets with source-port 646"
+set / acl acl-filter cpm type ipv4 entry 330 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 330 match transport source-port operator eq
+set / acl acl-filter cpm type ipv4 entry 330 match transport source-port value 646
+set / acl acl-filter cpm type ipv4 entry 330 action accept
+set / acl acl-filter cpm type ipv4 entry 340 description "Accept incoming LDP packets with destination-port 646"
+set / acl acl-filter cpm type ipv4 entry 340 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 340 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 340 match transport destination-port value 646
+set / acl acl-filter cpm type ipv4 entry 340 action accept
+set / acl acl-filter cpm type ipv4 entry 355 description "Containerlab-added rule: Accept incoming gRPC over port 50052 for the eda-discovery gRPC server"
+set / acl acl-filter cpm type ipv4 entry 355 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 355 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 355 match transport destination-port value 50052
+set / acl acl-filter cpm type ipv4 entry 355 action accept
+set / acl acl-filter cpm type ipv4 entry 356 description "Containerlab-added rule: Accept incoming gRPC over port 57410 for the eda-mgmt gRPC server"
+set / acl acl-filter cpm type ipv4 entry 356 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 356 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 356 match transport destination-port value 57410
+set / acl acl-filter cpm type ipv4 entry 356 action accept
+set / acl acl-filter cpm type ipv4 entry 357 description "Containerlab-added rule: Accept incoming gRPC over port 57411 for the eda-mgmt gRPC server"
+set / acl acl-filter cpm type ipv4 entry 357 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 357 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 357 match transport destination-port value 57411
+set / acl acl-filter cpm type ipv4 entry 357 action accept
+set / acl acl-filter cpm type ipv4 entry 358 description "Containerlab-added rule: Accept incoming gRPC over port 57401 for the insecure-mgmt gRPC server"
+set / acl acl-filter cpm type ipv4 entry 358 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 358 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 358 match transport destination-port value 57401
+set / acl acl-filter cpm type ipv4 entry 358 action accept
+set / acl acl-filter cpm type ipv4 entry 370 description "Accept incoming IGMP packets"
+set / acl acl-filter cpm type ipv4 entry 370 match ipv4 protocol igmp
+set / acl acl-filter cpm type ipv4 entry 370 action accept
+set / acl acl-filter cpm type ipv4 entry 380 description "Accept incoming PIM packets"
+set / acl acl-filter cpm type ipv4 entry 380 match ipv4 protocol pim
+set / acl acl-filter cpm type ipv4 entry 380 action accept
+set / acl acl-filter cpm type ipv4 entry 390 description "Accept incoming RADIUS AAA packets"
+set / acl acl-filter cpm type ipv4 entry 390 match ipv4 protocol udp
+set / acl acl-filter cpm type ipv4 entry 390 match transport source-port range start 1812
+set / acl acl-filter cpm type ipv4 entry 390 match transport source-port range end 1813
+set / acl acl-filter cpm type ipv4 entry 390 action accept
+set / acl acl-filter cpm type ipv4 entry 400 description "Accept incoming SSH connections on the default NETCONF port 830"
+set / acl acl-filter cpm type ipv4 entry 400 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 400 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 400 match transport destination-port value 830
+set / acl acl-filter cpm type ipv4 entry 400 action accept
+set / acl acl-filter cpm type ipv4 entry 410 description "Accept incoming PTP messages with destination-ports 319 and 320"
+set / acl acl-filter cpm type ipv4 entry 410 match ipv4 protocol udp
+set / acl acl-filter cpm type ipv4 entry 410 match transport destination-port range start 319
+set / acl acl-filter cpm type ipv4 entry 410 match transport destination-port range end 320
+set / acl acl-filter cpm type ipv4 entry 410 action accept
+set / acl acl-filter cpm type ipv4 entry 420 description "Accept incoming PCEP packets with destination-port 4189"
+set / acl acl-filter cpm type ipv4 entry 420 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 420 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 420 match transport destination-port value 4189
+set / acl acl-filter cpm type ipv4 entry 420 action accept
+set / acl acl-filter cpm type ipv4 entry 430 description "Accept incoming SBFD session messages"
+set / acl acl-filter cpm type ipv4 entry 430 match ipv4 protocol udp
+set / acl acl-filter cpm type ipv4 entry 430 match transport source-port operator eq
+set / acl acl-filter cpm type ipv4 entry 430 match transport source-port value 7784
+set / acl acl-filter cpm type ipv4 entry 430 action accept
+set / acl acl-filter cpm type ipv4 entry 440 description "Accept incoming SBFD session messages"
+set / acl acl-filter cpm type ipv4 entry 440 match ipv4 protocol udp
+set / acl acl-filter cpm type ipv4 entry 440 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 440 match transport destination-port value 7784
+set / acl acl-filter cpm type ipv4 entry 440 action accept
+set / acl acl-filter cpm type ipv4 entry 450 description "Accept incoming LSP MPLS Echo requests and replies"
+set / acl acl-filter cpm type ipv4 entry 450 match ipv4 protocol udp
+set / acl acl-filter cpm type ipv4 entry 450 match transport source-port operator eq
+set / acl acl-filter cpm type ipv4 entry 450 match transport source-port value 3503
+set / acl acl-filter cpm type ipv4 entry 450 action accept
+set / acl acl-filter cpm type ipv4 entry 460 description "Accept incoming LSP MPLS Echo requests and replies"
+set / acl acl-filter cpm type ipv4 entry 460 match ipv4 protocol udp
+set / acl acl-filter cpm type ipv4 entry 460 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 460 match transport destination-port value 3503
+set / acl acl-filter cpm type ipv4 entry 460 action accept
+set / acl acl-filter cpm type ipv4 entry 470 description "Accept incoming TWAMP Control connection"
+set / acl acl-filter cpm type ipv4 entry 470 match ipv4 protocol tcp
+set / acl acl-filter cpm type ipv4 entry 470 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv4 entry 470 match transport destination-port value 862
+set / acl acl-filter cpm type ipv4 entry 470 action accept
+set / acl acl-filter cpm type ipv4 entry 550 description "Accept incoming VRRP Control packets"
+set / acl acl-filter cpm type ipv4 entry 550 match ipv4 protocol vrrp
+set / acl acl-filter cpm type ipv4 entry 550 action accept
+set / acl acl-filter cpm type ipv4 entry 1000 description "Drop all else"
+set / acl acl-filter cpm type ipv4 entry 1000 action log true
+set / acl acl-filter cpm type ipv4 entry 1000 action drop
+set / acl acl-filter cpm type ipv6 statistics-per-entry true
+set / acl acl-filter cpm type ipv6 entry 10 description "Accept incoming ICMPv6 unreachable messages"
+set / acl acl-filter cpm type ipv6 entry 10 match ipv6 next-header icmp6
+set / acl acl-filter cpm type ipv6 entry 10 match ipv6 icmp6 type dest-unreachable
+set / acl acl-filter cpm type ipv6 entry 10 action accept rate-limit system-cpu-policer icmp
+set / acl acl-filter cpm type ipv6 entry 20 description "Accept incoming ICMPv6 packet-too-big messages"
+set / acl acl-filter cpm type ipv6 entry 20 match ipv6 next-header icmp6
+set / acl acl-filter cpm type ipv6 entry 20 match ipv6 icmp6 type packet-too-big
+set / acl acl-filter cpm type ipv6 entry 20 action accept rate-limit system-cpu-policer icmp
+set / acl acl-filter cpm type ipv6 entry 30 description "Accept incoming ICMPv6 time-exceeded messages"
+set / acl acl-filter cpm type ipv6 entry 30 match ipv6 next-header icmp6
+set / acl acl-filter cpm type ipv6 entry 30 match ipv6 icmp6 type time-exceeded
+set / acl acl-filter cpm type ipv6 entry 30 action accept rate-limit system-cpu-policer icmp
+set / acl acl-filter cpm type ipv6 entry 50 description "Accept incoming ICMPv6 echo-request messages"
+set / acl acl-filter cpm type ipv6 entry 50 match ipv6 next-header icmp6
+set / acl acl-filter cpm type ipv6 entry 50 match ipv6 icmp6 type echo-request
+set / acl acl-filter cpm type ipv6 entry 50 action accept rate-limit system-cpu-policer icmp
+set / acl acl-filter cpm type ipv6 entry 60 description "Accept incoming ICMPv6 echo-reply messages"
+set / acl acl-filter cpm type ipv6 entry 60 match ipv6 next-header icmp6
+set / acl acl-filter cpm type ipv6 entry 60 match ipv6 icmp6 type echo-reply
+set / acl acl-filter cpm type ipv6 entry 60 action accept rate-limit system-cpu-policer icmp
+set / acl acl-filter cpm type ipv6 entry 70 description "Accept incoming ICMPv6 router-advertisement messages"
+set / acl acl-filter cpm type ipv6 entry 70 match ipv6 next-header icmp6
+set / acl acl-filter cpm type ipv6 entry 70 match ipv6 icmp6 type router-advertise
+set / acl acl-filter cpm type ipv6 entry 70 action accept rate-limit system-cpu-policer icmp
+set / acl acl-filter cpm type ipv6 entry 75 description "Accept incoming ICMPv6 router-solicit messages"
+set / acl acl-filter cpm type ipv6 entry 75 match ipv6 next-header icmp6
+set / acl acl-filter cpm type ipv6 entry 75 match ipv6 icmp6 type router-solicit
+set / acl acl-filter cpm type ipv6 entry 75 action accept rate-limit system-cpu-policer icmp
+set / acl acl-filter cpm type ipv6 entry 80 description "Accept incoming ICMPv6 neighbor-solicitation messages"
+set / acl acl-filter cpm type ipv6 entry 80 match ipv6 next-header icmp6
+set / acl acl-filter cpm type ipv6 entry 80 match ipv6 icmp6 type neighbor-solicit
+set / acl acl-filter cpm type ipv6 entry 80 action accept rate-limit system-cpu-policer icmp
+set / acl acl-filter cpm type ipv6 entry 90 description "Accept incoming ICMPv6 neighbor-advertisement messages"
+set / acl acl-filter cpm type ipv6 entry 90 match ipv6 next-header icmp6
+set / acl acl-filter cpm type ipv6 entry 90 match ipv6 icmp6 type neighbor-advertise
+set / acl acl-filter cpm type ipv6 entry 90 action accept rate-limit system-cpu-policer icmp
+set / acl acl-filter cpm type ipv6 entry 100 description "Accept incoming SSH when the other host initiates the TCP connection"
+set / acl acl-filter cpm type ipv6 entry 100 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 100 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 100 match transport destination-port value 22
+set / acl acl-filter cpm type ipv6 entry 100 action accept
+set / acl acl-filter cpm type ipv6 entry 110 description "Accept incoming SSH when this router initiates the TCP connection"
+set / acl acl-filter cpm type ipv6 entry 110 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 110 match transport source-port operator eq
+set / acl acl-filter cpm type ipv6 entry 110 match transport source-port value 22
+set / acl acl-filter cpm type ipv6 entry 110 action accept
+set / acl acl-filter cpm type ipv6 entry 128 description "Containerlab-added rule: Accept incoming Telnet when the other host initiates the TCP connection"
+set / acl acl-filter cpm type ipv6 entry 128 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 128 match transport source-port operator eq
+set / acl acl-filter cpm type ipv6 entry 128 match transport source-port value 23
+set / acl acl-filter cpm type ipv6 entry 128 action accept
+set / acl acl-filter cpm type ipv6 entry 138 description "Containerlab-added rule: Accept incoming Telnet when this router initiates the TCP connection"
+set / acl acl-filter cpm type ipv6 entry 138 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 138 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 138 match transport destination-port value 23
+set / acl acl-filter cpm type ipv6 entry 138 action accept
+set / acl acl-filter cpm type ipv6 entry 140 description "Accept incoming TACACS+ when the other host initiates the TCP connection"
+set / acl acl-filter cpm type ipv6 entry 140 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 140 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 140 match transport destination-port value 49
+set / acl acl-filter cpm type ipv6 entry 140 action accept
+set / acl acl-filter cpm type ipv6 entry 150 description "Accept incoming TACACS+ when this router initiates the TCP connection"
+set / acl acl-filter cpm type ipv6 entry 150 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 150 match transport source-port operator eq
+set / acl acl-filter cpm type ipv6 entry 150 match transport source-port value 49
+set / acl acl-filter cpm type ipv6 entry 150 action accept
+set / acl acl-filter cpm type ipv6 entry 160 description "Accept incoming DNS response messages"
+set / acl acl-filter cpm type ipv6 entry 160 match ipv6 next-header udp
+set / acl acl-filter cpm type ipv6 entry 160 match transport source-port operator eq
+set / acl acl-filter cpm type ipv6 entry 160 match transport source-port value 53
+set / acl acl-filter cpm type ipv6 entry 160 action accept
+set / acl acl-filter cpm type ipv6 entry 188 description "Containerlab-added rule: Accept incoming HTTP(JSON-RPC) when the other host initiates the TCP connection"
+set / acl acl-filter cpm type ipv6 entry 188 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 188 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 188 match transport destination-port value 80
+set / acl acl-filter cpm type ipv6 entry 188 action accept
+set / acl acl-filter cpm type ipv6 entry 190 description "Accept incoming HTTP(JSON-RPC) when this router initiates the TCP connection"
+set / acl acl-filter cpm type ipv6 entry 190 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 190 match transport source-port operator eq
+set / acl acl-filter cpm type ipv6 entry 190 match transport source-port value 80
+set / acl acl-filter cpm type ipv6 entry 190 action accept
+set / acl acl-filter cpm type ipv6 entry 200 description "Accept incoming NTP messages from servers"
+set / acl acl-filter cpm type ipv6 entry 200 match ipv6 next-header udp
+set / acl acl-filter cpm type ipv6 entry 200 match transport source-port operator eq
+set / acl acl-filter cpm type ipv6 entry 200 match transport source-port value 123
+set / acl acl-filter cpm type ipv6 entry 200 action accept
+set / acl acl-filter cpm type ipv6 entry 210 description "Accept incoming SNMP GET/GETNEXT messages from servers"
+set / acl acl-filter cpm type ipv6 entry 210 match ipv6 next-header udp
+set / acl acl-filter cpm type ipv6 entry 210 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 210 match transport destination-port value 161
+set / acl acl-filter cpm type ipv6 entry 210 action accept
+set / acl acl-filter cpm type ipv6 entry 220 description "Accept incoming BGP when the other router initiates the TCP connection"
+set / acl acl-filter cpm type ipv6 entry 220 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 220 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 220 match transport destination-port value 179
+set / acl acl-filter cpm type ipv6 entry 220 action accept
+set / acl acl-filter cpm type ipv6 entry 230 description "Accept incoming BGP when this router initiates the TCP connection"
+set / acl acl-filter cpm type ipv6 entry 230 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 230 match transport source-port operator eq
+set / acl acl-filter cpm type ipv6 entry 230 match transport source-port value 179
+set / acl acl-filter cpm type ipv6 entry 230 action accept
+set / acl acl-filter cpm type ipv6 entry 240 description "Accept incoming HTTPS(JSON-RPC) when the other host initiates the TCP connection"
+set / acl acl-filter cpm type ipv6 entry 240 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 240 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 240 match transport destination-port value 443
+set / acl acl-filter cpm type ipv6 entry 240 action accept
+set / acl acl-filter cpm type ipv6 entry 250 description "Accept incoming HTTPS(JSON-RPC) when this router initiates the TCP connection"
+set / acl acl-filter cpm type ipv6 entry 250 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 250 match transport source-port operator eq
+set / acl acl-filter cpm type ipv6 entry 250 match transport source-port value 443
+set / acl acl-filter cpm type ipv6 entry 250 action accept
+set / acl acl-filter cpm type ipv6 entry 260 description "Accept incoming DHCPv6 client messages"
+set / acl acl-filter cpm type ipv6 entry 260 match ipv6 next-header udp
+set / acl acl-filter cpm type ipv6 entry 260 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 260 match transport destination-port value 546
+set / acl acl-filter cpm type ipv6 entry 260 action accept
+set / acl acl-filter cpm type ipv6 entry 270 description "Accept incoming single-hop BFD session messages"
+set / acl acl-filter cpm type ipv6 entry 270 match ipv6 next-header udp
+set / acl acl-filter cpm type ipv6 entry 270 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 270 match transport destination-port value 3784
+set / acl acl-filter cpm type ipv6 entry 270 action accept
+set / acl acl-filter cpm type ipv6 entry 280 description "Accept incoming multi-hop BFD session messages"
+set / acl acl-filter cpm type ipv6 entry 280 match ipv6 next-header udp
+set / acl acl-filter cpm type ipv6 entry 280 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 280 match transport destination-port value 4784
+set / acl acl-filter cpm type ipv6 entry 280 action accept
+set / acl acl-filter cpm type ipv6 entry 290 description "Accept incoming uBFD session messages"
+set / acl acl-filter cpm type ipv6 entry 290 match ipv6 next-header udp
+set / acl acl-filter cpm type ipv6 entry 290 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 290 match transport destination-port value 6784
+set / acl acl-filter cpm type ipv6 entry 290 action accept
+set / acl acl-filter cpm type ipv6 entry 300 description "Accept incoming gRPC messages when the other host initiates the TCP connection"
+set / acl acl-filter cpm type ipv6 entry 300 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 300 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 300 match transport destination-port value 57400
+set / acl acl-filter cpm type ipv6 entry 300 action accept
+set / acl acl-filter cpm type ipv6 entry 310 description "Accept incoming UDP traceroute messages"
+set / acl acl-filter cpm type ipv6 entry 310 match ipv6 next-header udp
+set / acl acl-filter cpm type ipv6 entry 310 match transport destination-port range start 33434
+set / acl acl-filter cpm type ipv6 entry 310 match transport destination-port range end 33464
+set / acl acl-filter cpm type ipv6 entry 310 action accept
+set / acl acl-filter cpm type ipv6 entry 320 description "Accept incoming IPV6 hop-in-hop messages"
+set / acl acl-filter cpm type ipv6 entry 320 match ipv6 next-header 0
+set / acl acl-filter cpm type ipv6 entry 320 action accept
+set / acl acl-filter cpm type ipv6 entry 340 description "Accept incoming OSPF messages"
+set / acl acl-filter cpm type ipv6 entry 340 match ipv6 next-header 89
+set / acl acl-filter cpm type ipv6 entry 340 action accept
+set / acl acl-filter cpm type ipv6 entry 350 description "Accept incoming DHCPv6 relay messages"
+set / acl acl-filter cpm type ipv6 entry 350 match ipv6 next-header udp
+set / acl acl-filter cpm type ipv6 entry 350 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 350 match transport destination-port value 547
+set / acl acl-filter cpm type ipv6 entry 350 action accept
+set / acl acl-filter cpm type ipv6 entry 365 description "Containerlab-added rule: Accept incoming gRPC over port 50052 for the eda-discovery gRPC server"
+set / acl acl-filter cpm type ipv6 entry 365 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 365 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 365 match transport destination-port value 50052
+set / acl acl-filter cpm type ipv6 entry 365 action accept
+set / acl acl-filter cpm type ipv6 entry 366 description "Containerlab-added rule: Accept incoming gRPC over port 57410 for the eda-mgmt gRPC server"
+set / acl acl-filter cpm type ipv6 entry 366 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 366 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 366 match transport destination-port value 57410
+set / acl acl-filter cpm type ipv6 entry 366 action accept
+set / acl acl-filter cpm type ipv6 entry 367 description "Containerlab-added rule: Accept incoming gRPC over port 57411 for the eda-mgmt gRPC server"
+set / acl acl-filter cpm type ipv6 entry 367 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 367 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 367 match transport destination-port value 57411
+set / acl acl-filter cpm type ipv6 entry 367 action accept
+set / acl acl-filter cpm type ipv6 entry 368 description "Containerlab-added rule: Accept incoming gRPC over port 57401 for the insecure-mgmt gRPC server"
+set / acl acl-filter cpm type ipv6 entry 368 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 368 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 368 match transport destination-port value 57401
+set / acl acl-filter cpm type ipv6 entry 368 action accept
+set / acl acl-filter cpm type ipv6 entry 380 description "Accept incoming MLDv1 report messages"
+set / acl acl-filter cpm type ipv6 entry 380 match ipv6 next-header icmp6
+set / acl acl-filter cpm type ipv6 entry 380 match ipv6 icmp6 type mld-report
+set / acl acl-filter cpm type ipv6 entry 380 action accept
+set / acl acl-filter cpm type ipv6 entry 390 description "Accept incoming MLDv2 report messages"
+set / acl acl-filter cpm type ipv6 entry 390 match ipv6 next-header icmp6
+set / acl acl-filter cpm type ipv6 entry 390 match ipv6 icmp6 type mld-v2
+set / acl acl-filter cpm type ipv6 entry 390 action accept
+set / acl acl-filter cpm type ipv6 entry 400 description "Accept incoming MLDv1 done messages"
+set / acl acl-filter cpm type ipv6 entry 400 match ipv6 next-header icmp6
+set / acl acl-filter cpm type ipv6 entry 400 match ipv6 icmp6 type mld-done
+set / acl acl-filter cpm type ipv6 entry 400 action accept
+set / acl acl-filter cpm type ipv6 entry 410 description "Accept incoming MLD query messages"
+set / acl acl-filter cpm type ipv6 entry 410 match ipv6 next-header icmp6
+set / acl acl-filter cpm type ipv6 entry 410 match ipv6 icmp6 type mld-query
+set / acl acl-filter cpm type ipv6 entry 410 action accept
+set / acl acl-filter cpm type ipv6 entry 420 description "Accept incoming PIM messages"
+set / acl acl-filter cpm type ipv6 entry 420 match ipv6 next-header pim
+set / acl acl-filter cpm type ipv6 entry 420 action accept
+set / acl acl-filter cpm type ipv6 entry 430 description "Accept incoming RADIUS AAA messages"
+set / acl acl-filter cpm type ipv6 entry 430 match ipv6 next-header udp
+set / acl acl-filter cpm type ipv6 entry 430 match transport source-port range start 1812
+set / acl acl-filter cpm type ipv6 entry 430 match transport source-port range end 1813
+set / acl acl-filter cpm type ipv6 entry 430 action accept
+set / acl acl-filter cpm type ipv6 entry 440 description "Accept incoming SSH connections on the default NETCONF port 830"
+set / acl acl-filter cpm type ipv6 entry 440 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 440 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 440 match transport destination-port value 830
+set / acl acl-filter cpm type ipv6 entry 440 action accept
+set / acl acl-filter cpm type ipv6 entry 450 description "Accept incoming PTP messages with destination-ports 319 and 320"
+set / acl acl-filter cpm type ipv6 entry 450 match ipv6 next-header udp
+set / acl acl-filter cpm type ipv6 entry 450 match transport destination-port range start 319
+set / acl acl-filter cpm type ipv6 entry 450 match transport destination-port range end 320
+set / acl acl-filter cpm type ipv6 entry 450 action accept
+set / acl acl-filter cpm type ipv6 entry 460 description "Accept incoming PCEP packets with destination-port 4189"
+set / acl acl-filter cpm type ipv6 entry 460 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 460 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 460 match transport destination-port value 4189
+set / acl acl-filter cpm type ipv6 entry 460 action accept
+set / acl acl-filter cpm type ipv6 entry 470 description "Accept incoming SBFD session messages"
+set / acl acl-filter cpm type ipv6 entry 470 match ipv6 next-header udp
+set / acl acl-filter cpm type ipv6 entry 470 match transport source-port operator eq
+set / acl acl-filter cpm type ipv6 entry 470 match transport source-port value 7784
+set / acl acl-filter cpm type ipv6 entry 470 action accept
+set / acl acl-filter cpm type ipv6 entry 480 description "Accept incoming SBFD session messages"
+set / acl acl-filter cpm type ipv6 entry 480 match ipv6 next-header udp
+set / acl acl-filter cpm type ipv6 entry 480 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 480 match transport destination-port value 7784
+set / acl acl-filter cpm type ipv6 entry 480 action accept
+set / acl acl-filter cpm type ipv6 entry 490 description "Accept incoming LDP packets"
+set / acl acl-filter cpm type ipv6 entry 490 match ipv6 next-header udp
+set / acl acl-filter cpm type ipv6 entry 490 match transport source-port operator eq
+set / acl acl-filter cpm type ipv6 entry 490 match transport source-port value 646
+set / acl acl-filter cpm type ipv6 entry 490 action accept
+set / acl acl-filter cpm type ipv6 entry 500 description "Accept incoming LDP packets with source-port 646"
+set / acl acl-filter cpm type ipv6 entry 500 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 500 match transport source-port operator eq
+set / acl acl-filter cpm type ipv6 entry 500 match transport source-port value 646
+set / acl acl-filter cpm type ipv6 entry 500 action accept
+set / acl acl-filter cpm type ipv6 entry 510 description "Accept incoming LDP packets with destination-port 646"
+set / acl acl-filter cpm type ipv6 entry 510 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 510 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 510 match transport destination-port value 646
+set / acl acl-filter cpm type ipv6 entry 510 action accept
+set / acl acl-filter cpm type ipv6 entry 520 description "Accept incoming TWAMP Control connection"
+set / acl acl-filter cpm type ipv6 entry 520 match ipv6 next-header tcp
+set / acl acl-filter cpm type ipv6 entry 520 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 520 match transport destination-port value 862
+set / acl acl-filter cpm type ipv6 entry 520 action accept
+set / acl acl-filter cpm type ipv6 entry 530 description "Accept incoming LSP MPLS Echo requests and replies"
+set / acl acl-filter cpm type ipv6 entry 530 match ipv6 next-header udp
+set / acl acl-filter cpm type ipv6 entry 530 match transport destination-port operator eq
+set / acl acl-filter cpm type ipv6 entry 530 match transport destination-port value 3503
+set / acl acl-filter cpm type ipv6 entry 530 action accept
+set / acl acl-filter cpm type ipv6 entry 540 description "Accept incoming LSP MPLS Echo requests and replies"
+set / acl acl-filter cpm type ipv6 entry 540 match ipv6 next-header udp
+set / acl acl-filter cpm type ipv6 entry 540 match transport source-port operator eq
+set / acl acl-filter cpm type ipv6 entry 540 match transport source-port value 3503
+set / acl acl-filter cpm type ipv6 entry 540 action accept
+set / acl acl-filter cpm type ipv6 entry 550 description "Accept incoming VRRP Control packets"
+set / acl acl-filter cpm type ipv6 entry 550 match ipv6 next-header vrrp
+set / acl acl-filter cpm type ipv6 entry 550 action accept
+set / acl acl-filter cpm type ipv6 entry 1000 description "Drop all else"
+set / acl acl-filter cpm type ipv6 entry 1000 action log true
+set / acl acl-filter cpm type ipv6 entry 1000 action drop
+set / acl policers system-cpu-policer icmp entry-specific false
+set / acl policers system-cpu-policer icmp peak-rate-pps 1000
+set / acl policers system-cpu-policer icmp maximum-burst-packet 1000
+set / system management openconfig admin-state enable
+set / system control-plane-traffic input acl acl-filter cpm type ipv4
+set / system control-plane-traffic input acl acl-filter cpm type ipv6
+set / system configuration role sudo
+set / system load-balancing dynamic flowset-size 256
+set / system load-balancing dynamic inactivity-timer 50
+set / system load-balancing dynamic mode flow-dynamic
+set / system load-balancing dynamic link-quality-sampling-interval 5
+set / system load-balancing dynamic weighting-factor port-utilization 70
+set / system load-balancing dynamic weighting-factor queue-utilization 20
+set / system load-balancing dynamic weighting-factor itm-utilization 10
+set / system tls server-profile clab-profile key $aes1$ATQ9DIku0sOuIG8=$ucSh+/iWnGSN1F0AoXnRWj44hEQqKrF0p2wG4tGzqTRd5fNr5WmPGewxKNgQv8qYTVIgPmXlYRuUjokqPS+JNbMwZpevjoMLjdcX7StUI/IKZgwyLXTC824bVmpUeQEcCdtdQGGStyfRtXWYeqPMHEDI6UYT7kpthc44NUUiQQEMd4w2ZXImGhw7AjvEAR1lCadEpu5vks/ioarwNtpAKrOp4Ai/bIrUMyszZ/ASmkfKNuxhjOTUw1dwsMlF+rogtSjTdqKQcTOKuIAcibtx7UmUJdzNpup8HgUlozw/V11C0A9WQ8DjDGKe97wrYtwY78S6jL/oAYRZAWQsLefcHYXBHFBbSi4ZyapIHJwtiMK2NIhzNMQOdyv9g88RCsQuP391TDZHRaM6nkKGcybzqU0CN6FicFOpoaTsvb2jWay4Omk66yVmQwIhBikHUCchQoLYRMLYj9EzLyIM6BhPtJZvuwi0t8p20lHKFUBHSrd2GG4FRFCzs6g/W/6XnHrWiG8cqf1gQAxL1gGs2PXTH6ecXvZiPPJhV3U6zSGlRCdCdCNY0JUofEInOJWg0oeOqp7XIGGhOP1aa+8uYjsbjq/n8b596LlqT4C22xqUIis8ObxKeZotOqj4tVaUkr7eMMfEzktg5KTFtdPnl1IedpwgrWN7O9o2zLJvBgnomhHB0M6PmxI0EjwpeRFaimO+4/6S3aKa9zjfGuDWJRoYSdB25+3qHm829VDq7P8VPiHOgCFFH00oZlOj/qlon2g1P6bppwIYqFBUkznES7UCrI6k1rDHaVwalpURiRvM9gZhNEJr3e/GLZp0au9uqboIy2ScAKrYYyyGg61Er2viN+QEWQTaCTEgTrPO077cYR8EMQ9A9P88rDc21FN8lR5+PMPHnvA8TDl+TvWC8kCRnF2JNkrf2B4eWSsMUf2nSKK5ZO2SOvI0WHrJb9sacH4CrFlXTk6x0rZ0JeNqGTx3shnvQQIgEQ/aqx3Nz4OvhgyhHo2yqMouEmhXP7p98XYksv2gxYl8WvrXxj/5HQWoZVutNdSkCqwLTQzXCD3GMlp1gY6pZJo1npvyH6t2qwCMseKG69in5pxDZzhSX9+jKbOD7OOfXdmInL3m7qYWB4soAM0z1kvGbPGtl3k6BMijhoj7NCKaH9r3dd7GLu0Jpqo/UzZN/1YdHDzxleiKBJiJPKtmDb4JqNDGst7vaMfidUZy7nJ4VSwhjz5ImCMmO4MPGQfu+vGKlPNsY5Ppv/4BZFsdGJ/620/4WaFvGULxE6tuQ0Sx0e7EsOMpp/fFDvnoXYZCJiAaI3GeH1ruzSqwOKSeRm8qvZmUnLkhQjFIs7a2YX/n4CkdCx+fcZMQ4dL6FyK/xbH3K87L9z2gdTvpg1Zinyhd/EY8pF77DuHNrqvjbQljjlZ8P37cCzlPr+7J+Sfpjesw7kxcdIj5oCVQ/ePKeNTFmMv7BAyXKT3zJxD1UXqKKIz9x7Y6m1rhf8uaWjryEjt8vKsQy61SbW7PM6SqoJajvPPhWCEG69KYHMwPy2Vvd1nCspWkzGvN0yiJxtSzh3da+aGDmSlVi0sKgfJeXq+/MfLbe9ARGH6BJIbZ/HxWqq68Mot/TfTv1LyMZMiXs+1asE7vvTEz5XqlQM4mlRPkePrRluTAlWBpw/FyQeMOkoiGFLq10oOKcZkjQ3An7o8g8MFTtb9mzp3U9qm0cz3oJkd1i27+4rsflKrKO53A2uE62Wiw0O4eXbFRc2VJrZR+ihreoTd5he/FMricCXJ37cmuizLIBL2kGVMXDga2qsj6RGaXEBoIFIWOF5nBaMhln66C7Ec72xAlBMnIeZCINjtNRxoYs+ASok/qUs86aUfryaQYRfthRVS08cW4e+MMxj3CW9FgBuAaIn+iCoSZph4jXZtRNzH9nc9O1MQz/5Q7seBsYDqVvsWvuSgGQQu0RpGq1/HGsDuhWv1tuZQD/tFCgxBSPcbC8m3nwm0uhdyC7EMWwudeQvn1Aio2BFvqZN1O6rDWKiih5V6lupV+PGXIm91+9vWntwUhxssqk659HFPIlIB53qj+tHO33gHGRFG/Vg2QN0BaKn1dv2rfNmnUF/0XdIS+GVvFLgjZXH7qRDwE3jpE3DYMq+LxKPNljgS8WMzASYLooWJmkAeSFNfQSqaDVpbfW53OHv9GYAvKokrw6oaEoK7WV0rwTRE6q9Xi/YptNyQ5k71l8P4h7MN63lRCpfyz
+set / system tls server-profile clab-profile certificate "-----BEGIN CERTIFICATE-----
+MIID2TCCAsGgAwIBAgICBnowDQYJKoZIhvcNAQELBQAwUTELMAkGA1UEBhMCVVMx
+CTAHBgNVBAcTADEVMBMGA1UEChMMY29udGFpbmVybGFiMQkwBwYDVQQLEwAxFTAT
+BgNVBAMTDGFpZmFiIGxhYiBDQTAeFw0yNjA3MTUyMDMzMzVaFw0yNzA3MTUyMDMz
+MzVaMFsxCzAJBgNVBAYTAlVTMQkwBwYDVQQHEwAxFTATBgNVBAoTDGNvbnRhaW5l
+cmxhYjEJMAcGA1UECxMAMR8wHQYDVQQDExZzdHJpcGUxLWxlYWYxLmFpZmFiLmlv
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqU8sD4aoDnssc9hGrP1b
+o9ZTnmANLKPoRSBDfPsIBMuy3TYimQMjACtDsfSRhjATpp4vfKFQLxFEMZWGRj/8
+FyEL+ttk2kb5VxqzFAAh5HrTPMvuwLCDy7R5rETNzlj3Nylt10JoOVfnqdypdysX
+JJq7C8XLKnCxl7LzLw78Xd/ClboIy/zpNWoqeE0QIv1iX5IF5HUX6LNwkQJxUhok
+4NmmJ1PED02uTYMSy9bOejMKviV3Dz8iFcI5/3KfGR3WKwOhimSQm81uYPr9U9DH
+1jUWvoUVoEB8UljN9556/ngTwj+HTo8ZTMepkaZC0kUQ2//akcPIqJshnaxslNoE
+JQIDAQABo4GwMIGtMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcD
+AgYIKwYBBQUHAwEwDgYDVR0OBAcEBQECAwQGMB8GA1UdIwQYMBaAFOjw4tmGtZ+L
+hEcMv19ArvmUNcvtMEsGA1UdEQREMEKCDXN0cmlwZTEtbGVhZjGCE2FpZmFiLXN0
+cmlwZTEtbGVhZjGCFnN0cmlwZTEtbGVhZjEuYWlmYWIuaW+HBKwVFQswDQYJKoZI
+hvcNAQELBQADggEBALQsvlXr97cV3xjE0XGuHySnvzFhhDPbRMltNyJrKoUr2QqK
+Q4pEqrN4wt8o1oyVptlVwoX8ITLxLM0PJbF2YSoHXkLkhrC8XkkTYQwl+z6qCGAS
+NlySOsGafJmMFNj83LrP+T3wMFdUSOjFWWlZNhrH2qL+dD5nWg87Z81iLqo+eX1H
+puZHZoHJoLNYdSDOdYdkL9tTYLO+jrNHsY+huzccajhEFas2mr0HLwoVqfJC562E
+WtLoyy04xLgkusPgNh6uoQ+RYdXwO6cbj2Vkt0zRvGSIWbFJJPu82mCugUwOqWLR
+Ya3oG+RX8vWNDm1KzxrrX3H7wL7gT4zZ6Rtm7+I=
+-----END CERTIFICATE-----
+"
+set / system tls server-profile clab-profile authenticate-client false
+set / system aaa authentication idle-timeout 7200
+set / system aaa authentication authentication-method [ local ]
+set / system aaa authentication admin-user password $y$j9T$981fe4fd2472b4f9$ZBlN3M.O7Est6ESTchNEv5ZohsM0rIfPOGk6u/UwpK.
+set / system aaa authentication admin-user ssh-key [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFaTwFTXbXvCLOnn/jaijUjf+EiOYm0PkwJyOXM+K8Bq" "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIClmglgfcLrhHZKMTI7bTjrx5Vu1YmAtmeu0l2+iJhga" ]
+set / system aaa authentication linuxadmin-user password $y$j9T$KXNv.hfPnr/Q7CXOau8mc.$Kk0TM18fD5N.viKgtyJDvEqF.DQx4vfklnboT5gdVp1
+set / system aaa authentication linuxadmin-user ssh-key [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFaTwFTXbXvCLOnn/jaijUjf+EiOYm0PkwJyOXM+K8Bq" "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIClmglgfcLrhHZKMTI7bTjrx5Vu1YmAtmeu0l2+iJhga" ]
+set / system aaa authorization role sudo superuser true
+set / system aaa authorization role sudo services [ cli gnmi gnoi gnsi netconf ]
+set / system aaa server-group local type local
+set / system ssh-server mgmt admin-state enable
+set / system ssh-server mgmt network-instance mgmt
+set / system ssh-server mgmt use-credentialz true
+set / system ssh-server mgmt-netconf admin-state enable
+set / system ssh-server mgmt-netconf network-instance mgmt
+set / system ssh-server mgmt-netconf port 830
+set / system ssh-server mgmt-netconf disable-shell true
+set / system boot autoboot admin-state enable
+set / system lldp admin-state enable
+set / system lldp interface ethernet-1/1 admin-state enable
+set / system lldp interface ethernet-1/2 admin-state enable
+set / system lldp interface ethernet-1/3 admin-state enable
+set / system lldp interface ethernet-1/4 admin-state enable
+set / system name host-name stripe1-leaf1
+set / system ndk-server admin-state enable
+set / system grpc-server eda-discovery admin-state enable
+set / system grpc-server eda-discovery rate-limit 65535
+set / system grpc-server eda-discovery session-limit 1024
+set / system grpc-server eda-discovery metadata-authentication true
+set / system grpc-server eda-discovery default-tls-profile true
+set / system grpc-server eda-discovery network-instance mgmt
+set / system grpc-server eda-discovery port 50052
+set / system grpc-server eda-discovery services [ gnmi gnsi ]
+set / system grpc-server eda-insecure-mgmt admin-state enable
+set / system grpc-server eda-insecure-mgmt rate-limit 65535
+set / system grpc-server eda-insecure-mgmt session-limit 1024
+set / system grpc-server eda-insecure-mgmt metadata-authentication true
+set / system grpc-server eda-insecure-mgmt port 57411
+set / system grpc-server eda-insecure-mgmt services [ gnmi gnoi gnsi ]
+set / system grpc-server eda-mgmt admin-state enable
+set / system grpc-server eda-mgmt rate-limit 65535
+set / system grpc-server eda-mgmt session-limit 1024
+set / system grpc-server eda-mgmt metadata-authentication true
+set / system grpc-server eda-mgmt tls-profile EDA
+set / system grpc-server eda-mgmt network-instance mgmt
+set / system grpc-server eda-mgmt port 57410
+set / system grpc-server eda-mgmt services [ gnmi gnoi gnsi ]
+set / system grpc-server insecure-mgmt admin-state enable
+set / system grpc-server insecure-mgmt rate-limit 65000
+set / system grpc-server insecure-mgmt tls-profile clab-profile
+set / system grpc-server insecure-mgmt network-instance mgmt
+set / system grpc-server insecure-mgmt port 57400
+set / system grpc-server insecure-mgmt trace-options [ request response common ]
+set / system grpc-server insecure-mgmt services [ gnmi gnoi gnsi gribi p4rt ]
+set / system grpc-server insecure-mgmt unix-socket admin-state enable
+set / system grpc-server mgmt admin-state enable
+set / system grpc-server mgmt rate-limit 65535
+set / system grpc-server mgmt session-limit 1024
+set / system grpc-server mgmt metadata-authentication true
+set / system grpc-server mgmt tls-profile EDA
+set / system grpc-server mgmt network-instance mgmt
+set / system grpc-server mgmt port 57410
+set / system grpc-server mgmt trace-options [ request response common ]
+set / system grpc-server mgmt services [ gnmi gnoi gnsi ]
+set / system grpc-server mgmt gnmi commit-save true
+set / system grpc-server mgmt unix-socket admin-state enable
+set / system json-rpc-server admin-state enable
+set / system json-rpc-server network-instance mgmt http admin-state enable
+set / system json-rpc-server network-instance mgmt https admin-state enable
+set / system json-rpc-server network-instance mgmt https tls-profile clab-profile
+set / system logging buffer messages rotate 3
+set / system logging buffer messages size 10000000
+set / system logging buffer messages facility local6 priority match-above informational
+set / system logging buffer system facility auth priority match-above warning
+set / system logging buffer system facility cron priority match-above warning
+set / system logging buffer system facility daemon priority match-above warning
+set / system logging buffer system facility ftp priority match-above warning
+set / system logging buffer system facility kern priority match-above warning
+set / system logging buffer system facility lpr priority match-above warning
+set / system logging buffer system facility mail priority match-above warning
+set / system logging buffer system facility news priority match-above warning
+set / system logging buffer system facility syslog priority match-above warning
+set / system logging buffer system facility user priority match-above warning
+set / system logging buffer system facility uucp priority match-above warning
+set / system logging buffer system facility local0 priority match-above warning
+set / system logging buffer system facility local1 priority match-above warning
+set / system logging buffer system facility local2 priority match-above warning
+set / system logging buffer system facility local3 priority match-above warning
+set / system logging buffer system facility local4 priority match-above warning
+set / system logging buffer system facility local5 priority match-above warning
+set / system logging buffer system facility local7 priority match-above warning
+set / system logging file messages rotate 3
+set / system logging file messages size 10000000
+set / system logging file messages facility local6 priority match-above warning
+set / system dns network-instance mgmt
+set / system dns server-list [ 0.250.250.200 ]
+set / system snmp access-group SNMPv2-RO-Community security-level no-auth-no-priv
+set / system snmp access-group SNMPv2-RO-Community community-entry RO-Community community $aes1$AWCTnTQM790ZRG8=$eWG+dBUSpblosadrfqA91A==
+set / system snmp network-instance mgmt admin-state enable
+set / system banner login-banner "................................................................
+:                  Welcome to Nokia SR Linux!                  :
+:              Open Network OS for the NetOps era.             :
+:                                                              :
+:    This is a freely distributed official container image.    :
+:                      Use it - Share it                       :
+:                                                              :
+: Get started: https://learn.srlinux.dev                       :
+: Container:   https://go.srlinux.dev/container-image          :
+: Docs:        https://doc.srlinux.dev/25-10                   :
+: Rel. notes:  https://doc.srlinux.dev/rnn                     :
+: YANG:        https://yang.srlinux.dev/25.10.1                :
+: Discord:     https://go.srlinux.dev/discord                  :
+: Contact:     https://go.srlinux.dev/contact-sales            :
+................................................................
+"
+set / system netconf-server mgmt admin-state enable
+set / system netconf-server mgmt ssh-server mgmt-netconf

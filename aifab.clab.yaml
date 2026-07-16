@@ -10,53 +10,65 @@ topology:
     nokia_srlinux:
       image: ghcr.io/nokia/srlinux:25.10.1
       startup-config: configs/srlinux/__clabNodeName__.cfg
-      type: ixr-h4
     linux:
       image: aninchat/ubuntu-server:v1
       binds:
         - configs/linux:/linux
   nodes:
+  #### NETWORK STACK ###
+  #### BACKEND SPINES are IXR-H4 ####
     spine1:
       mgmt-ipv4: 172.21.21.101
+      type: ixr-h4
     spine2:
       mgmt-ipv4: 172.21.21.102
+      type: ixr-h4
+  #### BACKEND LEAFS are IXR-H4 ####
     stripe1-leaf1:
       mgmt-ipv4: 172.21.21.11
+      type: ixr-h4
       labels:
         graph-level: 2
         graph-icon: network
     stripe1-leaf2:
       mgmt-ipv4: 172.21.21.12
+      type: ixr-h4
       labels:
         graph-level: 2
         graph-icon: network
     stripe1-leaf3:
       mgmt-ipv4: 172.21.21.13
+      type: ixr-h4
       labels:
         graph-level: 2
         graph-icon: network
     stripe1-leaf4:
       mgmt-ipv4: 172.21.21.14
+      type: ixr-h4
       labels:
         graph-level: 2
         graph-icon: network
     stripe1-leaf5:
       mgmt-ipv4: 172.21.21.15
+      type: ixr-h4
       labels:
         graph-level: 2
         graph-icon: network
     stripe1-leaf6:
       mgmt-ipv4: 172.21.21.16
+      type: ixr-h4
       labels:
         graph-level: 2
         graph-icon: network
     stripe1-leaf7:
       mgmt-ipv4: 172.21.21.17
+      type: ixr-h4
       labels:
         graph-level: 2
         graph-icon: network
     stripe1-leaf8:
       mgmt-ipv4: 172.21.21.18
+      type: ixr-h4
       labels:
         graph-level: 2
         graph-icon: network
@@ -67,6 +79,7 @@ topology:
       labels:
         graph-level: 2
         graph-icon: network
+    #### LEAFS for BACKEND STRIPE2 are IXR-H5-64D ###
     stripe2-leaf2:
       kind: nokia_srlinux
       mgmt-ipv4: 172.21.21.22
@@ -116,6 +129,7 @@ topology:
       labels:
         graph-level: 2
         graph-icon: network
+    #### FRONTEND SPINES are IXR-H5-64o ###
     frontend-spine1:
       kind: nokia_srlinux
       mgmt-ipv4: 172.21.21.31
@@ -130,6 +144,7 @@ topology:
       labels:
         graph-level: 1
         graph-icon: network
+    #### FRONTEND LEAFS are IXR-D5 ###
     frontend-leaf1:
       kind: nokia_srlinux
       mgmt-ipv4: 172.21.21.33
@@ -207,7 +222,7 @@ topology:
       kind: linux
       exec:
         - bash linux/weka8.sh
-    ### TELEMETRY STACK ###
+    ### TELEMETRY STACK FPOR PHASE 2###
     gnmic:
       kind: linux
       mgmt-ipv4: 172.21.21.70
