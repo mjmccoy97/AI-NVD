@@ -485,8 +485,8 @@ The included make file can be used as a command orchetsrator to execut some cont
 
 ### BGP Peering Validation
 
-This script will run in a loop until all of the BGP peers in the topology have been established. It autodetects both static and dynamic peers.
-This can be useful during the initial lab spin up to determine whether the fabric has convered from a peering perspective. 
+This script will run in a loop until all of the BGP peers in the topology have been established. It auto-detects both static and dynamic peers.
+This can be useful during the initial lab spin up to determine whether the fabric has converged from a peering perspective. 
 
 <div style="text-align: center;">
   <img src="./images/BGP-Wait-Screenshot.png" alt="Centered Image">
