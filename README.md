@@ -8,7 +8,7 @@
 
 # Getting Started
 
-This containerlab is a virtual version of two-stripe rail-optimized frontend and backend AI fabrics as described in the Nokia Validated Design. It is comprised of containerized versions of various 7220 IXR platforms:
+This containerlab is a virtual version of two-stripe rail-optimized frontend and backend AI Fabrics as described in the [Nokia Validated Design](https://documentation.nokia.com/cgi-bin/dbaccessfilename.cgi/3HE21916AAAATQZZA_V1_Nokia%20Validated%20Design:%20AI%20Cluster%20with%20Backend%20Frontend%20and%20Storage%20Networks.pdf). It is comprised of containerized versions of various 7220 IXR platforms:
 - Backend Spines : 7220 IXR-H4
 - Backend Leafs (Stripe1) : 7220 IXR-H4
 - Backend Leafs (Stripe2) : 7220 IXR-H5-64d
