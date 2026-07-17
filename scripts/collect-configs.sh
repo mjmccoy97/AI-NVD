@@ -1,12 +1,37 @@
 #!/bin/bash
 
 # Collect "info flat" configs from all SRLinux nodes in the two-stripe-rail-optimized topology.
-# Saves each node's config to ./configs/<node-name>
+# Saves each node's config to ../configs/srlinux/<node-name>.cfg -- the same files
+# containerlab loads as startup-config at deploy time.
 
 set -euo pipefail
 
-OUTPUT_DIR="$(dirname "$0")/configs"
+RED='\033[0;31m'
+NC='\033[0m'
+
+OUTPUT_DIR="$(dirname "$0")/../configs/srlinux"
+BACKUP_DIR="$(dirname "$0")/../configs/srlinux-backups/$(date +%Y%m%d-%H%M%S)"
 mkdir -p "$OUTPUT_DIR"
+
+echo -e "${RED}WARNING: this will overwrite the existing startup-config files in"
+echo "$OUTPUT_DIR"
+echo "with each node's current running config. This is what containerlab will"
+echo "load on the next 'make deploy' -- any config drift on the live nodes that"
+echo "hasn't been reviewed will become the new baseline."
+echo -e "The existing files will be backed up first to $BACKUP_DIR${NC}"
+read -r -p "Continue? [y/N] " CONFIRM
+if [[ ! "$CONFIRM" =~ ^[Yy]$ ]]; then
+    echo "Aborted. No files were changed."
+    exit 0
+fi
+echo
+
+if compgen -G "$OUTPUT_DIR"/*.cfg > /dev/null; then
+    mkdir -p "$BACKUP_DIR"
+    cp "$OUTPUT_DIR"/*.cfg "$BACKUP_DIR"/
+    echo "Backed up existing configs to $BACKUP_DIR"
+    echo
+fi
 
 declare -A NODES=(
     [spine1]=172.21.21.101
@@ -37,7 +62,7 @@ SUCCESS=0
 FAILED=0
 
 for NODE in "${!NODES[@]}"; do
-    OUTPUT_FILE="$OUTPUT_DIR/$NODE"
+    OUTPUT_FILE="$OUTPUT_DIR/$NODE.cfg"
     echo -n "Collecting config from $NODE ... "
     if docker exec "aifab-$NODE" sr_cli "info flat" > "$OUTPUT_FILE" 2>&1; then
         echo "OK -> $OUTPUT_FILE"

@@ -127,7 +127,7 @@ load_topology_interfaces() {
                 TOPOLOGY_INTERFACES[$device]+=" $eth_iface"
             fi
         fi
-    done < <(grep -E "endpoints:" "$TOPOLOGY_FILE" | grep -oE '"[^"]+"' | tr -d '"')
+    done < <(grep -E "endpoints:" "$TOPOLOGY_FILE" | grep -oE "'[^']+'|\"[^\"]+\"" | tr -d "'\"")
 
     if [[ "$VERBOSE" == "true" ]]; then
         echo -e "${BLUE}Loaded topology interface lists for ${#TOPOLOGY_INTERFACES[@]} devices${NC}"

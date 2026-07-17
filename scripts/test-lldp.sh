@@ -104,7 +104,7 @@ load_topology() {
     declare -g -A EXPECTED_NEIGHBORS
 
     local srlinux_set=" ${DEVICES[*]} "
-    local pattern='endpoints.*"([^:]+):([^"]+)".*"([^:]+):([^"]+)"'
+    local pattern="endpoints.*['\"]([^:]+):([^'\"]+)['\"].*['\"]([^:]+):([^'\"]+)['\"]"
 
     while IFS= read -r line; do
         if [[ "$line" =~ $pattern ]]; then

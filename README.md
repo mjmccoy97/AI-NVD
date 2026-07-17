@@ -54,6 +54,7 @@ This AI NVD covers the following features:
 - Leaf-GPU IPv6 connectivity
 - Dynamic Load Balancing (DLB)
 - DCQCN (ECN + PFC) for congestion control
+- EVPN VXLAN for L2 connectivity of the storage devices (MAC-VRFs on frontend leafs)
 
 # Phase 1: Lab Initialization
 
@@ -420,10 +421,19 @@ Warning: Permanently added 'aifab-stripe1-leaf1' (ED25519) to the list of known 
 Loading environment configuration file(s): ['/etc/opt/srlinux/srlinux.rc', '/home/admin/.srlinuxrc']
 Welcome to the Nokia SR Linux CLI.
 
-
 --{ running }--[  ]--
 A:admin@stripe1-leaf1#
 </pre>
+
+## Saving Configuration Changes
+
+If you have made configuration changes to the SRLinux nodes and want them to persist the next time it is deployed, this can also be done easily with the collect-configs script.
+This will collect the configs from each of the SRLinux devices in flat format, and save them to the ./configs/srlinux folder as the new device startup configs. 
+The current configs in this directory will be automatically backed up as part of this operation.
+
+<div style="text-align: center;">
+  <img src="./images/Collect-Configs.png" alt="Centered Image">
+</div>
 
 ## Lab Teardown
 <pre style="background-color: #f4f4f4; border: 1px solid #ddd; padding: 10px; border-radius: 5px;">
@@ -491,6 +501,17 @@ This can be useful during the initial lab spin up to determine whether the fabri
 <div style="text-align: center;">
   <img src="./images/BGP-Wait-Screenshot.png" alt="Centered Image">
 </div>
+
+
+### Verifying Interfaces
+
+<div style="text-align: center;">
+  <img src="./images/Test-Interfaces1.png" alt="Centered Image">
+</div>
+<div style="text-align: center;">
+  <img src="./images/Test-Interfaces2.png" alt="Centered Image">
+</div>
+
 
 ### Verifying Frontend Connectivity 
 
